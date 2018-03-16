@@ -1,0 +1,32 @@
+{% load static %}
+<img src="img/odpust.jpg" class="img" alt="">
+
+<div class=" cards-container">
+    {% for article in articles %}
+    <div class="k-card">
+        <div class="row">
+            <h3 class="col-md-8">
+                {{ article.title }}
+            </h3>
+        </div>
+        <div class="card-text">
+                {% autoescape off %}
+                {{ article.content }}
+                {% endautoescape %}
+        </div>
+        <p class="card-text col-md-6">Opublikowano: {{ article.date }}</p>
+
+    </div>
+    {% endfor %}
+  <div class="clearfix">
+    {% if next_number != None %}
+    <a class="pull-left" href="/articles/{{next_number}}">
+        <i class="fa fa-arrow-left"></i> Nowsze wpisy</a>
+    {% endif %}
+    {% if older_number != None %}
+    <a class="pull-right" href="/articles/{{older_number}}">
+        Starsze wpisy <i class="fa fa-arrow-right"></i>
+    </a>
+    {% endif %}
+  </div>
+</div>

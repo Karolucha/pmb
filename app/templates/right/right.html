@@ -1,0 +1,19 @@
+<!--<p class="nav-link">Informacje</p>-->
+<!--<hr class="my-2" />-->
+<ul class="nav md-pills nav-justified pills-secondary">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#msze-main" role="tab">Msze święte</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#kancelaria-main" role="tab">Kancelaria</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#nabozenstwa" role="tab">Nabożeństwa</a>
+    </li>
+</ul>
+<hr class="my-2" />
+<div class="tab-content">
+    {% include 'right/msze.html' %}
+    {% include 'right/kancelaria.html' %}
+    {% include 'right/nabozenstwa.html' %}
+</div>

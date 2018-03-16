@@ -1,0 +1,52 @@
+body {
+    background-image: url("images/jawor.jpg");
+
+    background-color: #77D2FF;
+    background-size:cover;
+}
+#page, #events {
+    margin-top:13vh; margin-left:5vw;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+
+    flex-wrap: wrap;
+
+}
+#events{
+    margin-left: 5vw;
+    margin-top: 2vh;
+   }
+
+
+.k-nav-link {
+    color: #3B3B3B;
+    font-weight: normal;
+    letter-spacing: 0.1em;
+    font-size: 1.2em;
+}
+
+.k-card, .k-menu-dropdown {
+    background-color: rgba(215, 211, 255, 0.94);;
+    border-radius: 0px 0px 2px;
+    padding: 14px 24px 24px;
+    margin: 0px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+}
+
+.nav-link {
+        white-space: nowrap;
+}
+.k-menu-nav-link.active {
+    font-weight: bold;
+/*    border-bottom: 1px solid #B9F6FF;*/
+    /* background-color: #DBFBFF; */
+}
+
+
+/* LIST #2 */
+/*#list2 { width:320px; }*/
+#list2 ol { font-style:italic; font-family:Georgia, Times, serif; font-size:24px;   }
+#list2 ol li { }
+#list2 ol li p { padding:8px; font-style:normal; font-family:Arial; font-size:13px;  border-left: 1px solid #999; }
+#list2 ol li p em { display:block

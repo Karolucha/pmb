@@ -1,0 +1,16 @@
+<div class="k-card ">
+    <h4 class="h4-responsive">Ogłoszenia na 4 Niedzielę zwykłą</h4>
+    <div class="card-body">
+        <div id="list2">
+        <ol>
+            {% for announcement in annoucements %}
+                <li><p>
+                    {% autoescape off %}
+                    {{announcement.content}}
+                    {% endautoescape %}
+                </p></li>
+            {% endfor %}
+        </ol>
+        </div>
+    </div>
+</div>
