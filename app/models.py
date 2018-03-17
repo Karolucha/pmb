@@ -52,7 +52,7 @@ class MassSchema(models.Model):
     # hours = models.ForeignKey(Hour)
 
     # week_of_mass = ListField(choices=DAYS_OF_WEEK, verbose_name='Dni których dotyczy rozpiska')
-    season_name = models.CharField(max_length=20, verbose_name='nazwa sezonu', null=True, blank=True)
+    season_name = models.CharField(max_length=50, verbose_name='nazwa sezonu', null=True, blank=True)
     season_start = models.DateField(verbose_name='Pierwszy dzień sezonu', null=True, blank=True)
     season_end = models.DateField(verbose_name='Ostatni dzień sezonu', null=True, blank=True)
     monday = models.BooleanField(verbose_name='Poniedziałek', default=False)
@@ -99,25 +99,29 @@ class SubPages(models.Model):
 
 class WeekAnnouncment(models.Model):
     date = models.DateField(null=True, blank=True, verbose_name='niedziela')
+
     def __str__(self):
         return "Na niedzielę " + str(self.date)
+
     class Meta:
         ordering = '-date',
         verbose_name='Ogłoszenia duszpasterskie'
         verbose_name_plural = 'Ogłoszenia duszpasterskie'
 
 
-
-class Announcment(models.Model):
-    content = models.CharField(max_length=1500, null=True, blank=True, verbose_name='treść')
+class Announcement(models.Model):
+    content = models.CharField(max_length=15000, null=True, blank=True, verbose_name='treść')
     week_announcment = models.ForeignKey(WeekAnnouncment, verbose_name='Ogłoszenia')
+
     def __str__(self):
         return str(self.week_announcment.date)
-    class Meta:
 
+    class Meta:
         verbose_name='Ogłoszenie'
         verbose_name_plural = 'Ogłoszenia'
 
+class IntentionWeek(models.Model):
+    week = models.CharField(max_length=200)
 
 class Intentions(models.Model):
     # date = models.DateTimeField(verbose_name='termin_mszy')
@@ -126,25 +130,36 @@ class Intentions(models.Model):
         ('I Tydzień', 'I Tydzień'),
         ('II Tydzień', 'II Tydzień'),
     )
-    week = models.CharField(max_length=100, choices=weeks)
-    date = models.ForeignKey(Hour)
-    title = models.CharField(max_length=100, verbose_name='nazwa intencji')
-    # tydzien_w_roku = models.IntegerField()
+    # week = models.CharField(max_length=100, choices=weeks)
+    # date = models.ForeignKey(Hour)
+    date = models.DateField(verbose_name='data')
+    hour = models.TimeField(verbose_name='godzina')
+    title = models.CharField(max_length=200, verbose_name='nazwa intencji')
+    week = models.ForeignKey(IntentionWeek)
+
+    def __str__(self):
+        return str(self.date) + ' g. ' + str(self.hour)  + ' ' + self.title[10] + '...'
+
     class Meta:
         verbose_name='Intencja'
         verbose_name_plural = 'Intencje'
 
 
 class OfficeHours(models.Model):
-    day = models.CharField(max_length=10, verbose_name='dzien tygodnia', choices=DAYS_OF_WEEK)
+    day = models.CharField(max_length=15, verbose_name='dzien tygodnia', choices=DAYS_OF_WEEK)
     start = models.IntegerField(verbose_name='od godziny')
     end = models.IntegerField(verbose_name='do godziny')
+
     class Meta:
-        verbose_name='Godziny działania kancelarii w danym dniu'
+        verbose_name = 'Godziny działania kancelarii w danym dniu'
         verbose_name_plural = 'Godziny działania kancelarii'
 
+    def __str__(self):
+        return "Godziny dla dnia " + str(self.day)
+
+
 class Actual(models.Model):
-    title = models.CharField(max_length=100, verbose_name='tytuł')
+    title = models.CharField(max_length=200, verbose_name='tytuł')
     content = models.CharField(max_length=25000, verbose_name='zawartość')
     date = models.DateTimeField(verbose_name='data publikacji', default=datetime.now())
 
