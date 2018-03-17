@@ -17,6 +17,8 @@ from django.conf.urls import url, include
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
+
+admin.site.site_header = 'Zarządzanie treścią strony'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^summernote/', include('django_summernote.urls')),

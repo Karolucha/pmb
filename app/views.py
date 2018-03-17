@@ -71,7 +71,10 @@ def get_context(page_number=None):
     #     }
     # }
     last_date = WeekAnnouncment.objects.last().date
+    print(last_date)
     annoucements = Announcement.objects.filter(week_announcment__date=last_date)
+    # annoucements = Announcement.objects.all()
+    print(annoucements)
     context = {
         'latest_question_list': '22',
         'annoucements': annoucements,
