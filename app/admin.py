@@ -112,4 +112,4 @@ class IntentionsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OfficeHours)
-admin.site.register(SubPages)
+# admin.site.register(SubPages)

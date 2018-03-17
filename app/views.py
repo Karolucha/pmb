@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 # Create your views here.
-from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncment
+from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncment, OfficeHours
 
 
 def get_context(page_number=None):
@@ -74,10 +74,12 @@ def get_context(page_number=None):
     print(last_date)
     annoucements = Announcement.objects.filter(week_announcment__date=last_date)
     # annoucements = Announcement.objects.all()
+    office_hours = OfficeHours.objects.all()
     print(annoucements)
     context = {
         'latest_question_list': '22',
         'annoucements': annoucements,
+        'officeHours': office_hours,
         'articles': articles,
         # 'has_previous': has_previous,
         # 'has_next': has_next,

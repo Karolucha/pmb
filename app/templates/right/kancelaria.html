@@ -9,26 +9,15 @@
                             <th >
                             <h4 class="card-title"> Godziny</h4>
                             </th>
+                            {% for day in officeHours %}
                             <tr>
                                 <td class="card-text">
-                                    wtorek
+                                    {{ day.day }}
                                 </td>
-                                <td>16.00-17.00</td>
+                                <td>{{day.start}}.00-{{day.end}}.00</td>
                             </tr>
+                            {% endfor %}
 
-                            <tr>
-                                <td class="card-text">
-                                    czwartek
-                                </td>
-                                <td>16.00-17.00</td>
-                            </tr>
-
-                            <tr>
-                                <td class="card-text">
-                                    sobota
-                                </td>
-                                <td>9.00-10.00</td>
-                            </tr>
                         </table>
                     </div> <!-- #class="card-body" -->
                 </div><!-- class="k-card" -->
