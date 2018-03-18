@@ -170,3 +170,7 @@ class Actual(models.Model):
         verbose_name = 'Nowy artykuł aktualności'
         verbose_name_plural = 'Aktualność'
         ordering = '-date',
+
+class Sacraments(models.Model):
+    name = models.CharField(max_length=50)
+    content = models.CharField(max_length=15000)

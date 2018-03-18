@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 # Create your views here.
-from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncment, OfficeHours
+from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncment, OfficeHours, Sacraments
 
 
 def get_context(page_number=None):
@@ -99,6 +99,14 @@ def index(request):
 def article_detail(request, page_number):
     print('article_detail page number', page_number)
     return render(request, 'index.html', get_context(page_number))
+
+
+def sacraments(request, sacrament_id):
+    print(sacrament_id)
+    context = get_context()
+    sacrament_name = Sacraments.objects.get(sacrament_id).name
+    page_html = 'pokuta.html'
+    return render(request, page_html, context)
 
 # def articles(request, page_number=None):
 #
