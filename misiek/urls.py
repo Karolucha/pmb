@@ -1,0 +1,14 @@
+from django.conf.urls import include, url
+
+from misiek import views
+urlpatterns = [
+    # ex: /polls/
+    url('^adminek', views.index, name='index'),
+    url('^actual_list$', views.actual, name='actual'),
+    # url('^actual_detail/(?P<actual_id>\d{1,4})?', views.actual_detail, name='actual_detail'),
+    url(r'^actual_detail/(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='actual_detail'),
+    url('^cancelary', views.cancelary, name='cancelary'),
+    # url(r'^article/(?P<page_number>\d{1,4})?/$', views.articles, name='article_detail'),
+    # ex: /polls/5/
+
+]

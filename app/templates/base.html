@@ -35,7 +35,8 @@
             </hgroup>
             <ul class="nav md-pills nav-justified pills-secondary">
                 <li class="nav-item">
-                    <a class="nav-link active k-menu-nav-link" data-toggle="tab" href="#aktualnosci" role="tab">Aktualności</a>
+                    <a class="nav-link active k-menu-nav-link"  href="{% url 'articles' page_number=0 %}" role="tab">Aktualności</a>
+                    <!--<a class="nav-link active k-menu-nav-link" data-toggle="tab" href="#aktualnosci" role="tab">Aktualności</a>-->
                 </li>
                 <li class="nav-item">
                     <a class="nav-link k-menu-nav-link" data-toggle="tab" href="#ogloszenia" role="tab">Ogłoszenia</a>
@@ -43,19 +44,21 @@
                 <li class="nav-item">
                     <a class="nav-link k-menu-nav-link" data-toggle="tab" href="#intencje" role="tab">Intencje</a>
                 </li>
-                    <li class="nav-item">
 
+                <li class="nav-item">
                     <div class="btn-group">
                         <a class="nav-link dropdown-toggle to-mini-menu" href="#" data-toggle="dropdown" aria-haspopup="true"
                          aria-expanded="false">Sakramenty</a>
                         <div class="dropdown-menu row row-dropdown k-menu-dropdown" style="width: 30vw;">
-                            <a class="nav-link" data-toggle="tab" href="{% url sacraments sacrament_id=1 %}" role="tab">Bierzmowanie</a>
-                            <a class="nav-link" data-toggle="tab" href="#chrzest" role="tab">Chrzest</a>
-                            <a class="nav-link" data-toggle="tab" href="#pokuta" role="tab">Pokuta</a>
+                            {% for sacrament in sacraments_all %}
+                            <a class="sacrament-link" href="{% url 'sacraments' sacrament_id=sacrament.id %}" >{{sacrament.name}}</a><br/>
+                            {% endfor %}
+                            <!--<a class="nav-link" data-toggle="tab" href="#chrzest" role="tab">Chrzest</a>-->
+                            <!--<a class="nav-link" data-toggle="tab" href="#pokuta" role="tab">Pokuta</a>-->
                         </div>
                     </div>
-
                 </li>
+
                 <li class="nav-item">
 
                     <div class="btn-group">
@@ -130,6 +133,7 @@
         <hr class="my-2" />
 
         <div class="tab-content">
+
                    {% block content %}
                     {% endblock %}
         </div>

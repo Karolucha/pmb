@@ -3,6 +3,10 @@ app/static/js/mdb.min.js
 app/static/js/bootstrap.min.js
 app/static/js/jquery-3.2.1.min.js
 .idea/.*
-app/static/fonts/.*
+app/static/fonts
 /app/.*
-app/static/images.*
+app/static/images
+misiek/static/fonts/
+misiek/static/styles/
+misiek/static/angular.min.js
+misiek/static/w3c.css

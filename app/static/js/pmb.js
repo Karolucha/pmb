@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    console.log('load');
     $('#btnSideBarOpen').click(function(){
         $('#mySidebar').show();
     })
@@ -14,6 +14,7 @@ $(document).ready(function () {
     // })
     var dropdownTownshipLinkSelector = '.k-menu-dropdown .nav-link'
     $(dropdownTownshipLinkSelector).click(function (e) {
+        console.log('WAS CLICKED');
         e.preventDefault()
         $(dropdownTownshipLinkSelector).removeClass("active");
         $(dropdownTownshipLinkSelector).removeClass("show");
@@ -22,6 +23,7 @@ $(document).ready(function () {
     $('.row-dropdown').on('show.bs.dropdown', function () {
         console.log('up')
         $('.row-dropdown').css('display', 'flex');
+        console.log('WAS CLICKED');
     })
 
     $('.row-dropdown').on('show.bs.dropdown', function () {

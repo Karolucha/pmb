@@ -55,13 +55,13 @@ class MassSchema(models.Model):
     season_name = models.CharField(max_length=50, verbose_name='nazwa sezonu', null=True, blank=True)
     season_start = models.DateField(verbose_name='Pierwszy dzień sezonu', null=True, blank=True)
     season_end = models.DateField(verbose_name='Ostatni dzień sezonu', null=True, blank=True)
-    monday = models.BooleanField(verbose_name='Poniedziałek', default=False)
-    tuesday = models.BooleanField(verbose_name='Wtorek', default=False)
-    wednesday = models.BooleanField(verbose_name='Środa', default=False)
-    thursday = models.BooleanField(verbose_name='Czwartek', default=False)
-    friday = models.BooleanField(verbose_name='Piątek', default=False)
-    sunday = models.BooleanField(verbose_name='Sobota', default=False)
-    saturday = models.BooleanField(verbose_name='Niedziela', default=False)
+    # monday = models.BooleanField(verbose_name='Poniedziałek', default=False)
+    # tuesday = models.BooleanField(verbose_name='Wtorek', default=False)
+    # wednesday = models.BooleanField(verbose_name='Środa', default=False)
+    # thursday = models.BooleanField(verbose_name='Czwartek', default=False)
+    # friday = models.BooleanField(verbose_name='Piątek', default=False)
+    sunday = models.BooleanField(verbose_name='Niedziela', default=False)
+    # saturday = models.BooleanField(verbose_name='Niedziela', default=False)
 
     def __str__(self):
         return "Schemat mszy dla sezonu " + str(self.season_start) + " - " + str(self.season_end)
@@ -81,7 +81,7 @@ class Hour(models.Model):
     church = models.CharField(max_length=50, null=True, blank=True, choices=churches, verbose_name='kościół')
 
     def __str__(self):
-        return str(self.hour)
+        return 'g.' + str(self.hour) + ' kościół ' + self.church
 
     class Meta:
         verbose_name = 'Msza święta'
@@ -171,6 +171,14 @@ class Actual(models.Model):
         verbose_name_plural = 'Aktualność'
         ordering = '-date',
 
-class Sacraments(models.Model):
-    name = models.CharField(max_length=50)
-    content = models.CharField(max_length=15000)
+
+class Sacrament(models.Model):
+    name = models.CharField(max_length=50, verbose_name='nazwa sakramentu')
+    content = models.CharField(max_length=15000, verbose_name='opis')
+
+    def __str__(self):
+        return 'Sakrament: ' + self.name
+
+    class Meta:
+        verbose_name = 'Sakrament'
+        verbose_name_plural = 'Sakramenty'

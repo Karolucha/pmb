@@ -17,8 +17,10 @@ class MassForm(forms.ModelForm):
         model = MassSchema
         fields = ['season_start', 'season_end',
                   'season_name',
-                  'monday', 'tuesday', 'wednesday', 'thursday',
-                  'friday', 'sunday', 'saturday']
+                  'sunday']
+
+        # 'monday', 'tuesday', 'wednesday', 'thursday',
+                  # 'friday', 'sunday',
 #test 1234qwer
 
 
@@ -110,6 +112,23 @@ class IntentionsAdmin(admin.ModelAdmin):
     form = WeekIntentionForm
 
 
+#----------------------Sakramenty
+
+class SacramentForm(forms.ModelForm):
+    class Meta:
+        model = Sacrament
+        fields = 'name', 'content'
+        widgets = {
+            'content': SummernoteWidget(),
+        }
+
+
+@admin.register(Sacrament)
+class SacramentAdmin(SummernoteModelAdmin):
+    summer_note_fields = '__all__'
+    form = SacramentForm
+
 
 admin.site.register(OfficeHours)
+# admin.site.register(Sacraments)
 # admin.site.register(SubPages)

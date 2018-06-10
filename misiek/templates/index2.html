@@ -1,0 +1,9 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<ul class="w3-ul">
+{% for action in actions %}
+  <li class="w3-hover-green"><a href="{% url action.link %}">{{action.name}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

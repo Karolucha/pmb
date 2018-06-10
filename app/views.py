@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from datetime import datetime
 # Create your views here.
-from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncment, OfficeHours, Sacraments
-
+from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncment, OfficeHours, Sacrament
+CURRENT_SEASON = 'wiosenny'
 
 def get_context(page_number=None):
     annoucements = ['Dziś obchodzimy wspomnienie św Tomasza',
@@ -38,8 +38,14 @@ def get_context(page_number=None):
     #                                  season_end__gte=today)
     # mass = Hour.objects.filter(mass__season_start__gte=today,
     #                            mass__season_end__lte=today).select_related()
+    mass_schemas = MassSchema.objects.filter(season_name=CURRENT_SEASON)
+    sundays = mass_schemas.filter(sunday=True).select_related()
+    others = mass_schemas.filter(sunday=False)
+    print(sundays[0].hour_set)
+
+
     masses = Hour.objects.select_related().all()
-    print(masses[0].mass)
+    print('masses mass_schemas', mass_schemas)
     churches = set(mass.church for mass in masses)
     oldes_sunday = []
     new_sunday = []
@@ -75,11 +81,13 @@ def get_context(page_number=None):
     annoucements = Announcement.objects.filter(week_announcment__date=last_date)
     # annoucements = Announcement.objects.all()
     office_hours = OfficeHours.objects.all()
-    print(annoucements)
+    sacraments_queryset = Sacrament.objects.all()
+    print('return context')
     context = {
         'latest_question_list': '22',
         'annoucements': annoucements,
         'officeHours': office_hours,
+        'sacraments_all': sacraments_queryset,
         'articles': articles,
         # 'has_previous': has_previous,
         # 'has_next': has_next,
@@ -104,9 +112,12 @@ def article_detail(request, page_number):
 def sacraments(request, sacrament_id):
     print(sacrament_id)
     context = get_context()
-    sacrament_name = Sacraments.objects.get(sacrament_id).name
-    page_html = 'pokuta.html'
-    return render(request, page_html, context)
+    sacrament = Sacrament.objects.get(id=sacrament_id)
+    print(sacrament)
+    context['sacrament'] = sacrament
+    print('context done')
+
+    return render(request, 'index.html', context)
 
 # def articles(request, page_number=None):
 #

@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<div class="w3-bar w3-border w3-teal w3-large">
+  <a href="#" class="w3-bar-item w3-button">Lista artykułów</a>
+</div>
+<div class="w3-container">
+    <button class="w3-btn w3-white w3-border  w3-margin w3-border-green w3-round-xlarge" style="width:50%">Dodaj nowy</button>
+<input class="w3-input w3-border w3-padding" type="text" placeholder="Search for names.." id="myInput" onkeyup="myFunction()">
+{% for actual in actual_list_links %}
+<ul id="ul-list" class="w3-ul">
+<li class="w3-hover-teal w3-display-container">
+    <div class="w3-row">
+  <div class="w3-col s4 "><a href="{% url 'actual_detail' actual.id%}">{{actual.title}}</a></div>
+  <div class="w3-col s3  w3-center"> <span onclick="this.parentElement.style.display='none'"
+  class="w3-button ">&times;</span>
+  <a href="{% url 'actual_detail' actual.id%}"><span class="w3-button"> <i class="fa fa-edit"></i>EDYTUJ</span></a>
+  </div>
+</div>
+
+
+</li>
+</ul>
+{% endfor %}
+</div>
+<script>
+function myFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("ul-list");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+{% endblock %}
