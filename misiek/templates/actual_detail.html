@@ -8,22 +8,19 @@
 
 <form method="POST" class="w3-container">
    {% csrf_token %}
-  <label class="w3-text-teal"><b>Nagłówek wiadomości</b></label>
-  <input class="w3-input w3-border w3-light-grey" name="title" value="{{article.title}}" type="text">
-
-  <label class="w3-text-teal"><b>Opis</b></label>
+    <label class="w3-text-teal"><b>Nagłówek wiadomości</b></label>
+    <input class="w3-input w3-border w3-light-grey" name="title" value="{{article.title}}" type="text">
+    <label class="w3-text-teal"><b>Opis</b></label>
     <textarea class="w3-input w3-border w3-light-grey" name="content">{{article.content}}</textarea>
-
-  <button class="w3-btn w3-margin-top w3-blue-grey">Zapisz</button>
-
-<a href="{% url 'actual_detail' article.id %}">Vote again?</a>
+    <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
+    <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'actual' %}" >Anuluj</a>
 </form>
 
-    <script type="text/javascript" src="{% static 'styles/jquery.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'styles/codemirror.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'styles/xml.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'styles/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'styles/codemirror.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'styles/xml.min.js' %}"></script>
 
-    <!-- Include Editor JS files. -->
-    <script type="text/javascript" src="{% static 'styles/froala_editor.pkgd.min.js' %}"></script>
-    <script> $(function() { $('textarea').froalaEditor() }); </script>
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="{% static 'styles/froala_editor.pkgd.min.js' %}"></script>
+<script> $(function() { $('textarea').froalaEditor() }); </script>
 {% endblock %}

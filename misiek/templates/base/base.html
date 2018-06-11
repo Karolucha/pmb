@@ -21,10 +21,11 @@
 
      <!--<link rel="stylesheet" href="{% static 'fonts/css/font-awesome.css' %}">-->
      <link rel="stylesheet" href="{% static 'js/w3c.css' %}">
+     <link rel="stylesheet" href="{% static 'site.css' %}">
 
 <body>
 <div class="w3-bar w3-border w3-light-grey w3-xlarge">
-  <a href="#" class="w3-bar-item w3-button">Panel do zarządzania treścią strony</a>
+  <a href="{% url 'index' %}" class="w3-bar-item w3-button">Panel do zarządzania treścią strony</a>
 </div>
 {% block content %}
 {% endblock %}
