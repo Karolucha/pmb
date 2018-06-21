@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="w3-container w3-teal">
+  <h2>Godziny w dniu:</h2>
+</div>
+
+<form method="POST" class="w3-container">
+   {% csrf_token %}
+    <label class="w3-text-teal"><b>Opis</b>
+        <!--<input class="w3-input w3-border w3-light-grey" name="title" value="{{article.title}}" type="text">-->
+        <select>
+            <option value="{{object.day}}">{{object.day}}</option>
+        </select>
+    </label>
+    <textarea class="w3-input w3-border w3-light-grey" name="content">{{article.content}}</textarea>
+    <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
+    <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'actual' %}" >Anuluj</a>
+</form>

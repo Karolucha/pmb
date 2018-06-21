@@ -157,6 +157,8 @@ class OfficeHours(models.Model):
     def __str__(self):
         return "Godziny dla dnia " + str(self.day)
 
+    # @staticmethod
+    # def get_template():
 
 class Actual(models.Model):
     title = models.CharField(max_length=200, verbose_name='tytuł')
