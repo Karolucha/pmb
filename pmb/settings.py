@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'adminek',
-    'django_summernote',
 ]
 
 MIDDLEWARE = [

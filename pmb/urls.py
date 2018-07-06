@@ -21,7 +21,6 @@ from django.contrib import admin
 admin.site.site_header = 'Zarządzanie treścią strony'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^summernote/', include('django_summernote.urls')),
     url(r'', include('app.urls')),
     url(r'', include('adminek.urls')),
 

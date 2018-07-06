@@ -31,6 +31,8 @@ class ListField(models.TextField):
     def value_to_string(self, obj):
         value = self._get_val_from_obj(obj)
         return self.get_db_prep_value(value)
+
+
 DAYS_OF_WEEK = (
     ('Poniedziałek', 'Poniedziałek'),
     ('Wtorek', 'Wtorek'),
@@ -46,7 +48,6 @@ churches = (
     ('Miłosierdzia Bożego', 'Miłosierdzia Bożego'),
 )
 
-# class Week()
 
 class MassSchema(models.Model):
     # hours = models.ForeignKey(Hour)
@@ -73,11 +74,11 @@ class MassSchema(models.Model):
 class WeekOfMass(models.Model):
     week_day = models.CharField(choices=DAYS_OF_WEEK, max_length=12, null=True, blank=True,
                                 verbose_name='Dzień tygodnia')
-    mass_chema = models.ForeignKey(MassSchema, verbose_name='Lista mszy w sezonie')
+    mass_chema = models.ForeignKey(MassSchema, verbose_name='Lista mszy w sezonie', on_delete=models.CASCADE)
 
 class Hour(models.Model):
     hour = models.TimeField(verbose_name='godzina mszy', null=True, blank=True)
-    mass = models.ForeignKey(MassSchema, null=True, blank=True, verbose_name='msza')
+    mass = models.ForeignKey(MassSchema, null=True, blank=True, verbose_name='msza', on_delete=models.CASCADE)
     church = models.CharField(max_length=50, null=True, blank=True, choices=churches, verbose_name='kościół')
 
     def __str__(self):
@@ -111,7 +112,7 @@ class WeekAnnouncment(models.Model):
 
 class Announcement(models.Model):
     content = models.CharField(max_length=15000, null=True, blank=True, verbose_name='treść')
-    week_announcment = models.ForeignKey(WeekAnnouncment, verbose_name='Ogłoszenia')
+    week_announcment = models.ForeignKey(WeekAnnouncment, verbose_name='Ogłoszenia', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.week_announcment.date)
@@ -135,10 +136,10 @@ class Intentions(models.Model):
     date = models.DateField(verbose_name='data')
     hour = models.TimeField(verbose_name='godzina')
     title = models.CharField(max_length=200, verbose_name='nazwa intencji')
-    week = models.ForeignKey(IntentionWeek)
+    week = models.ForeignKey(IntentionWeek, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.date) + ' g. ' + str(self.hour)  + ' ' + self.title[10] + '...'
+        return str(self.date) + ' g. ' + str(self.hour) + ' ' + self.title[10] + '...'
 
     class Meta:
         verbose_name='Intencja'

@@ -2,10 +2,7 @@ from django.contrib import admin
 from django import forms
 # Register your models here.
 from django.forms import models, TimeField, TimeInput, SplitDateTimeWidget, DateInput
-from django_summernote.admin import SummernoteModelAdmin
-from django_summernote.widgets import SummernoteWidget
-from tinymce.models import HTMLField
-from django.forms.extras.widgets import SelectDateWidget
+
 from app.models import *
 from django.contrib.admin import widgets
 
@@ -49,13 +46,10 @@ class ActualForm(forms.ModelForm):
     class Meta:
         model = Actual
         fields = 'title', 'content'
-        widgets = {
-            'content': SummernoteWidget(),
-        }
 
 
 @admin.register(Actual)
-class ActualAdmin(SummernoteModelAdmin):
+class ActualAdmin(admin.ModelAdmin):
     summer_note_fields = '__all__'
     form = ActualForm
 
@@ -66,9 +60,6 @@ class AnnouncementForm(forms.ModelForm):
     class Meta:
         model = Announcement
         fields = 'content',
-        widgets = {
-            'content': SummernoteWidget(),
-        }
 
 
 class AnnouncementAdmin(admin.StackedInline):
@@ -118,14 +109,9 @@ class SacramentForm(forms.ModelForm):
     class Meta:
         model = Sacrament
         fields = 'name', 'content'
-        widgets = {
-            'content': SummernoteWidget(),
-        }
-
 
 @admin.register(Sacrament)
-class SacramentAdmin(SummernoteModelAdmin):
-    summer_note_fields = '__all__'
+class SacramentAdmin(admin.ModelAdmin):
     form = SacramentForm
 
 

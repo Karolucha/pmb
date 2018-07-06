@@ -60,22 +60,6 @@ def get_context(page_number=None):
 
         }
     }
-
-    # mass_schema = {
-    #     'sunday': {
-    #         church: [
-    #             hour.hour for hour in masses if hour.church == church and
-    #             hour.mass
-    #
-    #         ] for church in churches
-    #     },
-    #     'others': {
-    #         church: [
-    #             hour.hour for hour in masses if hour.church == church and
-    #             not hour.mass.sunday
-    #         ] for church in churches
-    #     }
-    # }
     last_date = WeekAnnouncment.objects.last().date
     print(last_date)
     annoucements = Announcement.objects.filter(week_announcment__date=last_date)
