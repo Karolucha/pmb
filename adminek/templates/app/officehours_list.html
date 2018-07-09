@@ -26,8 +26,8 @@
               <div class="w3-col s1 ">{{day.start}}</div>
               <div class="w3-col s1 ">{{day.end}}</div>
               <div class="w3-col s2  w3-center">
-              <a href="{% url 'detail' object_name='OfficeHours'  pk=day.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
-              <a href="{% url 'detail' object_name='OfficeHours'  pk=day.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
+              <a href="{% url 'detail' object_name='OfficeHours' method='delete'  pk=day.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
+              <a href="{% url 'detail' object_name='OfficeHours' method='edit'  pk=day.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
               </div>
             </div>
         </li>
