@@ -148,18 +148,23 @@ class Intentions(models.Model):
 
 class OfficeHours(models.Model):
     day = models.CharField(max_length=15, verbose_name='dzien tygodnia', choices=DAYS_OF_WEEK)
-    start = models.IntegerField(verbose_name='od godziny')
-    end = models.IntegerField(verbose_name='do godziny')
+    start = models.TimeField(verbose_name='od godziny')
+    end = models.TimeField(verbose_name='do godziny')
 
     class Meta:
         verbose_name = 'Godziny działania kancelarii w danym dniu'
         verbose_name_plural = 'Godziny działania kancelarii'
 
+    # @property
+    # def get_tem
+
     def __str__(self):
         return "Godziny dla dnia " + str(self.day)
 
-    # @staticmethod
-    # def get_template():
+    @staticmethod
+    def get_context():
+        return {'days': DAYS_OF_WEEK}
+
 
 class Actual(models.Model):
     title = models.CharField(max_length=200, verbose_name='tytuł')

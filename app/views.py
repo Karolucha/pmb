@@ -5,22 +5,15 @@ from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncment, 
 CURRENT_SEASON = 'wiosenny'
 
 def get_context(page_number=None):
-    annoucements = ['Dziś obchodzimy wspomnienie św Tomasza',
-                    'Zapraszamy na obchody']
     print('page number', page_number)
 
     if page_number is not None and page_number != '0':
         page_number = int(page_number)
-        # newest_article = Actual.objects.()
         offset = page_number*3
         limit = page_number*3+3
         print('numbers ', offset, limit)
         articles = Actual.objects.all()[offset:limit]
-        # print('articles ',articles)
         articles_sum = Actual.objects.all().count()
-        # last_article = articles.order_by('date')[0]
-        # print('article ', last_article.title)
-        # if Actual.objects.filter(date__lt=articles.last().date):
         if articles_sum - offset > 2:
             older_number = page_number + 1
             next_number = page_number - 1
@@ -34,13 +27,8 @@ def get_context(page_number=None):
         next_number = None
         older_number = 1
     today = datetime.now().date()
-    # mass = MassSchema.objects.filter(season_start__lte=today,
-    #                                  season_end__gte=today)
-    # mass = Hour.objects.filter(mass__season_start__gte=today,
-    #                            mass__season_end__lte=today).select_related()
     mass_schemas = MassSchema.objects.filter(season_name=CURRENT_SEASON)
     sundays = mass_schemas.filter(sunday=True).select_related()
-    others = mass_schemas.filter(sunday=False)
     print(sundays[0].hour_set)
 
 
@@ -49,8 +37,6 @@ def get_context(page_number=None):
     churches = set(mass.church for mass in masses)
     oldes_sunday = []
     new_sunday = []
-    # for i, hour in enumerate(masses):
-    #     print(masses[i].mass)
     mass_schema = {
         'sunday': {
             'old': oldes_sunday,
@@ -63,7 +49,6 @@ def get_context(page_number=None):
     last_date = WeekAnnouncment.objects.last().date
     print(last_date)
     annoucements = Announcement.objects.filter(week_announcment__date=last_date)
-    # annoucements = Announcement.objects.all()
     office_hours = OfficeHours.objects.all()
     sacraments_queryset = Sacrament.objects.all()
     print('return context')
@@ -94,15 +79,8 @@ def article_detail(request, page_number):
 
 
 def sacraments(request, sacrament_id):
-    print(sacrament_id)
     context = get_context()
     sacrament = Sacrament.objects.get(id=sacrament_id)
     print(sacrament)
     context['sacrament'] = sacrament
-    print('context done')
-
     return render(request, 'index.html', context)
-
-# def articles(request, page_number=None):
-#
-#     return render(request, 'index.html', get_context(page_number=page_number))

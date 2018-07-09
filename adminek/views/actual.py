@@ -37,6 +37,9 @@ def actual_delete(request, actual_id):
         return render(request, 'actual_delete.html', {
             'article': article})
 
+
+
+
 class ActualDetailView(View):
     def get(self, request, *args, **kwargs):
         # object_name = kwargs['object_name']

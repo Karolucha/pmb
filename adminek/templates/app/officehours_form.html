@@ -13,19 +13,22 @@
         </label>
         <select class="w3-select w3-border w-30" name="day">
             <option value="{{object.day}}">{{object.day}}</option>
+            {% for day in days %}
+                <option name="day" value="{{day.0}}">{{day.1}}</option>
+            {% endfor %}
         </select>
     </div>
     <div class="w3-row w3-text-teal  w3-section">
         <label class="w3-col-10" >
             Od:
         </label>
-         <input class="w3-input w-30" type="number" value="{{object.start}}"/>
+         <input class="w3-input w-30" name="start" type="time" value="{{object.start}}"/>
     </div>
      <div class="w3-row w3-text-teal  w3-section">
         <label class="w3-text-teal  w-30">
             Do:
         </label>
-         <input class="w3-input w-30"  type="number" value="{{object.end}}"/>
+         <input class="w3-input w-30"  name="end" type="time" value="{{object.end}}"/>
      </div>
     <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
     <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'actual' %}" >Anuluj</a>
