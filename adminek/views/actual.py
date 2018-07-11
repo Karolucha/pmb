@@ -5,10 +5,13 @@ from app.models import Actual
 
 ACTIONS = [{
   'name': 'Aktualności',
-  'link': 'actual'
+  'object_name': 'Actual'
 }, {
   'name': 'Godziny działania kancelari',
-  'link': 'cancelary'
+  'object_name': 'OfficeHours'
+}, {
+  'name': 'Sakramenty lista',
+  'object_name': 'Sacrament'
 }]
 
 def index(request):

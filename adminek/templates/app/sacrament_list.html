@@ -1,33 +1,29 @@
 {% extends '../base/base.html' %}
 {% block content %}
 <div class="w3-bar w3-border w3-teal w3-large">
-    <h3>Lista Dni</h3>
+    <h3>Zakładka "Sakramenty"</h3>
 </div>
 <div class="w3-container">
     <button class="w3-btn w3-white w3-border  w3-margin w3-border-green w3-round-xlarge" style="width:50%">
-        <a href="{% url 'detail' method='POST' object_name='OfficeHours' %}">Dodaj nowy</a>
+        <a href="{% url 'detail' method='post' object_name='sacrament' %}">Dodaj nowy</a>
     </button>
     <input class="w3-input w3-border w3-padding" type="text" placeholder="Szukaj po nazwie" id="myInput" onkeyup="myFunction()">
     <ul class="w3-ul w3-teal">
         <li class="w3-hover-teal w3-display-container">
             <div class="w3-row">
-              <div class="w3-col s3  w3-center">Dzień</div>
-              <div class="w3-col s1  w3-center">Godzina od</div>
-              <div class="w3-col s1  w3-center">Godzina do</div>
+              <div class="w3-col s3  w3-center">Nazwa</div>
               <div class="w3-col s2  w3-center">Akcje</div>
             </div>
         </li>
     </ul>
     <ul id="ul-list" class="w3-ul">
-        {% for day in object_list %}
+        {% for object in object_list %}
         <li class="w3-hover-teal w3-display-container">
             <div class="w3-row">
-              <div class="w3-col s3 "><a href="{% url 'actual_detail' actual.id%}">{{day.day}}</a></div>
-              <div class="w3-col s1 ">{{day.start}}</div>
-              <div class="w3-col s1 ">{{day.end}}</div>
+              <div class="w3-col s3 "><a href="{% url 'detail' method='update' object_name='sacrament' pk=object.id %}">{{object}}</a></div>
               <div class="w3-col s2  w3-center">
-              <a href="{% url 'detail' object_name='OfficeHours' method='delete'  pk=day.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
-              <a href="{% url 'detail' object_name='OfficeHours' method='edit'  pk=day.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
+              <a href="{% url 'detail' object_name='sacrament' method='delete'  pk=object.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
+              <a href="{% url 'detail' object_name='sacrament' method='edit'  pk=object.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
               </div>
             </div>
         </li>

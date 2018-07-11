@@ -33,20 +33,11 @@ class CancelaryCreateView(CreateView):
 
     def form_valid(self, form):
         model = form.save(commit=False)
-        # model.submitted_by = self.request.user
-        # model.save()
-        print('ALL VALID')
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         print('GET SUCCES  URL')
         return reverse('demos-ui-createview')
-    # def form_valid(self, form):
-    #     return redirect)
-        # return self.render_to_response(self.get_context_data(form=form))
-    # def post(self, request, *args, **kwargs):
-    #     super(CancelaryCreateView, self).post(request, *args, **kwargs)
-    #     return render_
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

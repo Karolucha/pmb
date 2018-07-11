@@ -1,5 +1,5 @@
 from django.apps import apps
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 
 
@@ -9,7 +9,7 @@ class BaseGenericView(View):
         method = kwargs.get('method', 'get')
         object_name = kwargs['object_name']
         model_class = apps.get_model(app_label='app', model_name=object_name)
-        context = model_class.get_context()
+        context = model_class.get_context() if hasattr(model_class, 'get_context') else {}
         if kwargs['pk'] is not None:
             article = model_class.objects.get(id=kwargs['pk'])
             context['object'] = article
@@ -25,6 +25,7 @@ class BaseGenericView(View):
         return render(request, template_name, context)
 
     def post(self, request, *args, **kwargs):
+        print("MISIU")
         object_name = kwargs['object_name']
         model_class = apps.get_model(app_label='app', model_name=object_name)
         fields = [field.name for field in model_class._meta.get_fields()]
@@ -36,7 +37,7 @@ class BaseGenericView(View):
         elif request.POST.get('delete'):
             model_object = model_class.objects.get(id=kwargs['pk'])
             model_object.delete()
-            model_object.save()
+            # model_object.save()
         else:
             model_object = model_class.objects.filter(id=kwargs['pk'])
             values = {field: request.POST[field] for field in fields
@@ -44,5 +45,6 @@ class BaseGenericView(View):
             model_object.update(**values)
 
         template_name = 'app/' + object_name.lower() + '_list.html'
-        return render(request, template_name, {
-            'object_list': model_class.objects.all()})
+        return redirect('detail', method='list', object_name=object_name)
+        # return render(request, template_name, {
+        #     'object_list': model_class.objects.all()})
