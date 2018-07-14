@@ -34,18 +34,18 @@ class ListField(models.TextField):
 
 
 DAYS_OF_WEEK = (
-    ('Poniedziałek', 'Poniedziałek'),
-    ('Wtorek', 'Wtorek'),
-    ('Środa', 'Środa'),
-    ('Czwartek', 'Czwartek'),
-    ('Piątek', 'Piątek'),
-    ('Sobota', 'Sobota'),
-    ('Niedziela', 'Niedziela'),
+    ('pon', 'Poniedziałek'),
+    ('wt', 'Wtorek'),
+    ('sr', 'Środa'),
+    ('cz', 'Czwartek'),
+    ('pt', 'Piątek'),
+    ('sb', 'Sobota'),
+    ('nd', 'Niedziela'),
 )
 
 churches = (
-    ('św. Faustyny', 'św. Faustyny'),
-    ('Miłosierdzia Bożego', 'Miłosierdzia Bożego'),
+    ('f', 'św. Faustyny'),
+    ('mb', 'Miłosierdzia Bożego'),
 )
 
 
@@ -190,3 +190,14 @@ class Sacrament(models.Model):
     class Meta:
         verbose_name = 'Sakrament'
         verbose_name_plural = 'Sakramenty'
+
+class Ceremony(models.Model):
+    name = models.CharField(max_length=50)
+    time = models.TimeField()
+    day = models.CharField(choices=DAYS_OF_WEEK, max_length=20)
+    church = models.CharField(churches, max_length=30)
+    display_start = models.DateField()
+    display_end = models.DateField()
+
+    def __str__(self):
+        return self.name

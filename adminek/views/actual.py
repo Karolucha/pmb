@@ -12,6 +12,9 @@ ACTIONS = [{
 }, {
   'name': 'Sakramenty lista',
   'object_name': 'Sacrament'
+}, {
+  'name': 'Nabożeńśtwa',
+  'object_name': 'Ceremony'
 }]
 
 def index(request):
