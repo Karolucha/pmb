@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="w3-container w3-teal">
+  <h2>{{article.title}}</h2>
+</div>
+
+<form method="POST" class="w3-container">
+   {% csrf_token %}
+    <label class="w3-text-teal"><b>Msze święte w okresie</b></label>
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>Od kiedy wyświetlać na stronie?</b>
+        </label>
+        <input id="dateFrom" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="display_start" value="{{object.schema.season_start | date:'Y-m-d' }}">
+    </div>
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>Do kiedy wyświetlać na stronie?</b>
+        </label>
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="display_end" value="{{object.schema.season_end| date:'Y-m-d'}}">
+    </div>
+
+    <div class="w3-row">
+        <label>Godziny mszy:</label>
+    </div>
+    {% for hour in object.hours %}
+    <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">
+        <label class="w3-text-teal"><b>Msza</b>
+        </label>
+        <input class="w3-hover-green w3-border w3-light-grey w-30" type="time" value="{{hour.hour}}"  name="{{hour.id}}">
+        <select name="church-{{hour.id}}" class="w3-select w3-border w-30">
+            <option value="mb" selected="{{hour.church}}=='Miłosierdzia Bożego'">Miłosierdzia bożego</option>
+            <option value="f" selected="{{hour.church}}=='św. Faustyny'">Św faustyny</option>
+        </select>
+        <div class="w3-btn" onclick="deleteRow('row-'+{{hour.id}})">X</div>
+    </div>
+    {% empty %}
+    <div id="new-1" class="w3-row w3-text-teal w3-section mass-hour-row">
+        <label class="w3-text-teal"><b>Msza</b>
+        </label>
+        <input class="w3-hover-green w3-border w3-light-grey w-30" type="time" value="07:00"  name="1">
+        <select name="church-1" class="w3-select w3-border w-30">
+            <option value="mb" selected="{{hour.church}}=='Miłosierdzia Bożego'">Miłosierdzia bożego</option>
+            <option value="f" selected="{{hour.church}}=='św. Faustyny'">Św faustyny</option>
+        </select>
+        <div class="w3-btn" onclick="deleteRow('row-1')">X</div>
+    </div>
+    {% endfor %}
+    <div class="w3-row w3-text-teal w3-section">
+        <div class="w3-btn w3-blue-grey" onclick="addMassForm()">Kolejna msza</button>
+    </div>
+    <div class="w3-row w3-text-teal w3-section">
+        <input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'actual' %}" >Anuluj</a>
+    </div>
+</form>
+<script>
+
+    //document.getElementById('dateFrom').valueAsDate = new Date();
+  //  document.getElementById('dateTo').valueAsDate = new Date();
+</script>
+
+<script type="text/javascript" src="{% static 'js/mass.js' %}"></script>
+{% endblock %}

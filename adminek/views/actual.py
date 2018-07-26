@@ -15,6 +15,12 @@ ACTIONS = [{
 }, {
   'name': 'Nabożeńśtwa',
   'object_name': 'Ceremony'
+}, {
+  'name': 'Ogłoszenia duszpasterskie',
+  'object_name': 'Announcement'
+}, {
+  'name': 'Msze święte',
+  'object_name': 'MassSchema'
 }]
 
 def index(request):

@@ -5,27 +5,35 @@ from django.views import View
 
 class BaseGenericView(View):
 
+    def get_for_single(self, model_class, id_object):
+        return model_class.objects.get(id=id_object)
+        # context['object'] = model_object
+
     def get(self, request, *args, **kwargs):
         method = kwargs.get('method', 'get')
-        object_name = kwargs['object_name']
-        model_class = apps.get_model(app_label='app', model_name=object_name)
-        context = model_class.get_context() if hasattr(model_class, 'get_context') else {}
+        self.object_name = kwargs['object_name']
+        self.model_class = apps.get_model(app_label='app', model_name=self.object_name)
+        self.context = self.model_class.get_context() if hasattr(self.model_class, 'get_context') else {}
         if kwargs['pk'] is not None:
-            article = model_class.objects.get(id=kwargs['pk'])
-            context['object'] = article
-        print('context ', context)
+            # model_object = model_class.objects.get(id=kwargs['pk'])
+            self.context['object'] = self.get_for_single(self.model_class, kwargs['pk'])
+        print('context ', self.context)
+        self.get_template_name(method)
+        return render(request, self.template_name, self.context)
+
+    def get_template_name(self, method):
+
         if method == 'delete':
             post_fix = '_delete.html'
         elif method == 'list':
-            context['object_list'] = model_class.objects.all()
+            self.context['object_list'] = self.model_class.objects.all()
             post_fix = '_list.html'
         else:
             post_fix = '_form.html'
-        template_name = 'app/' + object_name.lower() + post_fix
-        return render(request, template_name, context)
+
+        self.template_name = 'app/' + self.object_name.lower() + post_fix
 
     def post(self, request, *args, **kwargs):
-        print("MISIU")
         object_name = kwargs['object_name']
         model_class = apps.get_model(app_label='app', model_name=object_name)
         fields = [field.name for field in model_class._meta.get_fields()]

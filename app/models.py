@@ -67,6 +67,14 @@ class MassSchema(models.Model):
     def __str__(self):
         return "Schemat mszy dla sezonu " + str(self.season_start) + " - " + str(self.season_end)
 
+    @staticmethod
+    def get_foreign_name():
+        return 'Hour'
+
+    # @staticmethod
+    # def get_context():
+    #     return {'len_hours': MassSchema.objects.}
+
     class Meta:
         verbose_name = 'Lista mszy w sezonie'
         verbose_name_plural = 'Schemat mszy'
