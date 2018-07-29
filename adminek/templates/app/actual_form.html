@@ -9,10 +9,10 @@
 <form method="POST" class="w3-container">
    {% csrf_token %}
   <label class="w3-text-teal"><b>Nagłówek wiadomości</b></label>
-  <input class="w3-input w3-border w3-light-grey" name="title" value="{{article.title}}" type="text">
+  <input class="w3-input w3-border w3-light-grey" name="title" value="{{object.title}}" type="text">
 
   <label class="w3-text-teal"><b>Opis</b></label>
-  <textarea class="w3-input w3-border w3-light-grey" name="content">{{article.content}}</textarea>
+  <textarea class="w3-input w3-border w3-light-grey" name="content">{{object.content}}</textarea>
     <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
 <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'actual' %}" >Anuluj</a>
 </form>

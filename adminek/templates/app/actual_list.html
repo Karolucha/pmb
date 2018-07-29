@@ -5,7 +5,7 @@
 </div>
 <div class="w3-container">
     <button class="w3-btn w3-white w3-border  w3-margin w3-border-green w3-round-xlarge" style="width:50%">
-        <a href="{% url 'actual_detail' %}">Dodaj nowy</a>
+        <a href="{% url 'detail' method='post' object_name='actual' %}">Dodaj nowy</a>
     </button>
     <input class="w3-input w3-border w3-padding" type="text" placeholder="Szukaj po nazwie" id="myInput" onkeyup="myFunction()">
     <ul class="w3-ul w3-teal">
@@ -18,13 +18,13 @@
         </li>
     </ul>
     <ul id="ul-list" class="w3-ul">
-        {% for actual in actual_list_links %}
+        {% for actual in object_list %}
         <li class="w3-hover-teal w3-display-container">
             <div class="w3-row">
               <div class="w3-col s6 "><a href="{% url 'actual_detail' actual.id%}">{{actual}}</a></div>
               <div class="w3-col s3  w3-center">
-              <a href="{% url 'delete' actual.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
-              <a href="{% url 'detail' actual.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
+              <a href="{% url 'detail' object_name='actual' method='delete'  pk=actual.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
+              <a href="{% url 'detail' object_name='actual' method='edit'  pk=actual.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
               </div>
             </div>
         </li>

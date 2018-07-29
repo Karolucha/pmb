@@ -4,6 +4,11 @@ from django.views import View
 
 
 class BaseGenericView(View):
+    template_name = None
+    object_name = None
+    model_class = None
+    context = None
+    values = None
 
     def get_for_single(self, model_class, id_object):
         return model_class.objects.get(id=id_object)
@@ -35,24 +40,45 @@ class BaseGenericView(View):
 
     def post(self, request, *args, **kwargs):
         object_name = kwargs['object_name']
-        model_class = apps.get_model(app_label='app', model_name=object_name)
-        fields = [field.name for field in model_class._meta.get_fields()]
+        self.model_class = apps.get_model(app_label='app', model_name=object_name)
+        # fields = [field.name for field in self.model_class._meta.get_fields()]
+        # values = {field: request.POST[field] for field in fields
+        #           if field != 'id'}
         if kwargs['pk'] is None:
-            values = {field: request.POST[field] for field in fields
-                      if field != 'id'}
-            model_object = model_class(**values)
-            model_object.save()
-        elif request.POST.get('delete'):
-            model_object = model_class.objects.get(id=kwargs['pk'])
-            model_object.delete()
+            self.set_values(request)
+            self.create(*args, **kwargs)
+            # values = {field: request.POST[field] for field in fields
+            #           if field != 'id'}
+            # model_object = self.model_class(**values)
             # model_object.save()
+        elif request.POST.get('delete'):
+            self.delete(*args, **kwargs)
         else:
-            model_object = model_class.objects.filter(id=kwargs['pk'])
-            values = {field: request.POST[field] for field in fields
-                      if field != 'id'}
-            model_object.update(**values)
-
-        template_name = 'app/' + object_name.lower() + '_list.html'
+            self.set_values(request)
+            self.edit(*args, **kwargs)
+            # model_object = self.model_class.objects.filter(id=kwargs['pk'])
+            # values = {field: request.POST[field] for field in fields
+            #           if field != 'id'}
+            # model_object.update(**values)
+        # template_name = 'app/' + object_name.lower() + '_list.html'
         return redirect('detail', method='list', object_name=object_name)
         # return render(request, template_name, {
         #     'object_list': model_class.objects.all()})
+
+    def create(self, *args, **kwargs):
+        model_object = self.model_class(**self.values)
+        model_object.save()
+
+    def edit(self, *args, **kwargs):
+        model_object = self.model_class.objects.filter(id=kwargs['pk'])
+        model_object.update(**self.values)
+        
+    def delete(self, *args, **kwargs):
+        model_object = self.model_class.objects.get(id=kwargs['pk'])
+        model_object.delete()
+
+    def set_values(self, request):
+        post_items = dict(request.POST)
+        fields = [field.name for field in self.model_class._meta.get_fields()]
+        self.values = {field: request.POST[field] for field in fields
+                       if field != 'id' if field in post_items.keys()}
