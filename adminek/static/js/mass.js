@@ -17,13 +17,20 @@ function addMassForm(){
     }, 1)
 }
 
-function deleteRow(event) {
+function deleteRow(rowId) {
     form = document.getElementsByTagName('form')[0];
-    console.log('form', form);
+    console.log('form', rowId);
     if (form.getElementsByTagName('select').length ===1) {
         alert('Nie można usunąć wszystkich!');
         return;
     }
-    row = document.getElementById(event);
-    form.removeChild(row);
+    if (rowId.startsWith('row-')) {
+        var hiddenInput = document.createElement("input");
+        hiddenInput.setAttribute("type", "hidden");
+        hiddenInput.setAttribute("name", "deletions");
+        hiddenInput.setAttribute("value", rowId);
+        form.appendChild(hiddenInput);
+    }
+    row = document.getElementById(rowId);
+    row.parentNode.removeChild(row);
 }

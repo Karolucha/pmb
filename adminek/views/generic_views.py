@@ -46,7 +46,7 @@ class BaseGenericView(View):
         #           if field != 'id'}
         if kwargs['pk'] is None:
             self.set_values(request)
-            self.create(*args, **kwargs)
+            self.create(request, *args, **kwargs)
             # values = {field: request.POST[field] for field in fields
             #           if field != 'id'}
             # model_object = self.model_class(**values)
@@ -55,7 +55,7 @@ class BaseGenericView(View):
             self.delete(*args, **kwargs)
         else:
             self.set_values(request)
-            self.edit(*args, **kwargs)
+            self.edit(request, *args, **kwargs)
             # model_object = self.model_class.objects.filter(id=kwargs['pk'])
             # values = {field: request.POST[field] for field in fields
             #           if field != 'id'}
@@ -65,11 +65,11 @@ class BaseGenericView(View):
         # return render(request, template_name, {
         #     'object_list': model_class.objects.all()})
 
-    def create(self, *args, **kwargs):
+    def create(self, request, *args, **kwargs):
         model_object = self.model_class(**self.values)
         model_object.save()
 
-    def edit(self, *args, **kwargs):
+    def edit(self, request, *args, **kwargs):
         model_object = self.model_class.objects.filter(id=kwargs['pk'])
         model_object.update(**self.values)
         

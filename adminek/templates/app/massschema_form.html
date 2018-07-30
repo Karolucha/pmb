@@ -17,7 +17,7 @@
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Do kiedy wyświetlać na stronie?</b>
         </label>
-        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="season_end" value="{{object.schema.season_end| date:'Y-m-d'}}">
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="season_end" value="{{object.schema.season_end | date:'Y-m-d'}}">
     </div>
 
     <div class="w3-row">
@@ -26,23 +26,22 @@
     <div id='hours-all'>
     {% for hour in object.hours %}
     <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">
-        <label class="w3-text-teal"><b>Msza</b>
-        </label>
-        <input class="w3-hover-green w3-border w3-light-grey w-30" type="time" value="{{hour.hour}}"  name="{{hour.id}}">
+        <label class="w3-text-teal"><b>Msza</b></label>
+        <input class="w3-hover-green w3-border w3-light-grey w-30" type="time" value="{{hour.hour}}"  name="hour-{{hour.id}}">
         <select name="church-{{hour.id}}" class="w3-select w3-border w-30">
-            <option value="mb" selected="{{hour.church}}=='Miłosierdzia Bożego'">Miłosierdzia bożego</option>
-            <option value="f" selected="{{hour.church}}=='św. Faustyny'">Św faustyny</option>
+            <option value="f" {% if not hour.is_mb %}selected="selected"{% endif %}>Św faustyny</option>
+            <option value="mb" {% if hour.is_mb %}selected="selected"{% endif %}>Miłosierdzia bożego</option>
         </select>
-        <div class="w3-btn" onclick="deleteRow('row-'+{{hour.id}})">X</div>
+        <div class="w3-btn" onclick="deleteRow('row-' + {{hour.id}})">X</div>
     </div>
     {% empty %}
     <div id="n-1" class="w3-row w3-text-teal w3-section mass-hour-row">
-        <label class="w3-text-teal"><b>Msza</b>
+        <label class="w3-tex-teal"><b>Msza</b>
         </label>
         <input class="w3-hover-green w3-border w3-light-grey w-30" type="time" value="07:00"  name="n-hour-1">
         <select name="n-church-1" class="w3-select w3-border w-30">
-            <option value="mb" selected="{{hour.church}}=='Miłosierdzia Bożego'">Miłosierdzia bożego</option>
-            <option value="f" selected="{{hour.church}}=='św. Faustyny'">Św faustyny</option>
+            <option value="mb">Miłosierdzia bożego</option>
+            <option value="f">Św faustyny</option>
         </select>
         <div class="w3-btn" onclick="deleteRow('row-1')">X</div>
     </div>
