@@ -17,10 +17,13 @@ ACTIONS = [{
   'object_name': 'Ceremony'
 }, {
   'name': 'Ogłoszenia duszpasterskie',
-  'object_name': 'Announcement'
+  'object_name': 'WeekAnnouncement'
 }, {
   'name': 'Msze święte',
   'object_name': 'MassSchema'
+}, {
+  'name': 'Intencje',
+  'object_name': 'IntentionWeek'
 }]
 
 def index(request):

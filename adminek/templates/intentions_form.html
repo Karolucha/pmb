@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="w3-container w3-teal">
+  <h2>{{article.title}}</h2>
+</div>
+
+<form method="POST" class="w3-container">
+   {% csrf_token %}
+    <label class="w3-text-teal"><b>Ogłoszenia na niedzielę:</b></label>
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>Na którą niedzielę ogłoszenie</b>
+        </label>
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="display_end" value="{{date}}">
+    </div>
+
+    <div id='hours-all'>
+            <div class="w3-row">
+              <div class="w3-col s3  w3-center">Dzień</div>
+              <div class="w3-col s3  w3-center">Godzina</div>
+              <div class="w3-col s3  w3-center">Treść intencji</div>
+            </div>
+    {% for intention in intentions %}
+    <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">
+        <input class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date-{{intention.id}}" value="{{intention.date}}">
+        <input class="w3-hover-green w3-border w3-light-grey w-30" type="time" name="date-{{intention.id}}" value="{{intention.hour}}">
+        <input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="old-{{intention.id}}" value="{{intention.title}}">
+
+    </div>
+    {% endfor %}
+    </div>
+
+    <div class="w3-row w3-text-teal w3-section">
+        <input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='WeekAnnouncement' %}" >Anuluj</a>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Pobierz</a>
+    </div>
+</form>
+<script type="text/javascript" src="{% static 'js/intention.js' %}"></script>
+{% endblock %}

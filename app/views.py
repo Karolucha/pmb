@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 # Create your views here.
-from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncment, OfficeHours, Sacrament
+from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncement, OfficeHours, Sacrament
 CURRENT_SEASON = 'wiosenny'
 
 def get_context(page_number=None):
@@ -46,7 +46,7 @@ def get_context(page_number=None):
 
         }
     }
-    last_date = WeekAnnouncment.objects.last().date
+    last_date = WeekAnnouncement.objects.last().date
     print(last_date)
     annoucements = Announcement.objects.filter(week_announcment__date=last_date)
     office_hours = OfficeHours.objects.all()

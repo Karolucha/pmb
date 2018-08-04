@@ -67,10 +67,10 @@ class AnnouncementAdmin(admin.StackedInline):
     form = AnnouncementForm
 
 
-@admin.register(WeekAnnouncment)
+@admin.register(WeekAnnouncement)
 class WeekAnnouncmentAdmin(admin.ModelAdmin):
     inlines = [AnnouncementAdmin]
-    model = WeekAnnouncment
+    model = WeekAnnouncement
     date = forms.DateField(widget=TimeInput)
 
 

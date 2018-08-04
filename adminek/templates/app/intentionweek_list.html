@@ -1,17 +1,17 @@
 {% extends '../base/base.html' %}
 {% block content %}
 <div class="w3-bar w3-border w3-teal w3-large">
-    <h3>Msze święte w parafii</h3>
+    <h3>Ogłoszenia duszpasterskie</h3>
 </div>
 <div class="w3-container">
     <button class="w3-btn w3-white w3-border  w3-margin w3-border-green w3-round-xlarge" style="width:50%">
-        <a href="{% url 'mass' method='post' object_name='massschema' %}">Dodaj nowy</a>
+        <a href="{% url 'intentionweek' method='post' object_name='intentionweek' %}">Dodaj nowy</a>
     </button>
     <input class="w3-input w3-border w3-padding" type="text" placeholder="Szukaj po nazwie" id="myInput" onkeyup="myFunction()">
     <ul class="w3-ul w3-teal">
         <li class="w3-hover-teal w3-display-container">
             <div class="w3-row">
-              <div class="w3-col s4  w3-center">Nazwa</div>
+              <div class="w3-col s3  w3-center">Nazwa</div>
               <div class="w3-col s2  w3-center">Akcje</div>
             </div>
         </li>
@@ -20,10 +20,10 @@
         {% for object in object_list %}
         <li class="w3-hover-teal w3-display-container">
             <div class="w3-row">
-              <div class="w3-col s4 "><a href="{% url 'detail' method='update' object_name='announcement' pk=object.id %}">{{object}}</a></div>
+              <div class="w3-col s3 "><a href="{% url 'detail' method='update' object_name='announcement' pk=object.id %}">{{object}}</a></div>
               <div class="w3-col s2  w3-center">
-              <a href="{% url 'mass' object_name='massschema' method='delete'  pk=object.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
-              <a href="{% url 'mass' object_name='massschema' method='edit'  pk=object.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
+              <a href="{% url 'intentionweek' object_name='intentionweek' method='delete'  pk=object.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
+              <a href="{% url 'intentionweek' object_name='intentionweek' method='edit'  pk=object.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
               </div>
             </div>
         </li>

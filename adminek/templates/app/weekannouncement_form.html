@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="w3-container w3-teal">
+  <h2>{{article.title}}</h2>
+</div>
+
+<form method="POST" class="w3-container">
+   {% csrf_token %}
+    <label class="w3-text-teal"><b>Ogłoszenia na niedzielę:</b></label>
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>Na którą niedzielę ogłoszenie</b>
+        </label>
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="display_end" value="{{object.schema.date}}">
+    </div>
+
+    <div id='hours-all'>
+    {% for hour in object.announcements %}
+    <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">
+        <label class="w3-text-teal"><b>Ogłoszenie:</b></label>
+        <div class="w3-btn" onclick="deleteRow('row-' + {{hour.id}})">Usuń</div>
+        <textarea class="w3-input w3-border w3-light-grey w-75" rows="4" name="old-{{hour.id}}">{{hour.content}}</textarea>
+        <!--<input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="old-{{hour.id}}" value="{{hour.content}}">-->
+
+    </div>
+    {% empty %}
+        <label>IT IS EMPTY</label>
+    <div id="n-1" class="w3-row w3-text-teal w3-section mass-hour-row">
+        <label class="w3-tex-teal"><b>Ogłoszenie</b>
+        </label>
+        <div class="w3-btn" onclick="deleteRow('row-1')">Usuń</div>
+        <input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="a-0" value="{{hour.content}}">
+
+
+    </div>
+    {% endfor %}
+    </div>
+
+    <div class="w3-btn w-30 w3-hover-green w3-border w3-light-grey " onclick="renderNextAnnouncementField()">
+        Kolejne ogłoszenie
+    </div>
+
+    <input class="w3-btn w3-margin-top w3-blue-grey" name="download" type="submit" value="Pobierz">
+
+    <div class="w3-row w3-text-teal w3-section">
+        <!--<input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>-->
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='WeekAnnouncement' %}" >Anuluj</a>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Pobierz</a>
+    </div>
+</form>
+
+    <!--<script type="text/javascript" src="{% static 'styles/jquery.min.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'styles/codemirror.min.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'styles/xml.min.js' %}"></script>-->
+
+    <!--&lt;!&ndash; Include Editor JS files. &ndash;&gt;-->
+    <!--<script type="text/javascript" src="{% static 'styles/froala_editor.pkgd.min.js' %}"></script>-->
+    <!--<script> $(function() { $('textarea').froalaEditor() }); </script>-->
+<script type="text/javascript" src="{% static 'js/announcement.js' %}"></script>
+{% endblock %}

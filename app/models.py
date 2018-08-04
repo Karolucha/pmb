@@ -65,15 +65,18 @@ class MassSchema(models.Model):
     # saturday = models.BooleanField(verbose_name='Niedziela', default=False)
 
     def __str__(self):
-        return "Schemat mszy dla sezonu " + str(self.season_start) + " - " + str(self.season_end)
+        if self.sunday:
+            sunday = " (niedzielne) "
+        else:
+            sunday = ""
+        return "Msze święte w dniach " + str(self.season_start) + " - " + str(self.season_end) + sunday
 
     @staticmethod
     def get_foreign_name():
         return 'Hour'
 
-    # @staticmethod
-    # def get_context():
-    #     return {'len_hours': MassSchema.objects.}
+
+
 
     class Meta:
         verbose_name = 'Lista mszy w sezonie'
@@ -85,9 +88,9 @@ class WeekOfMass(models.Model):
     mass_chema = models.ForeignKey(MassSchema, verbose_name='Lista mszy w sezonie', on_delete=models.CASCADE)
 
 class Hour(models.Model):
-    hour = models.TimeField(verbose_name='godzina mszy', null=True, blank=True)
-    mass = models.ForeignKey(MassSchema, null=True, blank=True, verbose_name='msza', on_delete=models.CASCADE)
-    church = models.CharField(max_length=50, null=True, blank=True, choices=churches, verbose_name='kościół')
+    hour = models.TimeField(verbose_name='godzina mszy')
+    mass = models.ForeignKey(MassSchema, verbose_name='msza', on_delete=models.CASCADE)
+    church = models.CharField(max_length=50, choices=churches, verbose_name='kościół')
 
     def __str__(self):
         return 'g.' + str(self.hour) + ' kościół ' + self.church
@@ -106,7 +109,7 @@ class SubPages(models.Model):
         verbose_name_plural = 'Podstrony'
 
 
-class WeekAnnouncment(models.Model):
+class WeekAnnouncement(models.Model):
     date = models.DateField(null=True, blank=True, verbose_name='niedziela')
 
     def __str__(self):
@@ -120,7 +123,7 @@ class WeekAnnouncment(models.Model):
 
 class Announcement(models.Model):
     content = models.CharField(max_length=15000, null=True, blank=True, verbose_name='treść')
-    week_announcment = models.ForeignKey(WeekAnnouncment, verbose_name='Ogłoszenia', on_delete=models.CASCADE)
+    week_announcment = models.ForeignKey(WeekAnnouncement, verbose_name='Ogłoszenia', on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.week_announcment.date)
@@ -129,18 +132,16 @@ class Announcement(models.Model):
         verbose_name='Ogłoszenie'
         verbose_name_plural = 'Ogłoszenia'
 
+
 class IntentionWeek(models.Model):
     week = models.CharField(max_length=200)
 
-class Intentions(models.Model):
-    # date = models.DateTimeField(verbose_name='termin_mszy')
 
+class Intentions(models.Model):
     weeks = (
         ('I Tydzień', 'I Tydzień'),
         ('II Tydzień', 'II Tydzień'),
     )
-    # week = models.CharField(max_length=100, choices=weeks)
-    # date = models.ForeignKey(Hour)
     date = models.DateField(verbose_name='data')
     hour = models.TimeField(verbose_name='godzina')
     title = models.CharField(max_length=200, verbose_name='nazwa intencji')
@@ -199,6 +200,7 @@ class Sacrament(models.Model):
         verbose_name = 'Sakrament'
         verbose_name_plural = 'Sakramenty'
 
+
 class Ceremony(models.Model):
     name = models.CharField(max_length=50)
     time = models.TimeField()
@@ -209,3 +211,14 @@ class Ceremony(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SectionRows(models.Model):
+    section_kind = models.CharField(max_length=50)
+    row_content = models.CharField(max_length=500)
+
+
+class MassSchemaRows(models.Model):
+    is_sunday = models.BooleanField()
+    church = models.CharField(churches, max_length=30)
+    hours = models.CharField(max_length=100)

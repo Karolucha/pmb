@@ -2,10 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4c3857ca-edf2-4788-8626-a8639d3be360" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminek/static/js/mass.js" afterPath="$PROJECT_DIR$/adminek/static/js/mass.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminek/static/js/announcement.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminek/static/js/intention.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminek/templates/app/intentionweek_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminek/templates/app/intentionweek_list.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminek/templates/app/massschema_delete.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminek/templates/intentions_form.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminek/views/announcement_view.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/adminek/views/intention_view.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/adminek/templates/app/announcement_form.html" afterPath="$PROJECT_DIR$/adminek/templates/app/weekannouncement_form.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/adminek/templates/app/announcement_list.html" afterPath="$PROJECT_DIR$/adminek/templates/app/weekannouncement_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminek/static/site.css" afterPath="$PROJECT_DIR$/adminek/static/site.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminek/templates/app/massschema_form.html" afterPath="$PROJECT_DIR$/adminek/templates/app/massschema_form.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminek/templates/app/massschema_list.html" afterPath="$PROJECT_DIR$/adminek/templates/app/massschema_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminek/urls.py" afterPath="$PROJECT_DIR$/adminek/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminek/views/actual.py" afterPath="$PROJECT_DIR$/adminek/views/actual.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminek/views/generic_views.py" afterPath="$PROJECT_DIR$/adminek/views/generic_views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/adminek/views/mass_view.py" afterPath="$PROJECT_DIR$/adminek/views/mass_view.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin.py" afterPath="$PROJECT_DIR$/app/admin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models.py" afterPath="$PROJECT_DIR$/app/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,34 +39,32 @@
   <component name="FileEditorManager">
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/models.py">
+        <leaf>
+          <file leaf-file-name="intentionweek_form.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/adminek/templates/app/intentionweek_form.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="299">
-                  <caret line="56" column="16" lean-forward="false" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="16" />
-                  <folding>
-                    <element signature="e#0#35#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="massschema_form.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/adminek/templates/app/massschema_form.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-132">
-                  <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+                <state relative-caret-position="202">
+                  <caret line="14" column="101" lean-forward="false" selection-start-line="14" selection-start-column="101" selection-end-line="14" selection-end-column="101" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="actual_form.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/adminek/templates/app/actual_form.html">
+          <file leaf-file-name="intentions_form.html" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/adminek/templates/intentions_form.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="198">
-                  <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+                  <caret line="21" column="62" lean-forward="false" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="massschema_list.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/adminek/templates/app/massschema_list.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="198">
+                  <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="18" />
                   <folding />
                 </state>
               </provider>
@@ -58,8 +73,8 @@
           <file leaf-file-name="generic_views.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/adminek/views/generic_views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="173">
-                  <caret line="72" column="8" lean-forward="false" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="71" />
+                <state relative-caret-position="270">
+                  <caret line="40" column="45" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="45" />
                   <folding />
                 </state>
               </provider>
@@ -69,11 +84,35 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="mass_view.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/adminek/views/mass_view.py">
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-4">
-                  <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+                <state relative-caret-position="-1464">
+                  <caret line="139" column="16" lean-forward="false" selection-start-line="139" selection-start-column="6" selection-end-line="139" selection-end-column="16" />
+                  <folding>
+                    <element signature="e#0#35#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="intention_view.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/adminek/views/intention_view.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="287">
+                  <caret line="48" column="33" lean-forward="false" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="announcement_view.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/adminek/views/announcement_view.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="374">
+                  <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#55#0" expanded="true" />
                   </folding>
@@ -81,22 +120,26 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="actual_list.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/adminek/templates/app/actual_list.html">
+          <file leaf-file-name="mass_view.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/adminek/views/mass_view.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="198">
-                  <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-                  <folding />
+                <state relative-caret-position="2596">
+                  <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="ceremony_form.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/adminek/templates/app/ceremony_form.html">
+          <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/adminek/urls.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="528">
-                  <caret line="39" column="8" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
-                  <folding />
+                <state relative-caret-position="264">
+                  <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+                  <folding>
+                    <element signature="e#0#32#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -109,8 +152,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="XHTML File" />
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -134,6 +177,10 @@
       <find>get_con</find>
       <find>church</find>
       <find>context</find>
+      <find>get</find>
+      <find>self.hour</find>
+      <find>intenti</find>
+      <find>mass</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -142,17 +189,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/admin/views.py" />
-        <option value="$PROJECT_DIR$/misiek/static/js/angular.min.js" />
-        <option value="$PROJECT_DIR$/misiek/templates/cancelary.html" />
-        <option value="$PROJECT_DIR$/misiek/static/js/adminek.js" />
-        <option value="$PROJECT_DIR$/misiek/templates/index2.html" />
-        <option value="$PROJECT_DIR$/misiek/static/js/w3c.css" />
-        <option value="$PROJECT_DIR$/misiek/templates/actual_delete.xhtml" />
-        <option value="$PROJECT_DIR$/misiek/templates/base/base.html" />
-        <option value="$PROJECT_DIR$/misiek/static/site.css" />
-        <option value="$PROJECT_DIR$/misiek/templates/actual_delete.html" />
-        <option value="$PROJECT_DIR$/misiek/templates/actual_new.html" />
         <option value="$PROJECT_DIR$/misiek/templates/actual_detail.html" />
         <option value="$PROJECT_DIR$/misiek/templates/actual.html" />
         <option value="$PROJECT_DIR$/misiek/templates/list.html" />
@@ -181,18 +217,29 @@
         <option value="$PROJECT_DIR$/adminek/templates/app/days.html" />
         <option value="$PROJECT_DIR$/adminek/templates/app/ceremony_list.html" />
         <option value="$PROJECT_DIR$/adminek/templates/app/ceremony_form.html" />
-        <option value="$PROJECT_DIR$/adminek/views/actual.py" />
-        <option value="$PROJECT_DIR$/adminek/templates/app/announcement_list.html" />
-        <option value="$PROJECT_DIR$/adminek/templates/app/announcement_form.html" />
         <option value="$PROJECT_DIR$/adminek/templates/app/masschema_form.html" />
-        <option value="$PROJECT_DIR$/adminek/urls.py" />
-        <option value="$PROJECT_DIR$/adminek/templates/app/massschema_list.html" />
-        <option value="$PROJECT_DIR$/app/models.py" />
         <option value="$PROJECT_DIR$/adminek/templates/app/actual_list.html" />
         <option value="$PROJECT_DIR$/adminek/templates/app/actual_form.html" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/announcement_list.html" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/announcement_form.html" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/weekannouncement_list.html" />
         <option value="$PROJECT_DIR$/adminek/views/generic_views.py" />
+        <option value="$PROJECT_DIR$/adminek/static/site.css" />
+        <option value="$PROJECT_DIR$/adminek/views/announcement_view.py" />
+        <option value="$PROJECT_DIR$/adminek/views/actual.py" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/massschema_list.html" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/massschema_delete.html" />
         <option value="$PROJECT_DIR$/adminek/templates/app/massschema_form.html" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/weekannouncement_form.html" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/intentionweek_list.html" />
+        <option value="$PROJECT_DIR$/adminek/urls.py" />
+        <option value="$PROJECT_DIR$/app/models.py" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/intentionweek_form.py" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/intentions_form.html" />
+        <option value="$PROJECT_DIR$/adminek/templates/app/intentionweek_form.html" />
         <option value="$PROJECT_DIR$/adminek/views/mass_view.py" />
+        <option value="$PROJECT_DIR$/adminek/templates/intentions_form.html" />
+        <option value="$PROJECT_DIR$/adminek/views/intention_view.py" />
       </list>
     </option>
   </component>
@@ -352,11 +399,11 @@
       <recent name="C:\Users\Karolinka\PycharmProjects\pmb\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Karolinka\PycharmProjects\pmb\adminek\templates" />
       <recent name="C:\Users\Karolinka\PycharmProjects\pmb\adminek\templates\app" />
       <recent name="C:\Users\Karolinka\PycharmProjects\pmb\misiek" />
       <recent name="C:\Users\Karolinka\PycharmProjects\pmb\misiek\templates\base" />
       <recent name="C:\Users\Karolinka\PycharmProjects\pmb\app\templates" />
-      <recent name="C:\Users\Karolinka\PycharmProjects\pmb\app\templates\right" />
     </key>
   </component>
   <component name="RunManager" selected="Python.settings">
@@ -617,15 +664,16 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1234375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3592552" sideWeight="0.5104167" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960895" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28477547" sideWeight="0.48958334" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34173056" sideWeight="0.48958334" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -633,7 +681,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858709" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -655,6 +702,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/adminek/views/mass_view.py</url>
+          <line>1</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
@@ -663,78 +711,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/adminek/static/js/adminek.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="23" column="3" lean-forward="false" selection-start-line="14" selection-start-column="19" selection-end-line="23" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/static/js/w3c.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="90" lean-forward="false" selection-start-line="7" selection-start-column="90" selection-end-line="7" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/static/site.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python34/Lib/site-packages/django/views/generic/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/templates/base/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="23" column="53" lean-forward="false" selection-start-line="23" selection-start-column="53" selection-end-line="23" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/views/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/intencje.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="136" column="3" lean-forward="true" selection-start-line="136" selection-start-column="3" selection-end-line="137" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="16" lean-forward="true" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pmb/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
@@ -842,13 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/templates/app/officehours_delete.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="56" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adminek/templates/app/sacrament_list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -877,13 +846,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/templates/app/officehours_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -907,28 +869,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/adminek/templates/app/announcement_list" />
-    <entry file="file://$PROJECT_DIR$/adminek/views/actual.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="28" lean-forward="false" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/templates/app/announcement_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="25" column="41" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/templates/app/announcement_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-302">
-          <caret line="17" column="55" lean-forward="false" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adminek/templates/index2.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
@@ -936,35 +876,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adminek/templates/app/churches.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="66">
           <caret line="3" column="9" lean-forward="false" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/templates/app/massschema_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="41" lean-forward="true" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -985,40 +900,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/templates/app/actual_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/views/generic_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="72" column="8" lean-forward="false" selection-start-line="72" selection-start-column="8" selection-end-line="72" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="56" column="16" lean-forward="false" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/templates/app/massschema_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-132">
-          <caret line="18" column="16" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adminek/templates/app/ceremony_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -1029,18 +910,202 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/adminek/templates/app/actual_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
+        <state relative-caret-position="0">
           <caret line="9" column="53" lean-forward="false" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/adminek/views/mass_view.py">
+    <entry file="file://$PROJECT_DIR$/adminek/static/js/announcement.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4">
-          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/officehours_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="24" lean-forward="false" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/static/site.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/officehours_delete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="15" column="11" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/views/actual.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="13" column="28" lean-forward="true" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/massschema_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="65" column="4" lean-forward="false" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="22" lean-forward="true" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/massschema_delete.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="14" column="119" lean-forward="true" selection-start-line="14" selection-start-column="67" selection-end-line="14" selection-end-column="119" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/intentionweek_form.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/weekannouncement_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="18" column="39" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/static/js/intention.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/weekannouncement_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/intentionweek_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/actual_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="13" column="49" lean-forward="true" selection-start-line="13" selection-start-column="49" selection-end-line="13" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/intentionweek_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="14" column="101" lean-forward="false" selection-start-line="14" selection-start-column="101" selection-end-line="14" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/views/generic_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="40" column="45" lean-forward="true" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1464">
+          <caret line="139" column="16" lean-forward="false" selection-start-line="139" selection-start-column="6" selection-end-line="139" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/views/announcement_view.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
             <element signature="e#0#55#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/views/mass_view.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2596">
+          <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/app/massschema_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="15" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/templates/intentions_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="21" column="62" lean-forward="false" selection-start-line="21" selection-start-column="62" selection-end-line="21" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/adminek/views/intention_view.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="48" column="33" lean-forward="false" selection-start-line="48" selection-start-column="33" selection-end-line="48" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>

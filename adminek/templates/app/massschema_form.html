@@ -19,6 +19,11 @@
         </label>
         <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="season_end" value="{{object.schema.season_end | date:'Y-m-d'}}">
     </div>
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>Czy są to niedzielne msze święte?</b>
+        </label>
+        <input class="w3-check" type="checkbox" name="sunday" {% if object.schema.sunday %}checked="checked"{% endif %}>
+    </div>
 
     <div class="w3-row">
         <label>Godziny mszy:</label>
@@ -52,7 +57,7 @@
     </div>
     <div class="w3-row w3-text-teal w3-section">
         <input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>
-        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'actual' %}" >Anuluj</a>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='massschema' %}" >Anuluj</a>
     </div>
 </form>
 <script>

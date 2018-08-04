@@ -22,8 +22,8 @@ class BaseGenericView(View):
         if kwargs['pk'] is not None:
             # model_object = model_class.objects.get(id=kwargs['pk'])
             self.context['object'] = self.get_for_single(self.model_class, kwargs['pk'])
-        print('context ', self.context)
         self.get_template_name(method)
+        print('context ', self.context)
         return render(request, self.template_name, self.context)
 
     def get_template_name(self, method):
