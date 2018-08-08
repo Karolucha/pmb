@@ -12,22 +12,24 @@
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Na którą niedzielę ogłoszenie</b>
         </label>
-        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="display_end" value="{{date}}">
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date" value="{{object.date | date:'Y-m-d'}}">
     </div>
 
     <div id='hours-all'>
             <div class="w3-row">
-              <div class="w3-col s3  w3-center">Dzień</div>
-              <div class="w3-col s3  w3-center">Godzina</div>
+              <div class="w3-col s2  w3-center">Dzień</div>
+              <div class="w3-col s1  w3-center">Godzina</div>
               <div class="w3-col s3  w3-center">Treść intencji</div>
             </div>
     {% for intention in intentions %}
-    <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">
-        <input class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date-{{intention.id}}" value="{{intention.date}}">
-        <input class="w3-hover-green w3-border w3-light-grey w-30" type="time" name="date-{{intention.id}}" value="{{intention.hour}}">
-        <input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="old-{{intention.id}}" value="{{intention.title}}">
-
-    </div>
+    <label class="s1">{{intention.day}}</label>
+        {% for hour in intention.intentions %}
+        <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">
+        <input class="w3-hover-green w3-border w3-light-grey s1" type="date" name="{{intention.day}}-date-{{hour.hour}}" value="{{hour.date  | date:'Y-m-d'}}">
+        <input class="w3-hover-green w3-border w3-light-grey s1" type="time" name="{{intention.day}}-hour-{{hour.hour}}" value="{{hour.hour}}">
+        <input class="w3-hover-green w3-border w3-light-grey s3" type="text" name="{{intention.day}}-content-{{hour.hour}}" value="{{hour.title}}">
+        </div>
+        {% endfor %}
     {% endfor %}
     </div>
 

@@ -12,7 +12,7 @@
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Na którą niedzielę ogłoszenie</b>
         </label>
-        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="display_end" value="{{object.schema.date}}">
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="display_end" value="{{object.schema.date | date:'Y-m-d'}}">
     </div>
 
     <div id='hours-all'>

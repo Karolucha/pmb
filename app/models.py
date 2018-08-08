@@ -134,8 +134,9 @@ class Announcement(models.Model):
 
 
 class IntentionWeek(models.Model):
-    week = models.CharField(max_length=200)
-
+    week = models.DateField(max_length=200)
+    def __str__(self):
+        return 'Intencje na tydzień od ' + str(self.week)
 
 class Intentions(models.Model):
     weeks = (
@@ -148,7 +149,7 @@ class Intentions(models.Model):
     week = models.ForeignKey(IntentionWeek, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.date) + ' g. ' + str(self.hour) + ' ' + self.title[10] + '...'
+        return str(self.date) + ' g. ' + str(self.hour) + ' ' + self.title + '...'
 
     class Meta:
         verbose_name='Intencja'
