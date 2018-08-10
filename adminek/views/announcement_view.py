@@ -48,7 +48,7 @@ class AnnouncementView(BaseGenericView):
             if name.startswith('old-'):
                 row_number = name.split('-')[-1]
                 announcement = Announcement.objects.get(id=row_number)
-                announcement.content = value
+                announcement.content = value[0]
                 announcement.save()
             if name == 'deletions':
                 for hour_element_id in value:

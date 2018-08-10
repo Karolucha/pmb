@@ -24,6 +24,7 @@ class BaseGenericView(View):
             self.context['object'] = self.get_for_single(self.model_class, kwargs['pk'])
         self.get_template_name(method)
         print('context ', self.context)
+        print('render model class', self.model_class)
         return render(request, self.template_name, self.context)
 
     def get_template_name(self, method):

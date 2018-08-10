@@ -33,14 +33,14 @@ $(document).ready(function () {
     // $('.lead .nav-link').on('mouseenter',function(e){
     //     console.log('OOOn');
     // });
-    var weekIntention = false;
-    $('#table-week-intention').hide();
-    $('#btn-week-intention').click(function(){
-        var textToDisplay = weekIntention ? 'Cały tydzień' : 'Zwiń';
-        $(this).text(textToDisplay);
-        $('#card-week-intention').toggle(weekIntention);
-        $('#table-week-intention').toggle(!weekIntention);
-        weekIntention = !weekIntention;
-    })
+//    var weekIntention = false;
+//    $('#table-week-intention').hide();
+//    $('#btn-week-intention').click(function(){
+//        var textToDisplay = weekIntention ? 'Cały tydzień' : 'Zwiń';
+//        $(this).text(textToDisplay);
+//        $('#card-week-intention').toggle(weekIntention);
+//        $('#table-week-intention').toggle(!weekIntention);
+//        weekIntention = !weekIntention;
+//    })
 
 });

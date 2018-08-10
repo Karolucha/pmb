@@ -34,13 +34,13 @@ class ListField(models.TextField):
 
 
 DAYS_OF_WEEK = (
-    ('pon', 'Poniedziałek'),
-    ('wt', 'Wtorek'),
-    ('sr', 'Środa'),
-    ('cz', 'Czwartek'),
-    ('pt', 'Piątek'),
-    ('sb', 'Sobota'),
-    ('nd', 'Niedziela'),
+    ('Poniedziałek', 'Poniedziałek'),
+    ('Wtorek', 'Wtorek'),
+    ('Środa', 'Środa'),
+    ('Czwartek', 'Czwartek'),
+    ('Piątek', 'Piątek'),
+    ('Sobota', 'Sobota'),
+    ('Niedziela', 'Niedziela'),
 )
 
 churches = (
@@ -135,8 +135,11 @@ class Announcement(models.Model):
 
 class IntentionWeek(models.Model):
     week = models.DateField(max_length=200)
+    display_now = models.BooleanField(default=False)
     def __str__(self):
         return 'Intencje na tydzień od ' + str(self.week)
+
+# class IntentionDay(models.Model):
 
 class Intentions(models.Model):
     weeks = (
@@ -209,6 +212,7 @@ class Ceremony(models.Model):
     church = models.CharField(churches, max_length=30)
     display_start = models.DateField()
     display_end = models.DateField()
+    display_now = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

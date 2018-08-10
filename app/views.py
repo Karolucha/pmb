@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from datetime import datetime
 # Create your views here.
-from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncement, OfficeHours, Sacrament
+from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncement, OfficeHours, Sacrament, MassSchemaRows, \
+    Ceremony, DAYS_OF_WEEK, IntentionWeek
+
 CURRENT_SEASON = 'wiosenny'
 
 def get_context(page_number=None):
@@ -26,46 +28,77 @@ def get_context(page_number=None):
         has_next = True
         next_number = None
         older_number = 1
-    today = datetime.now().date()
-    mass_schemas = MassSchema.objects.filter(season_name=CURRENT_SEASON)
-    sundays = mass_schemas.filter(sunday=True).select_related()
-    print(sundays[0].hour_set)
+    # today = datetime.now().date()
+    # mass_schemas = MassSchema.objects.filter(season_name=CURRENT_SEASON)
+    # sundays = mass_schemas.filter(sunday=True).select_related()
+    # print(sundays[0].hour_set)
 
 
-    masses = Hour.objects.select_related().all()
-    print('masses mass_schemas', mass_schemas)
-    churches = set(mass.church for mass in masses)
-    oldes_sunday = []
-    new_sunday = []
-    mass_schema = {
-        'sunday': {
-            'old': oldes_sunday,
-            'new': new_sunday
-        },
-        'other': {
+    # masses = Hour.objects.select_related().all()
+    # print('masses mass_schemas', mass_schemas)
+    # churches = set(mass.church for mass in masses)
+    # oldes_sunday = []
+    # new_sunday = []
+    # mass_schema = {
+    #     'sunday': {
+    #         'old': oldes_sunday,
+    #         'new': new_sunday
+    #     },
+    #     'other': {
+    #
+    #     }
+    # }
 
-        }
-    }
+    intentions = []
+    context_int = {}
+    context_int['object'] = IntentionWeek.objects.filter(display_now=True).prefetch_related('intentions_set')[0]
+    date = context_int['object'].week
+    i = 0
+    intentions_day = []
+    days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota']
+    sorted_by = context_int['object'].intentions_set.all()
+    for intention in sorted_by.order_by('date', 'hour'):
+        if intention.date != date:
+            intentions.append({
+                'day': days[i],
+                'intentions': intentions_day.copy()})
+            i += 1
+            date = intention.date
+            intentions_day = []
+        intentions_day.append(intention)
+
+    intentions.append({
+        'day': days[i],
+        'intentions': intentions_day.copy()})
+
+    context_int['intentions'] = intentions
     last_date = WeekAnnouncement.objects.last().date
-    print(last_date)
     annoucements = Announcement.objects.filter(week_announcment__date=last_date)
     office_hours = OfficeHours.objects.all()
     sacraments_queryset = Sacrament.objects.all()
     print('return context')
+    # http: // mateusz.pl / czytania / 2018 / 20180810.html
+    today_listening = "http://mateusz.pl/czytania/{}/{}.html".format(datetime.now().year,datetime.now().strftime('%Y%m%d'))
+
     context = {
+        'DAYS_OF_WEEK': DAYS_OF_WEEK,
         'latest_question_list': '22',
+        'intention_week': context_int,
+        # 'intention_week': IntentionWeek.objects.filter(display_now=True).prefetch_related('intentions_set')[0],
         'annoucements': annoucements,
         'officeHours': office_hours,
         'sacraments_all': sacraments_queryset,
         'articles': articles,
+        'ceremonies': Ceremony.objects.all(),
+        'today_listening': today_listening,
         # 'has_previous': has_previous,
         # 'has_next': has_next,
-        'mass_schema': mass_schema,
         'next_number': next_number,
+        # 'mass_schema': mass_schema,
         'older_number': older_number,
-        'old_messes': '08:30, 10:00, 11:30',
-        'new_messes': '07:00, 13:30, 18:00',
-        'old_messes_other': '9:00, 17:00'
+        'old_messes': MassSchemaRows.objects.filter(church='mb', is_sunday=True)[0].hours,
+        'new_messes': MassSchemaRows.objects.filter(church='f', is_sunday=True)[0].hours,
+        'old_messes_other': MassSchemaRows.objects.filter(church='mb', is_sunday=False)[0].hours
     }
     return context
 

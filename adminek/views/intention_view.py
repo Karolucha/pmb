@@ -63,6 +63,9 @@ class IntentionView(BaseGenericView):
         intentions = []
         if 'stepDay' in params.keys():
             self.context['date'] = request.POST['date']
+            old_week = IntentionWeek.objects.filter(week=self.context['date'])
+            if old_week.exists():
+                return redirect('intentionweek', method='edit', pk=old_week[0].id, object_name='intentionweek')
             self.prepare_intentions(intentions, True, self.days[0], 0)
             for index, day in enumerate(self.days[1:]):
                 self.prepare_intentions(intentions, False, day, index+1)

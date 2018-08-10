@@ -1,28 +1,17 @@
 <div class="tab-pane fade in" id="nabozenstwa" role="tabpanel">
     <div class="k-card">
         <div class="card-body">
-            <p class="card-title">Droga krzyżowa:</p>
-        <table class="table">
-            <thead>
-            <th>Dzień</th>
-            <th>Godzina</th>
-            </thead>
-            <tbody>
-            <tr>
-                <td>17:15</td>
-                <td>Piątek</td>
-            </tr>
-            </tbody>
-        </table>
-        <p class="card-title">Gorzkie żale:</p>
+        {% for ceremony in ceremonies %}
+        <h4 class="card-title">{{ceremony.name}}</h4>
         <table class="table">
             <tbody>
             <tr>
-                <td>17:00</td>
-                <td>Niedziela</td>
+                <td>{{ceremony.time}}</td>
+                <td>{{ceremony.day}}</td>
             </tr>
             </tbody>
         </table>
+        {% endfor %}
         </div>
     </div>
 </div>
