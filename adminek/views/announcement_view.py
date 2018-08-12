@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 
 from app.models import WeekAnnouncement, Announcement
 
+from docx import Document
+
 
 class AnnouncementView(BaseGenericView):
     messes = {}
@@ -24,6 +26,9 @@ class AnnouncementView(BaseGenericView):
     def get(self, request, *args, **kwargs):
         method = kwargs.get('method', 'get')
         if method == 'download':
+            object_context = WeekAnnouncement.objects.filter(id=kwargs['pk']).prefetch_related('announcement_set')[0]
+            document = DocumentWord(object_context.date, object_context.announcement_set.all().order_by('id'))
+            document.create()
             return redirect('detail', method='list', object_name='weekannouncement')
         else:
             return super().get(request, *args, **kwargs)
@@ -66,3 +71,19 @@ class AnnouncementView(BaseGenericView):
                                             week_announcment=schema)
                 announcement.save()
 
+
+class DocumentWord:
+    def __init__(self, date, announcements):
+        self.day = str(date)
+        self.announcements = announcements
+
+    def create(self):
+        document = Document()
+        document.add_heading('Ogłoszenia duszpasterskie ' + self.day, 0)
+        for announcement in self.announcements:
+            document.add_paragraph(
+                announcement.content, style='ListNumber'
+            )
+        document.add_page_break()
+
+        document.save('demo.docx')

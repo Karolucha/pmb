@@ -40,12 +40,10 @@
     <div class="w3-btn w-30 w3-hover-green w3-border w3-light-grey " onclick="renderNextAnnouncementField()">
         Kolejne ogłoszenie
     </div>
-
-    <input class="w3-btn w3-margin-top w3-blue-grey" name="download" type="submit" value="Pobierz">
-
     <div class="w3-row w3-text-teal w3-section">
-        <!--<input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>-->
+        <input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>
         <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='WeekAnnouncement' %}" >Anuluj</a>
+        <!--<a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Zapisz</a>-->
         <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Pobierz</a>
     </div>
 </form>
