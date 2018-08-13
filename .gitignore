@@ -12,3 +12,4 @@ misiek/static/w3c.css
 pmbenv/
 adminek/views/__pycache__/
 app/__pycache__/
+*.pyc

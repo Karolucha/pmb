@@ -44,7 +44,8 @@
         <input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>
         <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='WeekAnnouncement' %}" >Anuluj</a>
         <!--<a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Zapisz</a>-->
-        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Pobierz</a>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.schema.id %}" >Pobierz</a>
+        <a href="{% url 'announcement' object_name='WeekAnnouncement' method='edit'  pk=object.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
     </div>
 </form>
 

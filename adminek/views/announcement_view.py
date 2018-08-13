@@ -1,8 +1,9 @@
+import os
 from adminek.views.generic_views import BaseGenericView
 from django.shortcuts import render, redirect
-
+from django.core.files import File
+from django.http import HttpResponse
 from app.models import WeekAnnouncement, Announcement
-
 from docx import Document
 
 
@@ -28,8 +29,7 @@ class AnnouncementView(BaseGenericView):
         if method == 'download':
             object_context = WeekAnnouncement.objects.filter(id=kwargs['pk']).prefetch_related('announcement_set')[0]
             document = DocumentWord(object_context.date, object_context.announcement_set.all().order_by('id'))
-            document.create()
-            return redirect('detail', method='list', object_name='weekannouncement')
+            return document.download_docx()
         else:
             return super().get(request, *args, **kwargs)
 
@@ -87,3 +87,18 @@ class DocumentWord:
         document.add_page_break()
 
         document.save('demo.docx')
+
+    def download_docx(self):
+        document = Document()
+        document.add_heading('Ogłoszenia duszpasterskie ' + self.day, 0)
+        for announcement in self.announcements:
+            document.add_paragraph(
+                announcement.content, style='ListNumber'
+            )
+        document.add_page_break()
+
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+        response['Content-Disposition'] = 'attachment; filename=ogloszenia.docx'
+        document.save(response)
+
+        return response
