@@ -1,19 +1,10 @@
 body {
     background-image: url("images/jawor.jpg");
 
-
     background-color: #FFFFFF;
     background-size:cover;
 }
-#page, #events {
-    margin-top:13vh; margin-left:5vw;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
 
-    flex-wrap: wrap;
-
-}
 #events{
     margin-left: 5vw;
     margin-top: 2vh;
