@@ -71,6 +71,7 @@ class IntentionView(BaseGenericView):
             for index, day in enumerate(self.days[1:]):
                 self.prepare_intentions(intentions, False, day, index+1)
             self.context['intentions'] = intentions
+            print('what are ', self.context)
             return render(request, 'others/intentions_form.html', self.context)
         else:
             return super().post(request, *args, **kwargs)

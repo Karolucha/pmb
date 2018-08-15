@@ -25,17 +25,21 @@ class BaseGenericView(View):
         if kwargs['pk'] is not None:
             # model_object = model_class.objects.get(id=kwargs['pk'])
             self.context['object'] = self.get_for_single(self.model_class, kwargs['pk'])
+        if method == 'list':
+            self.context['object_list'] = self.get_for_list()
         self.get_template_name(method)
         # print('context ', self.context)
         print('render model class', self.model_class)
         return render(request, self.template_name, self.context)
+
+    def get_for_list(self):
+        return self.model_class.objects.all()
 
     def get_template_name(self, method):
 
         if method == 'delete':
             post_fix = '_delete.html'
         elif method == 'list':
-            self.context['object_list'] = self.model_class.objects.all()
             post_fix = '_list.html'
         else:
             post_fix = '_form.html'

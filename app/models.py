@@ -182,7 +182,7 @@ class OfficeHours(models.Model):
 class Actual(models.Model):
     title = models.CharField(max_length=200, verbose_name='tytuł')
     content = models.CharField(max_length=25000, verbose_name='zawartość')
-    date = models.DateTimeField(verbose_name='data publikacji', default=datetime.now())
+    date = models.DateTimeField(verbose_name='data publikacji', auto_now=True)
 
     def __str__(self):
         return self.title

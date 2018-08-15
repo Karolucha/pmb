@@ -12,7 +12,9 @@ function renderNextAnnouncementField(){
         newRow.getElementsByClassName('w3-btn')[0].addEventListener("click", function() {
             deleteRow(newRow.id)
         })
-        newRow.getElementsByTagName('input')[0].name='n-a-' + currentTime;
+        var textarea = newRow.getElementsByTagName('textarea')[0]
+        textarea.name='n-a-' + currentTime;
+        textarea.value='';
     }, 1)
 }
 

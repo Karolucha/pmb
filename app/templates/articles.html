@@ -11,12 +11,13 @@
                 {{ article.title }}
             </h3>
         </div>
+
         <div class="card-text">
                 {% autoescape off %}
                 {{ article.content }}
                 {% endautoescape %}
         </div>
-        <p class="card-text col-md-6">Opublikowano: {{ article.date }}</p>
+        <p style="color:grey;font-size:0.5em" class="card-text col-md-6">Data publikacji: {{ article.date | date:'Y-m-d H:i:s' }}</p>
 
     </div>
     {% endfor %}

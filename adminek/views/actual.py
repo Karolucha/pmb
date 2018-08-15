@@ -7,13 +7,13 @@ ACTIONS = [{
   'name': 'Aktualności',
   'object_name': 'Actual'
 }, {
-  'name': 'Godziny działania kancelari',
+  'name': 'Godziny działania kancelarii',
   'object_name': 'OfficeHours'
 }, {
   'name': 'Sakramenty lista',
   'object_name': 'Sacrament'
 }, {
-  'name': 'Nabożeńśtwa',
+  'name': 'Nabożeństwa',
   'object_name': 'Ceremony'
 }, {
   'name': 'Ogłoszenia duszpasterskie',

@@ -12,7 +12,7 @@
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Na którą niedzielę ogłoszenie</b>
         </label>
-        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date" value="{{date | date:'Y-m-d'}}" readonly>
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date" value="{{date}}" readonly>
     </div>
     {% for intention in intentions %}
     <label class="s1">{{intention.day}}</label>

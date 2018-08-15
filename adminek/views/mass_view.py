@@ -95,6 +95,17 @@ class MassSchemaView(BaseGenericView):
                 prop: value
             }
 
+
+
+    def delete(self, *args, **kwargs):
+        mass_schema = MassSchema.objects.filter(id=kwargs['pk']).prefetch_related('hour_set')[0]
+        for mass in mass_schema.hour_set.all():
+            mass.delete()
+
+        mass_schema.delete()
+
+class MassSchemaIssue():
+
     def get_schema(self):
         print('get schema')
         now = datetime.now().date()
@@ -118,15 +129,8 @@ class MassSchemaView(BaseGenericView):
 
     def save_for_church(self, schema, is_sunday, others, church):
         print('now is_sunday', is_sunday)
-        masses_mb = [mass.hour.strftime('%H:%M') for mass in others[0].hour_set.filter(church=church)]
+        masses_mb = [mass.hour.strftime('%H:%M') for mass in others[0].hour_set.filter(church=church).order_by('hour')]
         print(masses_mb)
         row_schema = MassSchemaRows(is_sunday=is_sunday, church=church,
                                     hours=', '.join(masses_mb))
         row_schema.save()
-
-    def delete(self, *args, **kwargs):
-        mass_schema = MassSchema.objects.filter(id=kwargs['pk']).prefetch_related('hour_set')[0]
-        for mass in mass_schema.hour_set.all():
-            mass.delete()
-
-        mass_schema.delete()

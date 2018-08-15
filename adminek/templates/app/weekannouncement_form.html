@@ -12,7 +12,7 @@
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Na którą niedzielę ogłoszenie</b>
         </label>
-        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="display_end" value="{{object.schema.date | date:'Y-m-d'}}">
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date" value="{{object.schema.date | date:'Y-m-d'}}">
     </div>
 
     <div id='hours-all'>
@@ -25,13 +25,12 @@
 
     </div>
     {% empty %}
-        <label>IT IS EMPTY</label>
-    <div id="n-1" class="w3-row w3-text-teal w3-section mass-hour-row">
+        <div id="n-1" class="w3-row w3-text-teal w3-section mass-hour-row">
         <label class="w3-tex-teal"><b>Ogłoszenie</b>
         </label>
         <div class="w3-btn" onclick="deleteRow('row-1')">Usuń</div>
-        <input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="a-0" value="{{hour.content}}">
-
+        <!--<input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="a-0" value="{{hour.content}}">-->
+        <textarea class="w3-input w3-border w3-light-grey w-75" rows="4" name="old-{{hour.id}}">{{hour.content}}</textarea>
 
     </div>
     {% endfor %}
