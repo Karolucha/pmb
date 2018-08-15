@@ -25,7 +25,10 @@ SECRET_KEY = '!aw_vdjw28$u9z&=9&y9ea$w$_dxz^+c^e_*os(#q71occai8t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    'szandala.eu'
+]
 
 
 # Application definition
