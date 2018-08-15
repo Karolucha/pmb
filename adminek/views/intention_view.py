@@ -30,6 +30,7 @@ class IntentionView(BaseGenericView):
             self.context['object'] = self.get_for_single(self.model_class, kwargs['pk'])
             intention_week = self.context['object']
             date = intention_week['intentionweek'].week
+            self.context['date'] =  intention_week['intentionweek'].week
             i = 0
             intentions_day = []
             for intention in intention_week['intentions']:
@@ -103,3 +104,14 @@ class IntentionView(BaseGenericView):
                 intention.save()
 
         return redirect('detail', method='list', object_name='intentionweek')
+
+
+    def edit(self, request, *args, **kwargs):
+        params = dict(request.POST)
+        for day in self.days:
+            hours_for_day = {key: value[0] for key, value in params.items() if key.startswith(day+'-hour')}
+            for hour_key in hours_for_day:
+                hour = hour_key.split('-')[-1]
+                intention = Intentions.objects.filter(id=params[day+'-id-'+hour][0])[0]
+                intention.title = params[day+'-content-'+hour][0]
+                intention.save()
