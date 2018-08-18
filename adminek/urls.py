@@ -1,8 +1,10 @@
 from django.conf.urls import url
 
-from adminek.views import actual, cancelary, generic_views, mass_view, article_views
+from adminek.views import actual, generic_views, mass_view, article_views
 from adminek.views import announcement_view
+from adminek.views import galery_view
 from adminek.views import intention_view
+from adminek.views import pastor_view
 from adminek.views.froala_upload import froala_view, load_images, get_image
 
 urlpatterns = [
@@ -16,6 +18,8 @@ urlpatterns = [
     url(r'^mass/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', mass_view.MassSchemaView.as_view(), name='mass'),
     url(r'^announcement/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', announcement_view.AnnouncementView.as_view(), name='announcement'),
     url(r'^intentionweek/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', intention_view.IntentionView.as_view(), name='intentionweek'),
-    url(r'^article/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', article_views.ArticleView.as_view(), name='article'),
+    url(r'^article/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$',  article_views.ArticleView.as_view(), name='article'),
+    url(r'^pastor/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', pastor_view.PastorView.as_view(), name='pastor'),
+    url(r'^galery/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', galery_view.GaleryView.as_view(), name='galery'),
     url(r'^actual_detail/(?P<pk>[0-9]+)?$', actual.ActualDetailView.as_view(), name='actual_detail'),
 ]

@@ -56,17 +56,50 @@
 <!-- / DUSZPASTERZE -->
 <!-- WSPOLNOTA -->
 <div class="tab-pane" id="wspolnota" role="tabpanel">
-    Grupy działające na terenie parafii
+  <div class="k-card">
+        <div class="card-body">
+        <h4 class="card-title">Grupy działające na terenie parafii</h4>
+            {% for group in activity_groups %}
+              <div class="k-card">
+                <div class="card-body">
+                <h4 class="card-title">{{group.name}}</h4>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>Grupa:</td>
+                        <td>{{group.description}}</td>
+                    </tr>
+                    <tr>
+                        <td>Kiedy spotkanie?</td>
+                        <td>{{group.meeting_description}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 <!-- /WSPOLNOTA -->
 <!-- KOSCIOL MB-->
 <div class="tab-pane" id="k-mb" role="tabpanel">
-    KOŚCIÓŁ MB
+      <div class="k-card">
+        <div class="card-body">
+        <h4 class="card-title">{{mb.name}}</h4>
+            <div class="card-text">{{mb.description}}</div>
+        </div>
+    </div>
 </div>
 <!-- /KOSCIOL MB -->
 <!-- KOSCIOL FAUS-->
 <div class="tab-pane" id="k-faus" role="tabpanel">
-    KOŚCIÓŁ FA
+          <div class="k-card">
+        <div class="card-body">
+        <h4 class="card-title">{{f.name}}</h4>
+            <div class="card-text">{{f.description}}</div>
+        </div>
+    </div>
 </div>
 <!-- /KOSCIOL FAUS -->
 <!-- HOMILIE -->

@@ -7,24 +7,37 @@ ACTIONS = [{
   'name': 'Aktualności',
   'object_name': 'Actual'
 }, {
+  'name': 'Ogłoszenia duszpasterskie',
+  'object_name': 'WeekAnnouncement'
+}, {
+  'name': 'Intencje',
+  'object_name': 'IntentionWeek'
+}, {
   'name': 'Godziny działania kancelarii',
   'object_name': 'OfficeHours'
-}, {
-  'name': 'Sakramenty lista',
-  'object_name': 'Sacrament'
 }, {
   'name': 'Nabożeństwa',
   'object_name': 'Ceremony'
 }, {
-  'name': 'Ogłoszenia duszpasterskie',
-  'object_name': 'WeekAnnouncement'
-}, {
   'name': 'Msze święte',
   'object_name': 'MassSchema'
 }, {
-  'name': 'Intencje',
-  'object_name': 'IntentionWeek'
+  'name': 'Galeria',
+  'object_name': 'Galery'
+}, {
+  'name': 'Grupy działające',
+  'object_name': 'ActivityGroup'
+}, {
+  'name': 'Sakramenty lista',
+  'object_name': 'Sacrament'
+}, {
+  'name': 'Kościoły',
+  'object_name': 'church'
+}, {
+  'name': 'Duszpasterze',
+  'object_name': 'pastor'
 }]
+
 
 def index(request):
     return render(request, 'index2.html', {'actions': ACTIONS})

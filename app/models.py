@@ -110,6 +110,7 @@ class SubPages(models.Model):
 
 
 class WeekAnnouncement(models.Model):
+    display_name = models.CharField(max_length=100, null=True, blank=True)
     date = models.DateField(null=True, blank=True, verbose_name='niedziela')
 
     def __str__(self):
@@ -227,3 +228,32 @@ class MassSchemaRows(models.Model):
     is_sunday = models.BooleanField()
     church = models.CharField(churches, max_length=30)
     hours = models.CharField(max_length=100)
+
+
+class Galery(models.Model):
+    title = models.CharField(max_length=200, verbose_name='tytuł')
+    description = models.CharField(max_length=25000, verbose_name='opis')
+    date = models.DateTimeField(verbose_name='data publikacji', auto_now=True)
+    article = models.ForeignKey(Actual, null=True, blank=True)
+
+
+class ImageWithCaption(models.Model):
+    image = models.ImageField()
+    caption = models.CharField(max_length=500, null=True, blank=True)
+    galery = models.ForeignKey(Galery)
+
+
+class ActivityGroup(models.Model):
+    name = models.CharField(max_length=200, verbose_name='nazwa')
+    description = models.CharField(max_length=1000, verbose_name='opis', null=True, blank=True)
+    meeting_description = models.CharField(max_length=1000, verbose_name='kiedy spotkania', null=True, blank=True)
+
+
+class Church(models.Model):
+    name = models.CharField(max_length=200, verbose_name='nazwa')
+    description = models.CharField(max_length=1000, verbose_name='opis', null=True, blank=True)
+
+
+class Pastor(models.Model):
+    name = models.CharField(max_length=100, verbose_name='imię i nazwisko')
+    image = models.ImageField()

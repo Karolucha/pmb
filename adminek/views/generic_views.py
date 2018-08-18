@@ -28,7 +28,7 @@ class BaseGenericView(View):
         if method == 'list':
             self.context['object_list'] = self.get_for_list()
         self.get_template_name(method)
-        # print('context ', self.context)
+        print('context ', self.context)
         print('render model class', self.model_class)
         return render(request, self.template_name, self.context)
 

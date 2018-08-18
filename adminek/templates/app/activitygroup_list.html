@@ -1,0 +1,32 @@
+{% extends '../base/base.html' %}
+{% block content %}
+<div class="w3-bar w3-border w3-teal w3-large">
+    <h3>Treść w zakładce kościoły</h3>
+</div>
+<div class="w3-container">
+    <button class="w3-btn w3-white w3-border  w3-margin w3-border-green w3-round-xlarge" style="width:50%">
+        <a href="{% url 'detail' method='POST' object_name='activitygroup' %}">Dodaj nowy</a>
+    </button>
+    <input class="w3-input w3-border w3-padding" type="text" placeholder="Szukaj po nazwie" id="myInput" >
+    <ul class="w3-ul w3-teal">
+        <li class="w3-hover-teal w3-display-container">
+            <div class="w3-row">
+              <div class="w3-col s3  w3-center">Grupa</div>
+            </div>
+        </li>
+    </ul>
+
+    <ul id="ul-list" class="w3-ul">
+        {% for church in object_list %}
+        <li class="w3-hover-teal w3-display-container">
+            <div class="w3-row">
+              <div class="w3-col s3 "><a href="{% url 'detail' object_name='activitygroup' method='edit'  pk=church.id%}">{{church.name}}</a></div>
+              <div class="w3-col s2  w3-center">
+              <a href="{% url 'detail' object_name='activitygroup' method='edit'  pk=church.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
+              </div>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

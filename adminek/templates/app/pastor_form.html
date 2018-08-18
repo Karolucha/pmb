@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="w3-container w3-teal">
+  <h2>{{object.name}}</h2>
+</div>
+
+<form method="POST" class="w3-container" enctype="multipart/form-data">
+   {% csrf_token %}
+    <div class="row">
+   <label>Kolumna z imieniem <input type="text" value="{{object.name}}" name="name"/> </label>
+   </div>
+    <div class="row">
+        <label>Zdjęcie <input type="file" name="image"/> </label>
+    </div>
+    <img src="{{ MEDIA_URL }}{{ object.image.url }}"/>
+    <div class="row">
+    <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
+
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' object_name='pastor' method='list' %}" >Anuluj</a>
+    </div>
+</form>
+{% endblock %}

@@ -3,7 +3,7 @@ from datetime import datetime
 # Create your views here.
 from adminek.views.mass_view import MassSchemaIssue
 from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncement, OfficeHours, Sacrament, MassSchemaRows, \
-    Ceremony, DAYS_OF_WEEK, IntentionWeek
+    Ceremony, DAYS_OF_WEEK, IntentionWeek, Church, ActivityGroup, Pastor
 
 CURRENT_SEASON = 'wiosenny'
 
@@ -83,7 +83,7 @@ def get_context(page_number=None):
     today_listening = "http://mateusz.pl/czytania/{}/{}.html".format(datetime.now().year,datetime.now().strftime('%Y%m%d'))
     mass_issue = MassSchemaIssue()
     mass_issue.get_schema()
-
+    churches = Church.objects.all()
     context = {
         'DAYS_OF_WEEK': DAYS_OF_WEEK,
         'latest_question_list': '22',
@@ -92,7 +92,11 @@ def get_context(page_number=None):
         'annoucements': annoucements,
         'officeHours': office_hours,
         'sacraments_all': sacraments_queryset,
+        'activity_groups': ActivityGroup.objects.all(),
         'articles': articles,
+        'mb': churches[0],
+        'f': churches[1],
+        'pastors': Pastor.objects.all(),
         'ceremonies': Ceremony.objects.all(),
         'today_listening': today_listening,
         # 'has_previous': has_previous,
