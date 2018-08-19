@@ -1,7 +1,7 @@
 {% extends '../base/base.html' %}
 {% block content %}
 <div class="w3-bar w3-border w3-teal w3-large">
-    <h3>Treść w zakładce kościoły</h3>
+    <h3>Treść w zakładce grupy</h3>
 </div>
 <div class="w3-container">
     <button class="w3-btn w3-white w3-border  w3-margin w3-border-green w3-round-xlarge" style="width:50%">
@@ -17,12 +17,13 @@
     </ul>
 
     <ul id="ul-list" class="w3-ul">
-        {% for church in object_list %}
+        {% for object in object_list %}
         <li class="w3-hover-teal w3-display-container">
             <div class="w3-row">
-              <div class="w3-col s3 "><a href="{% url 'detail' object_name='activitygroup' method='edit'  pk=church.id%}">{{church.name}}</a></div>
+              <div class="w3-col s3 "><a href="{% url 'detail' object_name='activitygroup' method='edit'  pk=object.id%}">{{object.name}}</a></div>
               <div class="w3-col s2  w3-center">
-              <a href="{% url 'detail' object_name='activitygroup' method='edit'  pk=church.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
+              <a href="{% url 'detail' object_name='activitygroup' method='delete'  pk=object.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
+              <a href="{% url 'detail' object_name='activitygroup' method='edit'  pk=object.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
               </div>
             </div>
         </li>

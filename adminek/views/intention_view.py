@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from adminek.views.generic_views import BaseGenericView
 from django.shortcuts import render, redirect
 
+from adminek.views.utils import get_all_sundays
 from app.models import MassSchemaRows, Intentions, IntentionWeek
 
 
@@ -27,14 +28,16 @@ class IntentionView(BaseGenericView):
         if method == 'edit':
             self.context = {}
             intentions = []
-            self.context['object'] = self.get_for_single(self.model_class, kwargs['pk'])
-            intention_week = self.context['object']
+            intention_week = self.get_for_single(self.model_class, kwargs['pk'])
+            # intention_week = self.context['object']
             date = intention_week['intentionweek'].week
-            self.context['date'] =  intention_week['intentionweek'].week
+            self.context['intention_week_start'] = intention_week['intentionweek'].week
             i = 0
             intentions_day = []
             for intention in intention_week['intentions']:
+                print(intention.date, date)
                 if intention.date != date:
+                    print('is different', intentions_day)
                     intentions.append({
                         'day': self.days[i],
                         'intentions': intentions_day.copy()})
@@ -46,50 +49,56 @@ class IntentionView(BaseGenericView):
             intentions.append({
                 'day': self.days[i],
                 'intentions': intentions_day.copy()})
-            self.template_name = 'others/intentions_form.html'
+            self.template_name = 'others/intentionweek_edit.html'
             self.context['intentions'] = intentions
+            print('context ', self.context)
             return render(request, self.template_name, self.context)
         else:
             return super().get(request, *args, **kwargs)
 
-    def get_template_name(self, method):
-        if method == 'edit':
-            self.template_name = 'others/intentionweek_edit'
-        else:
-            super().get_template_name(method)
+    # def get_template_name(self, method):
+    #     if method == 'edit':
+    #         self.template_name = 'others/intentionweek_edit'
+    #     else:
+    #         super().get_template_name(method)
 
     def post(self, request, *args, **kwargs):
         self.context = {}
         params = dict(request.POST)
-        intentions = []
         if 'stepDay' in params.keys():
-            self.context['date'] = request.POST['date']
-            old_week = IntentionWeek.objects.filter(week=self.context['date'])
+            self.context['object'] = {}
+            # self.context['object']['date'] = request.POST['date']
+            old_week = IntentionWeek.objects.filter(week=request.POST['date'])
             if old_week.exists():
+                self.context['intention_week_start'] = old_week[0].week
                 return redirect('intentionweek', method='edit', pk=old_week[0].id, object_name='intentionweek')
-            self.prepare_intentions(intentions, True, self.days[0], 0)
+            self.context['intention_week_start'] = request.POST['date']
+            intentions = [self.prepare_intentions(True, self.days[0], 0)]
             for index, day in enumerate(self.days[1:]):
-                self.prepare_intentions(intentions, False, day, index+1)
+                intentions.append(self.prepare_intentions(False, day, index+1))
             self.context['intentions'] = intentions
-            print('what are ', self.context)
+            print('context ', self.context)
             return render(request, 'others/intentions_form.html', self.context)
         else:
             return super().post(request, *args, **kwargs)
 
-    def prepare_intentions(self, intentions, is_sunday, day, index):
-        sunday_hours = MassSchemaRows.objects.filter(is_sunday=is_sunday)
-        hours_in_sunday = []
-        for sun in sunday_hours:
-            hours_in_sunday.extend(sun.hours.split(', '))
-        hours_in_sunday.sort()
+    def prepare_intentions(self, is_sunday, day, index):
+        rows_with_coma_sep_hours = MassSchemaRows.objects.filter(is_sunday=is_sunday)
+        hours_list_in_day = []
+        for mass_hour in rows_with_coma_sep_hours:
+            if mass_hour.hours:
+                mass_hours = mass_hour.hours.split(', ')
+                hours_list_in_day.extend(mass_hours)
+        hours_list_in_day.sort()
         hours = []
-        for hour in hours_in_sunday:
-            date = (datetime.strptime(self.context['date'], '%Y-%m-%d') + timedelta(days=index)).date()
+        # categorize by day
+        date = (datetime.strptime(self.context['intention_week_start'], '%Y-%m-%d') + timedelta(days=index)).date()
+        for hour in hours_list_in_day:
             intention = Intentions(hour=hour, date=date)
             hours.append(intention)
-        intentions.append({
+        return {
             'day': day,
-            'intentions': hours})
+            'intentions': hours}
 
     def create(self, request, *args, **kwargs):
         params = dict(request.POST)
@@ -105,7 +114,6 @@ class IntentionView(BaseGenericView):
                 intention.save()
 
         return redirect('detail', method='list', object_name='intentionweek')
-
 
     def edit(self, request, *args, **kwargs):
         params = dict(request.POST)

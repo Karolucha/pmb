@@ -22,6 +22,7 @@
         <li class="w3-hover-teal w3-display-container">
             <div class="w3-row">
               <div class="w3-col s6 "><a href="{% url 'actual_detail' actual.id%}">{{actual}}</a></div>
+              <div class="w3-col s3 w3-center">{{actual.date | date:'Y-m-d'}}</div>
               <div class="w3-col s3  w3-center">
               <a href="{% url 'detail' object_name='actual' method='delete'  pk=actual.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
               <a href="{% url 'detail' object_name='actual' method='edit'  pk=actual.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>

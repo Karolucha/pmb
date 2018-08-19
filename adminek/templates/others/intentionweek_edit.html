@@ -12,31 +12,37 @@
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Na którą niedzielę ogłoszenie</b>
         </label>
-        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date" value="{{object.date | date:'Y-m-d'}}">
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date" value="{{intention_week_start | date:'Y-m-d'}}">
     </div>
 
     <div id='hours-all'>
-            <div class="w3-row">
-              <div class="w3-col s2  w3-center">Dzień</div>
-              <div class="w3-col s1  w3-center">Godzina</div>
-              <div class="w3-col s3  w3-center">Treść intencji</div>
-            </div>
     {% for intention in intentions %}
-    <label class="s1">{{intention.day}}</label>
+        <label class="s1">{{intention.day}}</label>
         {% for hour in intention.intentions %}
-        <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">
-        <input class="w3-hover-green w3-border w3-light-grey s1" type="date" name="{{intention.day}}-date-{{hour.hour}}" value="{{hour.date  | date:'Y-m-d'}}">
-        <input class="w3-hover-green w3-border w3-light-grey s1" type="time" name="{{intention.day}}-hour-{{hour.hour}}" value="{{hour.hour}}">
-        <input class="w3-hover-green w3-border w3-light-grey s3" type="text" name="{{intention.day}}-content-{{hour.hour}}" value="{{hour.title}}">
-        </div>
+            <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">
+                <input class="w3-hover-green w3-border w3-light-grey w-25" type="date" name="{{intention.day}}-date-{{hour.hour}}" value="{{hour.date| date:'Y-m-d'}}" readonly>
+                <input type="hidden" name="{{intention.day}}-id-{{hour.hour}}" value="{{hour.id}}">
+                <input class="w3-hover-green w3-border w3-light-grey w-25" type="time" name="{{intention.day}}-hour-{{hour.hour}}" value="{{hour.hour}}" readonly>
+                <textarea class="w3-hover-green w3-border w3-light-grey w-75 w3-input" name="{{intention.day}}-content-{{hour.hour}}">{{hour.title}}</textarea>
+            </div>
         {% endfor %}
     {% endfor %}
+    <!--{% for intention in intentions %}-->
+    <!--<label class="s1">{{intention.day}}</label>-->
+        <!--{% for hour in intention.intentions %}-->
+        <!--<div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section mass-hour-row">-->
+        <!--<input class="w3-hover-green w3-border w3-light-grey s1" type="date" name="{{intention.day}}-date-{{hour.hour}}" value="{{hour.date  | date:'Y-m-d'}}">-->
+        <!--<input class="w3-hover-green w3-border w3-light-grey s1" type="time" name="{{intention.day}}-hour-{{hour.hour}}" value="{{hour.hour}}">-->
+        <!--<input class="w3-hover-green w3-border w3-light-grey s3" type="text" name="{{intention.day}}-content-{{hour.hour}}" value="{{hour.title}}">-->
+        <!--</div>-->
+        <!--{% endfor %}-->
+    <!--{% endfor %}-->
     </div>
 
     <div class="w3-row w3-text-teal w3-section">
-        <input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>
+        <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
         <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='WeekAnnouncement' %}" >Anuluj</a>
-        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Pobierz</a>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'intentionweek' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Pobierz</a>
     </div>
 </form>
 <script type="text/javascript" src="{% static 'js/intention.js' %}"></script>

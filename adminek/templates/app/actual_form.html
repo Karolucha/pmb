@@ -7,27 +7,28 @@
 
 <form method="POST" class="w3-container">{% csrf_token %}
     <input type="hidden" id="csrf-token" name="csrf-token" value="{% csrf_token %}">
-  <label class="w3-text-teal"><b>Nagłówek wiadomości</b></label>
-  <input class="w3-input w3-border w3-light-grey" name="title" value="{{object.title}}" type="text">
-
-  <label class="w3-text-teal"><b>Opis</b></label>
-  <textarea class="w3-input w3-border w3-light-grey" name="content">{{object.content}}</textarea>
+    <label class="w3-text-teal"><b>Nagłówek wiadomości</b></label>
+    <input class="w3-input w3-border w3-light-grey" name="title" value="{{object.title}}" type="text">
+    <label class="w3-text-teal"><b>Opis</b></label>
+    <textarea class="w3-input w3-border w3-light-grey" name="content">{{object.content}}</textarea>
     <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
-<a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'actual' %}" >Anuluj</a>
+    <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'actual' %}" >Anuluj</a>
+    <a class="w3-btn w3-margin-top w3-blue-grey w-20" href="{% url 'actual' %}" >Link na Facebooku</a>
+    <a class="w3-btn w3-margin-top w3-blue-grey w-20" href="{% url 'actual' %}" >Link na Twitter</a>
 </form>
 <!-- include libraries(jQuery, bootstrap) -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<!--<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">-->
+<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>-->
+<!--<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>-->
 
 <!-- include summernote css/js -->
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
-    <!--<script type="text/javascript" src="{% static 'styles/jquery.min.js' %}"></script>-->
-    <!--<script type="text/javascript" src="{% static 'styles/codemirror.min.js' %}"></script>-->
-    <!--<script type="text/javascript" src="{% static 'styles/xml.min.js' %}"></script>-->
+<!--<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">-->
+<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>-->
+    <script type="text/javascript" src="{% static 'styles/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'styles/codemirror.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'styles/xml.min.js' %}"></script>
 
-    <!--&lt;!&ndash; Include Editor JS files. &ndash;&gt;-->
-    <!--<script type="text/javascript" src="{% static 'styles/froala_editor.pkgd.min.js' %}"></script>-->
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="{% static 'styles/froala_editor.pkgd.min.js' %}"></script>
    <script type="text/javascript" src="{% static 'js/actual.js' %}"></script>
 {% endblock %}

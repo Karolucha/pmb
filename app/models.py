@@ -136,6 +136,7 @@ class Announcement(models.Model):
 
 class IntentionWeek(models.Model):
     week = models.DateField(max_length=200)
+    description = models.CharField(max_length=500,null=True,blank=True)
     display_now = models.BooleanField(default=False)
     def __str__(self):
         return 'Intencje na tydzień od ' + str(self.week)
@@ -184,6 +185,7 @@ class Actual(models.Model):
     title = models.CharField(max_length=200, verbose_name='tytuł')
     content = models.CharField(max_length=25000, verbose_name='zawartość')
     date = models.DateTimeField(verbose_name='data publikacji', auto_now=True)
+    facebook = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -234,6 +236,7 @@ class Galery(models.Model):
     title = models.CharField(max_length=200, verbose_name='tytuł')
     description = models.CharField(max_length=25000, verbose_name='opis')
     date = models.DateTimeField(verbose_name='data publikacji', auto_now=True)
+    date_event = models.DateField(verbose_name='data wydarzenia', null=True, blank=True)
     article = models.ForeignKey(Actual, null=True, blank=True)
 
 

@@ -3,7 +3,7 @@ from datetime import datetime
 # Create your views here.
 from adminek.views.mass_view import MassSchemaIssue
 from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncement, OfficeHours, Sacrament, MassSchemaRows, \
-    Ceremony, DAYS_OF_WEEK, IntentionWeek, Church, ActivityGroup, Pastor
+    Ceremony, DAYS_OF_WEEK, IntentionWeek, Church, ActivityGroup, Pastor, Galery
 
 CURRENT_SEASON = 'wiosenny'
 
@@ -96,6 +96,9 @@ def get_context(page_number=None):
         'articles': articles,
         'mb': churches[0],
         'f': churches[1],
+        # 'galery': Galery.objects.all()[0],
+        # 'galery_images': ['19143358_1909852805919906_4278016422278053940_o.jpg', '19143358_1909852805919906_4278016422278053940_o.jpg', '19143358_1909852805919906_4278016422278053940_o.jpg'],
+        # 'galery_images': [{'idx':i, 'img':img} for img in enumerate(list(Galery.objects.all().prefetch_related('imagewithcaption_set')[0].imagewithcaption_set.all()))],
         'pastors': Pastor.objects.all(),
         'ceremonies': Ceremony.objects.all(),
         'today_listening': today_listening,

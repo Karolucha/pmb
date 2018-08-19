@@ -53,10 +53,10 @@
     {% endfor %}
     </div>
     <div class="w3-row w3-text-teal w3-section">
-        <div class="w3-btn w3-blue-grey" onclick="addMassForm()">Kolejna msza</button>
+        <div class="w3-btn w3-blue-grey w-30" onclick="addMassForm()">Kolejna msza</button>
     </div>
     <div class="w3-row w3-text-teal w3-section">
-        <input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="Zapisz"/>
+        <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
         <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='massschema' %}" >Anuluj</a>
     </div>
 </form>

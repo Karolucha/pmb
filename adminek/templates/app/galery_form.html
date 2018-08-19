@@ -1,0 +1,62 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="w3-container w3-teal">
+  <h2>Galeria: {{object.title}}</h2>
+</div>
+<form method="POST" class="w3-container" enctype="multipart/form-data">
+   {% csrf_token %}
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>Nazwa galerii</b>
+        </label>
+        <input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="title" value="{{object.galery.title}}">
+    </div>
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>Opis w galerii</b>
+        </label>
+        <textarea class="w3-input w3-border w3-light-grey w-75" rows="4" name="description">{{object.galery.description}}</textarea>
+    </div>
+
+    <div id='hours-all'>
+    {% for imagewithcaption in object.images %}
+    <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section">
+       Obrazek:
+        <!--<label class="w3-text-teal"><b>{{ image.caption }}</b></label>-->
+        <!--<div class="w3-btn" onclick="deleteRow('row-' + {{hour.id}})">Usuń</div>-->
+        <!--<textarea class="w3-input w3-border w3-light-grey w-75" rows="4" name="caption">{{image.caption}}</textarea>-->
+        <img src="{{ MEDIA_URL }}{{ imagewithcaption.image.url }}"/>
+        <!--<input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="old-{{hour.id}}" value="{{hour.content}}">-->
+
+    </div>
+ {% endfor %}
+    <div id="n-1" class="w3-row w3-text-teal w3-section mass-hour-row">
+        <label class="w3-tex-teal"><b>Dodaj obraz do galerii</b>
+        </label>
+        <div class="w3-btn" onclick="deleteRow('row-0')">Usuń</div>
+        <!--<textarea class="w3-input w3-border w3-light-grey w-75" rows="4" name="caption-0"></textarea>-->
+        <input type="file" name="n-a-0">
+
+    </div>
+
+    </div>
+
+    <div class="w3-btn w-30 w3-hover-green w3-border w3-light-grey " onclick="renderNextAnnouncementField()">
+        Kolejny obraz
+    </div>
+    <div class="w3-row w3-text-teal w3-section">
+        <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'galery' method='list'  object_name='galery' %}" >Anuluj</a>
+        <!--<a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'announcement' object_name='WeekAnnouncement' method='download'  pk=object.id %}" >Zapisz</a>-->
+    </div>
+</form>
+
+    <!--<script type="text/javascript" src="{% static 'styles/jquery.min.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'styles/codemirror.min.js' %}"></script>-->
+    <!--<script type="text/javascript" src="{% static 'styles/xml.min.js' %}"></script>-->
+
+    <!--&lt;!&ndash; Include Editor JS files. &ndash;&gt;-->
+    <!--<script type="text/javascript" src="{% static 'styles/froala_editor.pkgd.min.js' %}"></script>-->
+    <!--<script> $(function() { $('textarea').froalaEditor() }); </script>-->
+<script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
+{% endblock %}

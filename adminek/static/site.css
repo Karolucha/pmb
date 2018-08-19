@@ -7,3 +7,13 @@ width:50%
 .w-30{
 width:30%
 }
+.w-20 {
+width:20%
+}
+.w-10{
+width:10%
+}
+
+body > form > div > div.fr-wrapper > div:nth-child(1) {
+display: None
+}

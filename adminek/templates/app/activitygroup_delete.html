@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div class="w3-card-4">
+    <header class="w3-container w3-blue">
+        <h2>Uwaga! Właśnie usuwasz:</h2>
+    </header>
+    <div class="w3-container">
+      <h3>Grupę: {{object.name}}</h3>
+    <form method="POST" class="w3-container">
+       {% csrf_token %}
+        <label class="w3-text-teal"><b>Czy na pewno chcesz usunąć?</b></label><br/>
+        <input type="hidden" name="delete" value="True"/><br/>
+        <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Usuń"/>
+        <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='activitygroup' %}" >Anuluj</a>
+    </form>
+    </div>
+    <footer class="w3-container w3-blue">
+  <h5></h5>
+</footer>
+</div>
+{% endblock %}

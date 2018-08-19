@@ -12,11 +12,11 @@
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Wskaż pierwszą niedzielę:</b>
         </label>
-        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date" value="{{object.schema.date}}">
+        <input id="dateTo" class="w3-hover-green w3-border w3-light-grey w-30" type="date" name="date" value="{{object.date | date:'Y-m-d'}}">
     </div>
     <div class="w3-row w3-text-teal w3-section">
         <input type="hidden" name="stepDay"/>
-        <input class="w3-btn w3-margin-top w3-blue-grey" type="submit" value="DALEJ ==>"/>
+        <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="DALEJ ==>"/>
         <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='list'  object_name='intentionweek' %}" >Anuluj</a>
         <!--<a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'detail' method='next' object_name='intentionweek' %}" >DALEJ ==></a>-->
     </div>
