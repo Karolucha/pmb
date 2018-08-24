@@ -1,4 +1,5 @@
 import os
+from PIL import Image
 
 from django.core.files.storage import FileSystemStorage
 
@@ -7,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.core.files import File
 from django.http import HttpResponse
 from app.models import WeekAnnouncement, Announcement, Galery, ImageWithCaption
+from pmb.settings import MEDIA_ROOT
 
 
 class GaleryView(BaseGenericView):
@@ -19,18 +21,14 @@ class GaleryView(BaseGenericView):
         # for msg in object_context.imagewithcaption_set.all().order_by('id'):
         #     images.append(msg.url)
         #     print(msg.url)
+        images = object_context.imagewithcaption_set.all().order_by('id')
         return {
             'galery': object_context,
-            'images': object_context.imagewithcaption_set.all().order_by('id')
+            'images': images,
+            'size': len(list(images)),
+            'images_numbers': [{
+                                   'idx': i+1, 'image':img} for i, img in enumerate(list(images))]
         }
-
-    # def get(self, request, *args, **kwargs):
-    #     method = kwargs.get('method', 'get')
-    #     if method == 'download':
-    #         object_context = WeekAnnouncement.objects.filter(id=kwargs['pk']).prefetch_related('announcement_set')[0]
-    #         return document.download_docx()
-    #     else:
-    #         return super().get(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
         print('time to save', dict(request.POST).keys())
@@ -71,10 +69,22 @@ class GaleryView(BaseGenericView):
             print('what a name ', name, name.startswith('n-a-'))
             if name.startswith('n-a-'):
                 myfile = request.FILES[name]
+                print('name',myfile.name)
+                names = myfile.name.split('.')
                 fs = FileSystemStorage()
                 filename = fs.save(myfile.name, myfile)
                 announcement = ImageWithCaption(galery=schema,
-                                                image=myfile.name)
+                                                image=myfile.name,
+                                                image_all=myfile.name)
                 announcement.save()
+                # im1 = Image.open(os.path.join(MEDIA_ROOT, myfile.name))
+                # width = 350
+                # height = 150
+                # im2 = im1.resize((width, height), Image.NEAREST)
+                # print('names', names, os.path.join(MEDIA_ROOT,names[0]+'.thumbnail.' + names[1]))
+                # im2.save(os.path.join(MEDIA_ROOT,names[0]+'.thumbnail.' + names[1]))
+                # image_all = ImageWithCaption(galery=schema,
+                #                                 image=myfile.name)
+                # image_all.save()
 
 

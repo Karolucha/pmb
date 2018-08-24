@@ -31,11 +31,15 @@
     <div id="left-main-card" class="k-card ">
          <header id="masthead" class="site-header" role="banner">
             <hgroup>
-                <h2 class="site-description">Parafia pw. Miłosierdzia Bożego w Jaworze</h2>
+                <div class="row">
+                 <img class="col-4" style="height:50%" src="{% static 'images/logo.jpg' %}"/>
+                    <h2 class="col-6 site-description" style="    margin-top: 5%;
+    text-align: center;">Parafia pw. Miłosierdzia Bożego w Jaworze</h2>
+                </div>
             </hgroup>
-            <ul class="nav md-pills nav-justified pills-secondary">
+            <ul id="main-ul" class="nav md-pills nav-justified pills-secondary">
                 <li class="nav-item">
-                    <a class="nav-link active k-menu-nav-link"  href="{% url 'articles' page_number=0 %}" role="tab">Aktualności</a>
+                    <a class="nav-link active k-menu-nav-link"  href="{% url 'main' %}" role="tab">Aktualności</a>
                     <!--<a class="nav-link active k-menu-nav-link" data-toggle="tab" href="#aktualnosci" role="tab">Aktualności</a>-->
                 </li>
                 <li class="nav-item">

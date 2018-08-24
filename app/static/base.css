@@ -1,10 +1,15 @@
 body {
-    background-image: url("images/jawor.jpg");
+    background-image: url("images/background/IMG_20170731_122245.jpg");
 
-    background-color: #FFFFFF;
+    background-color: rgb(5, 0, 0, 0.60);
     background-size:cover;
 }
-
+#left-main-card, #main-right-card {
+background-color: rgb(255, 255, 255, 0.20);
+}
+a.pull-left, a.pull-right{
+color:white
+}
 #events{
     margin-left: 5vw;
     margin-top: 2vh;
@@ -29,13 +34,15 @@ table {
 }
 
 .k-card, .k-menu-dropdown {
-    background-color: rgba(255, 255, 255, 0.94);;
+    background-color: rgba(255, 255, 255, 0.84);;
     border-radius: 0px 0px 2px;
     padding: 14px 24px 24px;
     margin: 0px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
 }
-
+.site-description, #main-ul li >a,  #main-ul li .btn-group >a, #main-right-card li a{
+    color: white
+}
 .nav-link {
         white-space: nowrap;
 }

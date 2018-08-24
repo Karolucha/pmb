@@ -84,6 +84,8 @@ def get_context(page_number=None):
     mass_issue = MassSchemaIssue()
     mass_issue.get_schema()
     churches = Church.objects.all()
+
+
     context = {
         'DAYS_OF_WEEK': DAYS_OF_WEEK,
         'latest_question_list': '22',
@@ -96,16 +98,11 @@ def get_context(page_number=None):
         'articles': articles,
         'mb': churches[0],
         'f': churches[1],
-        # 'galery': Galery.objects.all()[0],
-        # 'galery_images': ['19143358_1909852805919906_4278016422278053940_o.jpg', '19143358_1909852805919906_4278016422278053940_o.jpg', '19143358_1909852805919906_4278016422278053940_o.jpg'],
-        # 'galery_images': [{'idx':i, 'img':img} for img in enumerate(list(Galery.objects.all().prefetch_related('imagewithcaption_set')[0].imagewithcaption_set.all()))],
         'pastors': Pastor.objects.all(),
+        'galeries': Galery.objects.all(),
         'ceremonies': Ceremony.objects.all(),
         'today_listening': today_listening,
-        # 'has_previous': has_previous,
-        # 'has_next': has_next,
         'next_number': next_number,
-        # 'mass_schema': mass_schema,
         'older_number': older_number,
         'old_messes': MassSchemaRows.objects.filter(church='mb', is_sunday=True)[0].hours,
         'new_messes': MassSchemaRows.objects.filter(church='f', is_sunday=True)[0].hours,
@@ -128,3 +125,18 @@ def sacraments(request, sacrament_id):
     print(sacrament)
     context['sacrament'] = sacrament
     return render(request, 'index.html', context)
+
+
+def galery(request, galery_id):
+    context = get_context()
+    one_galery = Galery.objects.filter(id=galery_id).prefetch_related('imagewithcaption_set')[0]
+    images = one_galery.imagewithcaption_set.all().order_by('id')
+
+    context['galery']= one_galery
+    context['images']= images
+    context['size']= len(list(images))
+    context['images_numbers']= [{
+                               'idx': i + 1, 'image': img} for i, img in enumerate(list(images))]
+    # print('context', context)
+    print('image numbers', context['images_numbers'])
+    return render(request, 'index_to_extend.html', context)

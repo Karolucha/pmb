@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+ <!-- <button id="btnSideBarOpen" class="w3-button w3-teal w3-xlarg hide">☰</button>
+<div class="w3-sidebar w3-light-grey w3-bar-block hide" id="mySidebar" style="width:25%">
+  <h3 class="w3-bar-item">Menu</h3>
+   <button id="sideBarClose" class="w3-bar-item w3-large">Close &times;</button>
+  <a href="#" class="w3-bar-item w3-button">Link 1</a>
+  <a href="#" class="w3-bar-item w3-button">Link 2</a>
+  <a href="#" class="w3-bar-item w3-button">Link 3</a>
+</div> -->
+<!-- AKTUALNOSCI -->
+<div class="tab-pane active" id="aktualnosci" role="tabpanel">
+{% include 'parafia/galery_detail.html' %}
+</div>
+<!-- /AKTUALNOSCI  -->
+<!-- OGLOSZENIA -->
+<div class="tab-pane " id="ogloszenia" role="tabpanel">
+    {% include 'announcements.html' %}
+</div>
+<!-- /OGLOSZENIA -->
+<!-- INTENCJE -->
+<div class="tab-pane " id="intencje" role="tabpanel">
+    {% include 'intencje.html' %}
+</div>
+<!-- /INTENCJE -->
+
+
+<!-- BIERZMOWANIE-->
+<div class="tab-pane" id="bierzmowanie" role="tabpanel">
+    {% include 'sacraments/bierzmowanie.html' %}
+
+</div>
+<!-- BIERZMOWANIE-->
+<!-- CHRZEST-->
+<div class="tab-pane" id="chrzest" role="tabpanel">
+    {% include 'sacraments/chrzest.html' %}
+</div>
+<!-- CHRZEST-->
+<!-- POKUTA-->
+<div class="tab-pane" id="pokuta" role="tabpanel">
+    {% include 'sacraments/pokuta.html' %}
+</div>
+<!-- POKUTA-->
+<!-- /KOSCIOL MB -->
+
+<!-- DUSZPASTERZE -->
+<div class="tab-pane " id="duszpasterze" role="tabpanel">
+   {% include 'parafia/duszpasterze.html' %}
+</div>
+<!-- / DUSZPASTERZE -->
+<!-- WSPOLNOTA -->
+<div class="tab-pane" id="wspolnota" role="tabpanel">
+  <div class="k-card">
+        <div class="card-body">
+        <h4 class="card-title">Grupy działające na terenie parafii</h4>
+            {% for group in activity_groups %}
+              <div class="k-card">
+                <div class="card-body">
+                <h4 class="card-title">{{group.name}}</h4>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>Grupa:</td>
+                        <td>{{group.description}}</td>
+                    </tr>
+                    <tr>
+                        <td>Kiedy spotkanie?</td>
+                        <td>{{group.meeting_description}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- /WSPOLNOTA -->
+<!-- KOSCIOL MB-->
+<div class="tab-pane" id="k-mb" role="tabpanel">
+      <div class="k-card">
+        <div class="card-body">
+        <h4 class="card-title">{{mb.name}}</h4>
+            <div class="card-text">{{mb.description}}</div>
+        </div>
+    </div>
+</div>
+<!-- /KOSCIOL MB -->
+<!-- KOSCIOL FAUS-->
+<div class="tab-pane" id="k-faus" role="tabpanel">
+          <div class="k-card">
+        <div class="card-body">
+        <h4 class="card-title">{{f.name}}</h4>
+            <div class="card-text">{{f.description}}</div>
+        </div>
+    </div>
+</div>
+<!-- /KOSCIOL FAUS -->
+<!-- HOMILIE -->
+<div class="tab-pane" id="homilie" role="tabpanel">
+    {% include 'parafia/homilie.html' %}</div>
+<!-- /HOMILIE -->
+
+
+<!-- GALERIA -->
+<div class="tab-pane" id="galeria" role="tabpanel">
+    {% include 'parafia/galery.html' %}
+</div>
+<!-- /GALERIA -->
+<!-- KONTAKT -->
+<div class="tab-pane" id="kontakt" role="tabpanel" style="padding-left: 5%">
+    {% include 'contact.html' %}
+</div>
+<!-- /KONTAKT -->
+
+{% endblock %}

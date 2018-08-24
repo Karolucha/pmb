@@ -16,12 +16,13 @@
     </ul>
 
     <ul id="ul-list" class="w3-ul">
-        {% for church in object_list %}
+        {% for galery in object_list %}
         <li class="w3-hover-teal w3-display-container">
             <div class="w3-row">
-              <div class="w3-col s3 "><a href="{% url 'galery' object_name='galery' method='edit'  pk=church.id%}">{{church.title}}</a></div>
+              <div class="w3-col s3 "><a href="{% url 'galery' object_name='galery' method='edit'  pk=galery.id%}">{{galery.title}}</a></div>
               <div class="w3-col s2  w3-center">
-              <a href="{% url 'galery' object_name='galery' method='edit'  pk=church.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
+                <a href="{% url 'galery' object_name='galery' method='delete'  pk=galery.id%}" class="w3-button"> <i class="fa fa-trash"></i>USUŃ</a>
+                <a href="{% url 'galery' object_name='galery' method='edit'  pk=galery.id%}" class="w3-button"><i class="fa fa-edit"></i>EDYTUJ</a>
               </div>
             </div>
         </li>

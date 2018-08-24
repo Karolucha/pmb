@@ -65,7 +65,7 @@ class BaseGenericView(View):
         
     def delete(self, *args, **kwargs):
         model_object = self.model_class.objects.get(id=kwargs['pk'])
-        print('modelobject ', model_object.name)
+        print('modelobject ', model_object)
         model_object.delete()
 
     def set_values(self, request):

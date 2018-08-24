@@ -1,24 +1,50 @@
-<h3>Intencje na {{intention_week.object.week}}</h3>
-<div id="table-week-intention">
-    <table style="width:95%" class="table table-bordered table-striped">
-        <th style="width:15%">
-            Dzień
-        </th>
-        <th>Intencja</th>
-        {% for day in intention_week.intentions %}
-        <tr>
-            <td>
-              {{day.day}}
-            </td>
-              <td>
-                  {% for intention in day.intentions %}
-                  <div class="row">
-                      <div class="col-md-3">{{intention.hour}}</div>
-                      <div class="col-md-8">{{intention.title}}</div>
-                  </div><hr/>
-                  {% endfor %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+<div class="k-card">
+    <h4 class="h4-responsive">Intencje na {{intention_week.object.week}}</h4>
+    <div class="card-body">
+     <table style="width:95%" class="table table-bordered table-striped">
+            <th style="width:15%">
+                Dzień
+            </th>
+            <th>Intencja</th>
+            {% for day in intention_week.intentions %}
+            <tr>
+                <td>
+                  {{day.day}}
+                </td>
+                  <td>
+                      {% for intention in day.intentions %}
+                      <div class="row">
+                          <div class="col-md-3">{{intention.hour}}</div>
+                          <div class="col-md-8">{{intention.title}}</div>
+                      </div><hr/>
+                      {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 </div>
+<!--<h3>Intencje na {{intention_week.object.week}}</h3>-->
+<!--<div id="table-week-intention">-->
+    <!--<table style="width:95%" class="table table-bordered table-striped">-->
+        <!--<th style="width:15%">-->
+            <!--Dzień-->
+        <!--</th>-->
+        <!--<th>Intencja</th>-->
+        <!--{% for day in intention_week.intentions %}-->
+        <!--<tr>-->
+            <!--<td>-->
+              <!--{{day.day}}-->
+            <!--</td>-->
+              <!--<td>-->
+                  <!--{% for intention in day.intentions %}-->
+                  <!--<div class="row">-->
+                      <!--<div class="col-md-3">{{intention.hour}}</div>-->
+                      <!--<div class="col-md-8">{{intention.title}}</div>-->
+                  <!--</div><hr/>-->
+                  <!--{% endfor %}-->
+            <!--</td>-->
+        <!--</tr>-->
+        <!--{% endfor %}-->
+    <!--</table>-->
+<!--</div>-->
