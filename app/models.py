@@ -241,14 +241,14 @@ class Galery(models.Model):
     description = models.CharField(max_length=25000, verbose_name='opis')
     date = models.DateTimeField(verbose_name='data publikacji', auto_now=True)
     date_event = models.DateField(verbose_name='data wydarzenia', null=True, blank=True)
-    article = models.ForeignKey(Actual, null=True, blank=True)
+    article = models.ForeignKey(Actual, null=True, blank=True, on_delete=models.CASCADE)
 
 
 class ImageWithCaption(models.Model):
     image = models.ImageField()
     image_all = StdImageField(upload_to=os.path.join(MEDIA_ROOT, 'public'), blank=True, variations={'large': (640, 480), 'thumbnail': (100, 100, True)})
     caption = models.CharField(max_length=500, null=True, blank=True)
-    galery = models.ForeignKey(Galery)
+    galery = models.ForeignKey(Galery, on_delete=models.CASCADE)
 
 
 class ActivityGroup(models.Model):
