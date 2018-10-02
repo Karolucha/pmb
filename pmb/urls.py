@@ -19,6 +19,7 @@ from django.contrib import admin
 
 from pmb import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 admin.site.site_header = 'Zarządzanie treścią strony'
 urlpatterns = [
@@ -26,5 +27,9 @@ urlpatterns = [
     url(r'', include('app.urls')),
     url(r'', include('adminek.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
+    url(r'^accounts/login/$', auth_views.LoginView.as_view()),
+    url('accounts/', include('django.contrib.auth.urls')),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

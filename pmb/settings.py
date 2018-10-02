@@ -25,10 +25,13 @@ SECRET_KEY = '!aw_vdjw28$u9z&=9&y9ea$w$_dxz^+c^e_*os(#q71occai8t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    'szandala.eu'
-]
+ALLOWED_HOSTS =['*']
+
+# ALLOWED_HOSTS = [
+#     'localhost',
+#     'szandala.eu'
+#     '127.0.0.1'
+# ]
 
 
 # Application definition
@@ -83,7 +86,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 WSGI_APPLICATION = 'pmb.wsgi.application'
 
-
+LOGIN_REDIRECT_URL = '/panel'
+LOGOUT_REDIRECT_URL = '/panel'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 

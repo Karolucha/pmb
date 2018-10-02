@@ -130,18 +130,21 @@ display: none;
      right: 0;
  }
 </style>
+<div class="w3-panel w3-pale-green w3-bottombar w3-border-green w3-border">
+  <p>{{galery.description}}</p>
+
+</div>
 <div class="container">
      {% for image_number in images_numbers %}
     <div id="case-example-cover">
-                  <div class="mySlides">
-
-    <div id="nav-container">
-        <div id="case-left" onclick="plusSlides(-1)">  <a class="prev" >&#10094;</a></div>
-        <div id="case-right"onclick="plusSlides(1)">  <a class="next" >&#10095; </a></div>
-      <img class="big-img-gallery" src="{{ MEDIA_URL }}{{ image_number.image.image.url }}" style="">
+        <div class="mySlides">
+            <div id="nav-container">
+                <div id="case-left" onclick="plusSlides(-1)">  <a class="prev" >&#10094;</a></div>
+                <div id="case-right"onclick="plusSlides(1)">  <a class="next" >&#10095; </a></div>
+                <img class="big-img-gallery" src="{{ MEDIA_URL }}{{ image_number.image.image.url }}" style="">
+            </div>
         </div>
     </div>
-</div>
 
   <!-- Full-width images with number text -->
   <!--<div class="mySlides">-->

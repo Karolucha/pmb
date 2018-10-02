@@ -5,34 +5,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Panel PMB Jawor</title>
-    <!--<link rel="stylesheet"  href="{% static 'bootstrap.min.css' %}" />-->
-    <!--<link rel="stylesheet"  href="{% static 'base.css' %}" />-->
-    <!--<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />-->
-
-    <!--<link rel='stylesheet' id='twentytwelve-fonts-css' href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700&#038;subset=latin,latin-ext' type='text/css' media='all' />-->
-   <!-- <link rel='stylesheet' id='twentytwelve-style-css' href='http://www.pmbjawor.pl/wp-content/themes/twentytwelve/style.css?ver=4.8.4' type='text/css' media='all' />-->
- <!-- Include external CSS. -->
     <link href="{% static 'styles/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="{% static 'styles/codemirror.min.css' %}">
-
-    <!-- Include Editor style. -->
     <link href="{% static 'styles/froala_editor.pkgd.min.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'styles/froala_style.min.css' %}" rel="stylesheet" type="text/css" />
-
-     <!--<link rel="stylesheet" href="{% static 'fonts/css/font-awesome.css' %}">-->
+     <link rel="stylesheet" href="{% static 'fonts/css/font-awesome.css' %}">
      <link rel="stylesheet" href="{% static 'js/w3c.css' %}">
      <link rel="stylesheet" href="{% static 'site.css' %}">
 
 <body>
 <div class="w3-bar w3-border w3-light-grey w3-xlarge">
   <a href="{% url 'index' %}" class="w3-bar-item w3-button">Panel do zarządzania treścią strony</a>
+{% if user.is_authenticated %}
+    <div  class="btn" style="float:right; font-size: 0.5em"><a href="{% url 'logout' %}">wyloguj</a></div>
+{% endif %}
+
 </div>
-{% block content %}
-{% endblock %}
-    <!--<script type="text/javascript" src="{% static 'js/angular.min.js' %}"></script>-->
-   <!-- Include external JS libs. -->
 
+{% if user.is_authenticated %}
+    {% block content %}
+    {% endblock %}
+{% else %}
+<div class="w3-container w3-blue">
+  <h2>Zaloguj się aby administrować treścią strony</h2>
+</div>
 
-    <!--<script type="text/javascript" src="{% static 'js/adminek.js' %}"></script>-->
+<form method="post" class="w3-container" style="color: #757575;">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Zaloguj</button>
+  <p>Nie masz konta?
+    <a href="">Zarejestruj</a>
+  </p>
+</form>
+{% endif %}
 </body>
 </html>

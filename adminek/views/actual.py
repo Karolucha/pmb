@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views import View
 
@@ -38,7 +39,7 @@ ACTIONS = [{
   'object_name': 'pastor'
 }]
 
-
+@login_required
 def index(request):
     return render(request, 'index2.html', {'actions': ACTIONS})
 

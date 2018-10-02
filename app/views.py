@@ -1,58 +1,36 @@
 from django.shortcuts import render
 from datetime import datetime
-# Create your views here.
-from adminek.views.mass_view import MassSchemaIssue
-from app.models import Actual, MassSchema, Hour, Announcement, WeekAnnouncement, OfficeHours, Sacrament, MassSchemaRows, \
+from app.models import Actual, WeekAnnouncement, OfficeHours, Sacrament, MassSchemaRows, \
     Ceremony, DAYS_OF_WEEK, IntentionWeek, Church, ActivityGroup, Pastor, Galery
 
-CURRENT_SEASON = 'wiosenny'
+# CURRENT_SEASON = 'wiosenny'
 
 def get_context(page_number=None):
     print('page number', page_number)
-
-    if page_number is not None and page_number != '0':
-        page_number = int(page_number)
-        offset = page_number*3
-        limit = page_number*3+3
-        print('numbers ', offset, limit)
-        articles = Actual.objects.all().order_by('-date')[offset:limit]
-        articles_sum = Actual.objects.all().count()
-        if articles_sum - offset > 2:
-            older_number = page_number + 1
-            next_number = page_number - 1
-        else:
-            older_number = None
-            next_number = page_number - 1
-    else:
-        articles = Actual.objects.all().order_by('-date')[:3]
-        has_previous = False
-        has_next = True
-        next_number = None
-        older_number = 1
-    # today = datetime.now().date()
-    # mass_schemas = MassSchema.objects.filter(season_name=CURRENT_SEASON)
-    # sundays = mass_schemas.filter(sunday=True).select_related()
-    # print(sundays[0].hour_set)
-
-
-    # masses = Hour.objects.select_related().all()
-    # print('masses mass_schemas', mass_schemas)
-    # churches = set(mass.church for mass in masses)
-    # oldes_sunday = []
-    # new_sunday = []
-    # mass_schema = {
-    #     'sunday': {
-    #         'old': oldes_sunday,
-    #         'new': new_sunday
-    #     },
-    #     'other': {
-    #
-    #     }
-    # }
     today = datetime.now().date()
+    announcements = WeekAnnouncement.objects.filter(date__lt=today).order_by('-date').prefetch_related(
+        'announcement_set')[0].announcement_set.all()
+    churches = Church.objects.all()
 
+    context = {
+        'DAYS_OF_WEEK': DAYS_OF_WEEK,
+        'annoucements': announcements,
+
+        'mb': churches[0],
+        'f': churches[1],
+        'today_listening': "http://mateusz.pl/czytania/{}/{}.html".format(
+            datetime.now().year, datetime.now().strftime('%Y%m%d')),
+    }
+    context.update(extend_for_intentions(today))
+    context.update(extend_for_articles(page_number))
+    context.update(extend_for_all_records())
+    context.update(extend_for_messes())
+    return context
+
+
+def extend_for_intentions(today):
     intentions = []
-    context_int = {}
+    context_int = dict()
     context_int['object'] = IntentionWeek.objects.filter(week__lt=today).order_by('-week').prefetch_related('intentions_set')[0]
     date = context_int['object'].week
     i = 0
@@ -74,45 +52,72 @@ def get_context(page_number=None):
         'intentions': intentions_day.copy()})
 
     context_int['intentions'] = intentions
-
-    annoucements = WeekAnnouncement.objects.filter(date__lt=today).order_by('-date').prefetch_related('announcement_set')[0].announcement_set.all()
-    office_hours = OfficeHours.objects.all()
-    sacraments_queryset = Sacrament.objects.all()
-    print('return context')
-    # http: // mateusz.pl / czytania / 2018 / 20180810.html
-    today_listening = "http://mateusz.pl/czytania/{}/{}.html".format(datetime.now().year,datetime.now().strftime('%Y%m%d'))
-    mass_issue = MassSchemaIssue()
-    mass_issue.get_schema()
-    churches = Church.objects.all()
-
-
-    context = {
-        'DAYS_OF_WEEK': DAYS_OF_WEEK,
-        'latest_question_list': '22',
+    print('return context ', context_int['object'].id)
+    return {
         'intention_week': context_int,
-        # 'intention_week': IntentionWeek.objects.filter(display_now=True).prefetch_related('intentions_set')[0],
-        'annoucements': annoucements,
-        'officeHours': office_hours,
-        'sacraments_all': sacraments_queryset,
-        'activity_groups': ActivityGroup.objects.all(),
+    }
+
+
+def extend_for_articles(page_number):
+
+    if page_number is not None and page_number != '0':
+        page_number = int(page_number)
+        offset = page_number*3
+        limit = page_number*3+3
+        print('numbers ', offset, limit)
+        articles = Actual.objects.all().order_by('-date')[offset:limit]
+        articles_sum = Actual.objects.all().count()
+        if articles_sum - offset > 2:
+            older_number = page_number + 1
+            next_number = page_number - 1
+        else:
+            older_number = None
+            next_number = page_number - 1
+    else:
+        articles = Actual.objects.all().order_by('-date')[:3]
+        has_previous = False
+        has_next = True
+        next_number = None
+        older_number = 1
+
+    return {
         'articles': articles,
-        'mb': churches[0],
-        'f': churches[1],
+        'next_number': next_number,
+        'older_number': older_number,
+    }
+
+def extend_for_all_records():
+    return {
         'pastors': Pastor.objects.all(),
         'galeries': Galery.objects.all(),
         'ceremonies': Ceremony.objects.all(),
-        'today_listening': today_listening,
-        'next_number': next_number,
-        'older_number': older_number,
-        'old_messes': MassSchemaRows.objects.filter(church='mb', is_sunday=True)[0].hours,
-        'new_messes': MassSchemaRows.objects.filter(church='f', is_sunday=True)[0].hours,
-        'old_messes_other': MassSchemaRows.objects.filter(church='mb', is_sunday=False)[0].hours
+        'activity_groups': ActivityGroup.objects.all(),
+        'officeHours': OfficeHours.objects.all(),
+        'sacraments_all': Sacrament.objects.all(),
     }
-    return context
+
+
+def extend_for_messes():
+    return {
+        'old_messes': get_messes_for('mb', True),
+        'new_messes': get_messes_for('f', True),
+        'new_messes_other': get_messes_for('f', False),
+        'old_messes_other': get_messes_for('mb', False)
+    }
+
+
+def get_messes_for(church, is_sunday):
+    mass_rows = MassSchemaRows.objects.filter(church=church, is_sunday=is_sunday)
+    if len(mass_rows) > 0:
+        return mass_rows[0].hours
+    else:
+        return ''
+
 
 def index(request):
     print('index')
     return render(request, 'index.html', get_context())
+
 
 def article_detail(request, page_number):
     print('article_detail page number', page_number)
@@ -132,11 +137,10 @@ def galery(request, galery_id):
     one_galery = Galery.objects.filter(id=galery_id).prefetch_related('imagewithcaption_set')[0]
     images = one_galery.imagewithcaption_set.all().order_by('id')
 
-    context['galery']= one_galery
-    context['images']= images
-    context['size']= len(list(images))
-    context['images_numbers']= [{
+    context['galery'] = one_galery
+    context['images'] = images
+    context['size'] = len(list(images))
+    context['images_numbers'] = [{
                                'idx': i + 1, 'image': img} for i, img in enumerate(list(images))]
-    # print('context', context)
     print('image numbers', context['images_numbers'])
     return render(request, 'index_to_extend.html', context)
