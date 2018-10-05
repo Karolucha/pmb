@@ -21,32 +21,8 @@
 {% endif %}
 
 </div>
-
-{% if user.is_authenticated %}
-    {% block content %}
+ {% block content %}
     {% endblock %}
-{% else %}
-<div class="w3-container w3-teal">
-  <h2>Brak wstępu!</h2>
-</div>
-<div class="w3-container">
 
-<p>Musisz się zalogować aby zarządzać treścią strony</p>
-<a class="w3-btn w3-teal" href="{% url 'login' %}">Do strony logowania</a>
-
-</div>
-<!--<div class="w3-container w3-blue">-->
-  <!--<h2>Zaloguj się aby administrować treścią strony</h2>-->
-<!--</div>-->
-
-<!--<form method="post" class="w3-container" style="color: #757575;">-->
-  <!--{% csrf_token %}-->
-  <!--{{ form.as_p }}-->
-  <!--<button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Zaloguj</button>-->
-  <!--<p>Nie masz konta?-->
-    <!--<a href="">Zarejestruj</a>-->
-  <!--</p>-->
-<!--</form>-->
-{% endif %}
 </body>
 </html>

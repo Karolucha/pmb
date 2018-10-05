@@ -1,7 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from django.views import View
 
+from adminek.forms import SignUpForm
+from adminek.tokens import account_activation_token
 from app.models import Actual
 
 ACTIONS = [{
@@ -93,3 +98,27 @@ class ActualDetailView(View):
         article.save()
         return render(request, 'actual_detail.html', {
             'article': article})
+
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            # current_site = get_current_site(request)
+            subject = 'Activate Your MySite Account'
+            message = render_to_string('account_activation_email.html', {
+                'user': user,
+                'domain': 'PMB Jawor',
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                # 'token': account_activation_token.make_token(user),
+                'token': 's2err2t2%2',
+            })
+            user.email_user(subject, message)
+            return redirect('account_activation_sent')
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})

@@ -19,18 +19,18 @@
     </div>
 
     <div id='hours-all'>
+        <ol>
     {% for imagewithcaption in object.images %}
+    <li>
     <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section">
-       Obrazek:
-        <!--<label class="w3-text-teal"><b>{{ image.caption }}</b></label>-->
-        <!--<div class="w3-btn" onclick="deleteRow('row-' + {{hour.id}})">Usuń</div>-->
-        <!--<textarea class="w3-input w3-border w3-light-grey w-75" rows="4" name="caption">{{image.caption}}</textarea>-->
-        <!--<img src="{{ MEDIA_URL }}{{ imagewithcaption.image_all.thumbnail.url }}"/>-->
         <img style="width:30%" src="{{ MEDIA_URL }}{{ imagewithcaption.image.url }}"/>
-        <!--<input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="old-{{hour.id}}" value="{{hour.content}}">-->
-
+        <button class="w3-btn w3-margin-top w3-blue-grey w-30" onclick="removeImage(row-{{hour.id})">Usuń</button>
     </div>
+    </li>
+
  {% endfor %}
+        </ol>
+
     <div id="n-1" class="w3-row w3-text-teal w3-section mass-hour-row">
         <label class="w3-tex-teal"><b>Dodaj obraz do galerii</b>
         </label>
@@ -54,25 +54,25 @@
 
 
 <div class="container">
- {% for image_number in object.images_numbers %}
-  <!-- Full-width images with number text -->
-  <div class="mySlides">
-    <div class="numbertext">{{image_number.idx}} / {{size}}</div>
-      <img class="big-img-gallery" src="{{ MEDIA_URL }}{{ image_number.image.image.url }}" style="">
-  </div>
- {% endfor %}
-  <!-- Next and previous buttons -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095; </a>
-  <!-- Thumbnail images -->
-  <div class="row">
-      {% for image_number in object.images_numbers %}
+ <!--{% for image_number in object.images_numbers %}-->
+  <!--&lt;!&ndash; Full-width images with number text &ndash;&gt;-->
+  <!--<div class="mySlides">-->
+    <!--<div class="numbertext">{{image_number.idx}} / {{size}}</div>-->
+      <!--<img class="big-img-gallery" src="{{ MEDIA_URL }}{{ image_number.image.image.url }}" style="">-->
+  <!--</div>-->
+ <!--{% endfor %}-->
+  <!--&lt;!&ndash; Next and previous buttons &ndash;&gt;-->
+  <!--<a class="prev" onclick="plusSlides(-1)">&#10094;</a>-->
+  <!--<a class="next" onclick="plusSlides(1)">&#10095; </a>-->
+  <!--&lt;!&ndash; Thumbnail images &ndash;&gt;-->
+  <!--<div class="row">-->
+      <!--{% for image_number in object.images_numbers %}-->
 
-    <div style="float:left">
-      <img class="demo cursor" src="{{ MEDIA_URL }}{{ image_number.image.image.url }}" style="height:250px;" onclick="currentSlide({{image_number.idx}})" alt="The Woods">
-    </div>
-       {% endfor %}
-  </div>
+    <!--<div style="float:left">-->
+      <!--<img class="demo cursor" src="{{ MEDIA_URL }}{{ image_number.image.image.url }}" style="height:250px;" onclick="currentSlide({{image_number.idx}})" alt="The Woods">-->
+    <!--</div>-->
+       <!--{% endfor %}-->
+  <!--</div>-->
 </div>
 
 

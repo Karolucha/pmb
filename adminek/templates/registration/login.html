@@ -1,42 +1,43 @@
-{% extends 'base/base.html' %}
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Panel PMB Jawor</title>
+    <link href="{% static 'styles/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{% static 'styles/codemirror.min.css' %}">
+    <link href="{% static 'styles/froala_editor.pkgd.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'styles/froala_style.min.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{% static 'fonts/css/font-awesome.css' %}">
+    <link rel="stylesheet" href="{% static 'js/w3c.css' %}">
+    <link rel="stylesheet" href="{% static 'site.css' %}">
 
-{% block title %}Login{% endblock %}
+<body >
+<div class="w3-bar w3-border w3-light-grey w3-xlarge">
+    <div class="w3-bar-item w3-button">Panel do logowania</div>
 
-{% block content %}
-<!--<h2>Login</h2>-->
-<!--<form method="post">-->
-  <!--{% csrf_token %}-->
-  <!--{{ form.as_p }}-->
-  <!--<button type="submit">Login</button>-->
-<!--</form>-->
-
-
-<!-- Material form login -->
-<div class="card">
-
-  <h5 class="card-header info-color white-text text-center py-6">
-    <strong>Zaloguj się aby administrować treścią strony</strong>
-  </h5>
-  <div class="card-body px-lg-5 pt-0">
-    <form method="post" class="text-center" style="color: #757575;">
-      {% csrf_token %}
-      {{ form.as_p }}
-
-      <!-- Sign in button -->
-      <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Zaloguj</button>
-
-      <!-- Register -->
-      <p>Nie masz konta?
-        <a href="">Zarejestruj</a>
-      </p>
-
-
-
-    </form>
-
-
-  </div>
 
 </div>
 
-{% endblock %}
+<div class="w3-container w3-teal">
+  <h2>Zaloguj się aby administrować treścią strony</h2>
+</div>
+<form method="post" class="w3-container  w3-margin-top" style="margin-left:20%">
+  {% csrf_token %}
+  <!--{{ form.as_p }}-->
+    <label class="w3-text-teal"><b>Login</b></label>
+  <input class="w-50 w3-input w3-border w3-light-grey"  id="id_username" name="username" type="text">
+  <label class="w3-text-teal"><b>Hasło</b></label>
+  <input class="w-50 w3-input w3-border w3-light-grey"  id="id_password" name="password" type="password">
+  <br/>
+  <button class="w3-btn w-50 w3-blue-grey" type="submit">Zaloguj</button>
+  <p>Dodawanie nowych użytkowników
+    <a href="{% url 'admin:index' %}" class="w3-btn w3-blue-grey">Zarejestruj</a>
+  </p>
+  <p>Zapomniałeś hasła?
+    <a href="{% url 'password_reset' %}" class="w3-btn w3-blue-grey">Resetuj hasło</a>
+  </p>
+</form>
+</body>
+</html>

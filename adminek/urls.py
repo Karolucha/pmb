@@ -22,5 +22,7 @@ urlpatterns = [
     url(r'^pastor/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', pastor_view.PastorView.as_view(), name='pastor'),
     url(r'^galery/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', galery_view.GaleryView.as_view(), name='galery'),
     url(r'^actual_detail/(?P<pk>[0-9]+)?$', actual.ActualDetailView.as_view(), name='actual_detail'),
+    url(r'^signup/$', actual.signup, name='signup'),
+
 
 ]

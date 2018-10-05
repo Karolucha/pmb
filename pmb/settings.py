@@ -57,8 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
-import os
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 ROOT_URLCONF = 'pmb.urls'
 
@@ -133,9 +133,6 @@ USE_L10N = False
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -145,4 +142,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '/static/'),
     os.path.join(BASE_DIR, '/media/')
 ]
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # STATIC_ROOT =os.path.join(BASE_DIR, '/static/')
+EMAIL_HOST = 'gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'pmb.jawor.strona'
+EMAIL_HOST_PASSWORD = os.environ['PMB']
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'pmb.jawor.strona@gmail.com'
