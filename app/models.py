@@ -2,7 +2,7 @@ import os
 
 from django.db import models
 import ast
-from stdimage import StdImageField
+#from stdimage import StdImageField
 
 from pmb.settings import MEDIA_ROOT
 
@@ -246,7 +246,7 @@ class Galery(models.Model):
 
 class ImageWithCaption(models.Model):
     image = models.ImageField()
-    image_all = StdImageField(upload_to=os.path.join(MEDIA_ROOT, 'public'), blank=True, variations={'large': (640, 480), 'thumbnail': (100, 100, True)})
+    #image_all = StdImageField(upload_to=os.path.join(MEDIA_ROOT, 'public'), blank=True, variations={'large': (640, 480), 'thumbnail': (100, 100, True)})
     caption = models.CharField(max_length=500, null=True, blank=True)
     galery = models.ForeignKey(Galery, on_delete=models.CASCADE)
 

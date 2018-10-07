@@ -7,7 +7,6 @@ phonecatApp.controller('ActualController', function PhoneListController($scope) 
         content: 'Zapraszamy',
         date: '2017-06-02'
     }
-
 });
 
 phonecatApp.controller('ActionList', function PhoneListController($scope) {

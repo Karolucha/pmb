@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'adminek',
-    'stdimage',
+    #'stdimage',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +83,7 @@ TEMPLATES = [
 ]
 MEDIA_URL = '/media/'
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 WSGI_APPLICATION = 'pmb.wsgi.application'
 
@@ -91,10 +92,20 @@ LOGOUT_REDIRECT_URL = '/panel'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432 # default postgres port
     }
 }
 
