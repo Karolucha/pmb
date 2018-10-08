@@ -10,9 +10,6 @@ class BaseGenericView(View):
     context = None
     values = None
 
-    # def get_object(self):
-    #     return self.get_for_single(self.model_class, )
-
     def get_for_single(self, model_class, id_object):
         return model_class.objects.get(id=id_object)
 

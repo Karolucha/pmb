@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="w3-container w3-teal">
+  <h2>{{article.title}}</h2>
+</div>
+
+<form method="POST" class="w3-container">
+    {% csrf_token %}
+    {% for contact in contacts %}
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>{{contact.name}}:</b>
+        </label>
+        <textarea class="w-75 w3-border w3-light-grey w3-input" name="{{contact.name}}">{{contact.value}}</textarea>
+    </div>
+    {% endfor %}
+    <input class="w3-btn w3-margin-top w3-blue-grey w-30" type="submit" value="Zapisz"/>
+    <a class="w3-btn w3-margin-top w3-blue-grey w-30" href="{% url 'index' %}" >Anuluj</a>
+</form>
+{% endblock %}

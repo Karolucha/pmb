@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 
-from adminek.views import actual, generic_views, mass_view, article_views
+from adminek.views import actual, generic_views, mass_view, article_views, contact_view
 from adminek.views import announcement_view
 from adminek.views import galery_view
 from adminek.views import intention_view
@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^article/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$',  article_views.ArticleView.as_view(), name='article'),
     url(r'^pastor/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', pastor_view.PastorView.as_view(), name='pastor'),
     url(r'^galery/(?P<method>\w+)?/(?P<object_name>\w+)/(?P<pk>[0-9]+)?$', galery_view.GaleryView.as_view(), name='galery'),
+    url(r'^contact$', contact_view.ContactView.as_view(), name='contact'),
     url(r'^actual_detail/(?P<pk>[0-9]+)?$', actual.ActualDetailView.as_view(), name='actual_detail'),
     url(r'^signup/$', actual.signup, name='signup'),
 

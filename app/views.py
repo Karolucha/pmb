@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from datetime import datetime
 from app.models import (Actual, WeekAnnouncement, OfficeHours, Sacrament, MassSchemaRows,
-                        Ceremony, DAYS_OF_WEEK, IntentionWeek, Church, ActivityGroup, Pastor, Galery)
+                        Ceremony, DAYS_OF_WEEK, IntentionWeek, Church, ActivityGroup, Pastor, Galery, Contact)
 
 CHURCHES = Church.objects.all()
 
@@ -94,6 +94,7 @@ def extend_for_all_records():
         'activity_groups': ActivityGroup.objects.all(),
         'officeHours': OfficeHours.objects.all(),
         'sacraments_all': Sacrament.objects.all(),
+        'contacts': Contact.objects.all().order_by('id')
     }
 
 

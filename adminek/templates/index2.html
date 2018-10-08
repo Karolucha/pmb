@@ -5,5 +5,6 @@
 {% for action in actions %}
   <li class="w3-hover-green"><a href="{% url 'detail' object_name=action.object_name method='list' %}">{{action.name}}</a></li>
 {% endfor %}
+  <li class="w3-hover-green"><a href="{% url 'contact' %}">Kontakt</a></li>
 </ul>
 {% endblock %}

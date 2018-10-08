@@ -265,3 +265,8 @@ class Church(models.Model):
 class Pastor(models.Model):
     name = models.CharField(max_length=100, verbose_name='imię i nazwisko')
     image = models.ImageField()
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50, verbose_name='dane')
+    value = models.CharField(max_length=100, verbose_name='dane parafii')
