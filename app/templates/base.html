@@ -6,10 +6,47 @@
     <meta name="viewport" content="width=device-width" />
     <title>PMB Jawor</title>
     <link rel="stylesheet"  href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet"  href="{% static 'w3c.css' %}" />
     <link rel="stylesheet"  href="{% static 'base.css' %}" />
     <link rel="stylesheet" href="{% static 'fonts/css/font-awesome.css' %}">
     <link rel="stylesheet" media="screen and (max-device-width: 800px)" href="{% static 'pmb800.css' %}" />
     <link rel="stylesheet" media="screen and (min-device-width: 801px)" href="{% static 'pmbMax.css' %}" />
+<style>
+.mySlides, .mySlides2, .mySlides3 {
+display:none;
+max-width:50%;
+}
+
+.slides-right, .slides-left{
+display:flex
+flex-basis: 25%;
+flex-grow: 0;
+
+}
+
+.manager {
+display:flex;
+flex-direction: row;
+}
+* {
+    box-sizing: border-box;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 1%;
+        height:90vh;
+}
+
+.gallery-row::after {
+
+    content: "";
+    clear: both;
+    display: table;
+}
+
+</style>
 </head>
 <body>
 
@@ -20,7 +57,7 @@
                 <div class="row">
                  <img class="col-4" style="height:50%" src="{% static 'images/logo.jpg' %}"/>
                     <h2 class="col-6 site-description" style="    margin-top: 5%;
-    text-align: center;">Parafia pw. Miłosierdzia Bożego w Jaworze</h2>
+    text-align: center;    font-weight: 640;">Parafia pw. Miłosierdzia Bożego w Jaworze</h2>
                 </div>
             </hgroup>
             <ul id="main-ul" class="nav md-pills nav-justified pills-secondary">
@@ -149,6 +186,17 @@
         {% include 'right/right.html' %}
 
      </div>
+</div>
+
+<div class="gallery-row" >
+      <img class="mySlides column" src="{% static 'images/olt1.jpg' %}">
+      <img class="mySlides column" src="{% static 'images/olt2.jpg' %}">
+      <img class="mySlides column" src="{% static 'images/olt3.jpg' %}" >
+      <img class="mySlides2 column" src="{% static 'images/olt4.jpg' %}">
+      <img class="mySlides2 column" src="{% static 'images/key.jpg' %}">
+      <img class="mySlides2 column" src="{% static 'images/olt6.jpg' %}" >
+      <img class="mySlides3 column" src="{% static 'images/olt5.jpg' %}" >
+      <img class="mySlides3 column" src="{% static 'images/outside.jpg' %}">
 </div>
 
 <!--<div id="events"  >-->

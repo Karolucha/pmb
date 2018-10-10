@@ -1,4 +1,4 @@
-console.log('hello')
+console.log('hell3o')
 
 function renderNextAnnouncementField(){
     console.log('Hi button');
@@ -41,7 +41,28 @@ function deleteRow(rowId) {
 }
 
 function removeImage(rowId){
-    console.log('Remove image')
-    var imageRow = document.getElementById(rowId);
-    imageRow.style.color = 'red';
+    var cancelText = 'Anuluj';
+    var deleteText = 'Usuń'
+    var textOnButton = document.querySelector('#'+rowId+' .w3-btn').textContent;
+    if (textOnButton === deleteText) {
+        console.log('Remove image')
+        var imageRow = document.getElementById(rowId);
+        console.log(imageRow)
+        imageRow.style.backgroundColor = 'rgb(244, 98, 66, 0.8)';
+        document.querySelector('#'+rowId+' img').className='remove_image';
+        document.querySelector('#'+rowId+' .w3-btn').textContent='Anuluj';
+        document.querySelector('#'+rowId+' p').style.display='';
+        document.querySelector('#'+rowId+' input').name='deletions';
+    } else {
+        console.log('Remove image')
+        var imageRow = document.getElementById(rowId);
+        console.log(imageRow)
+        imageRow.style.backgroundColor = '';
+        document.querySelector('#'+rowId+' img').className='w-30';
+        document.querySelector('#'+rowId+' .w3-btn').textContent='Usuń';
+        document.querySelector('#'+rowId+' p').style.display='None';
+        document.querySelector('#'+rowId+' input').name='gallery';
+    }
+
+    //imageRow.getElementsByTagName('img').style.display='None';
 }

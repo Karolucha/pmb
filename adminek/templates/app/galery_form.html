@@ -20,26 +20,22 @@
 
     <div id='hours-all'>
         <ol>
-    {% for imagewithcaption in object.images %}
-    <li>
-    <div id="row-{{hour.id}}" class="w3-row w3-text-teal w3-section">
-        <img style="width:30%" src="{{ MEDIA_URL }}{{ imagewithcaption.image.url }}"/>
-        <button class="w3-btn w3-margin-top w3-blue-grey w-30" onclick="removeImage(row-{{hour.id})">Usuń</button>
-    </div>
-    </li>
-
- {% endfor %}
+            {% for imagewithcaption in object.images %}
+            <li>
+            <div id="row-{{imagewithcaption.id}}" class="w3-row w3-text-teal w3-section">
+                <img class="w-30" src="{{ MEDIA_URL }}{{ imagewithcaption.image.url }}"/>
+                <div class="w3-btn w3-margin-top w3-blue-grey w-30" onclick="removeImage('row-{{imagewithcaption.id}}')">Usuń</div>
+                <p style="display: None">TEN OBRAZ ZOSTANIE USUNIĘTY Z GALERII</p>
+                <input type="hidden" name="gallery" value="del-{{imagewithcaption.id}}"/>
+            </div>
+            </li>
+         {% endfor %}
         </ol>
-
-    <div id="n-1" class="w3-row w3-text-teal w3-section mass-hour-row">
-        <label class="w3-tex-teal"><b>Dodaj obraz do galerii</b>
-        </label>
-        <div class="w3-btn" onclick="deleteRow('row-0')">Usuń</div>
-        <!--<textarea class="w3-input w3-border w3-light-grey w-75" rows="4" name="caption-0"></textarea>-->
-        <input type="file" name="n-a-0">
-
-    </div>
-
+        <div id="n-1" class="w3-row w3-text-teal w3-section mass-hour-row">
+            <label class="w3-tex-teal"><b>Dodaj obraz do galerii</b>
+            </label>
+            <input type="file" name="n-a-0" multiple="multiple">
+        </div>
     </div>
 
     <div class="w3-btn w-30 w3-hover-green w3-border w3-light-grey " onclick="renderNextAnnouncementField()">
@@ -75,16 +71,5 @@
   <!--</div>-->
 </div>
 
-
-
-
-
-    <!--<script type="text/javascript" src="{% static 'styles/jquery.min.js' %}"></script>-->
-    <!--<script type="text/javascript" src="{% static 'styles/codemirror.min.js' %}"></script>-->
-    <!--<script type="text/javascript" src="{% static 'styles/xml.min.js' %}"></script>-->
-
-    <!--&lt;!&ndash; Include Editor JS files. &ndash;&gt;-->
-    <!--<script type="text/javascript" src="{% static 'styles/froala_editor.pkgd.min.js' %}"></script>-->
-    <!--<script> $(function() { $('textarea').froalaEditor() }); </script>-->
-<script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/gallery_admin.js' %}"></script>
 {% endblock %}

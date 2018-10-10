@@ -1,11 +1,12 @@
 body {
-    background-image: url("images/background/IMG_20170731_122245.jpg");
+    background-image: url("images/background/IMG_20171201_115147.jpg");
 
     background-color: rgb(5, 0, 0, 0.60);
     background-size:cover;
+
 }
 #left-main-card, #main-right-card {
-background-color: rgb(255, 255, 255, 0.20);
+background-color: rgb(255, 255, 255, 0.68);
 }
 a.pull-left, a.pull-right{
 color:white
@@ -18,7 +19,7 @@ color:white
 
 .k-nav-link,  {
     color: #3B3B3B;
-    font-weight: normal;
+        font-weight: 640;
     letter-spacing: 0.1em;
     font-size: 1.2em;
 }
@@ -37,11 +38,13 @@ table {
     background-color: rgba(255, 255, 255, 0.84);;
     border-radius: 0px 0px 2px;
     padding: 14px 24px 24px;
+
     margin: 0px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
 }
 .site-description, #main-ul li >a,  #main-ul li .btn-group >a, #main-right-card li a{
-    color: white
+    color: black;
+        font-weight: 640;
 }
 .nav-link {
         white-space: nowrap;
@@ -50,6 +53,10 @@ table {
     font-weight: bold;
 /*    border-bottom: 1px solid #B9F6FF;*/
     /* background-color: #DBFBFF; */
+}
+.gallery-row {
+    margin-top:2%;
+    background-color: rgb(255, 255, 255, 0.15);
 }
 
 

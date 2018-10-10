@@ -111,3 +111,8 @@ display: None
     width:auto;
     height:auto;
 }
+
+.remove_image {
+    opacity: 0.3;
+    width:15%;
+}

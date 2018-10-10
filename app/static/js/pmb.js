@@ -44,3 +44,37 @@ $(document).ready(function () {
 //    })
 
 });
+
+var myIndex = 0;
+var myIndex2 = 0;
+var myIndex3 = 0;
+carousel(myIndex, 'mySlides');
+carousel(myIndex2, 'mySlides2');
+carousel(myIndex3, 'mySlides3');
+
+function carousel(index, className) {
+    var i;
+    var x = document.getElementsByClassName(className);
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    index++;
+    if (index > x.length) {index = 1}
+    x[index-1].style.display = "flex";
+    setTimeout(function() {
+        carousel(index, className);
+    }    , 2000); // Change image every 2 seconds
+}
+//carousel2();
+
+function carousel2() {
+    var i;
+    var x = document.getElementsByClassName("mySlides2");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";
+    }
+    myIndex2++;
+    if (myIndex2 > x.length) {myIndex2 = 1}
+    x[myIndex2-1].style.display = "flex";
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+}
