@@ -99,6 +99,7 @@ LOGOUT_REDIRECT_URL = '/panel'
 #     }
 # }
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

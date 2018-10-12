@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from datetime import datetime
 from app.models import (Actual, WeekAnnouncement, OfficeHours, Sacrament, MassSchemaRows,
-                        Ceremony, DAYS_OF_WEEK, IntentionWeek, Church, ActivityGroup, Pastor, Galery, Contact)
+                        Ceremony, DAYS_OF_WEEK, IntentionWeek, Church, ActivityGroup, Pastor, Galery, Contact,
+                        MassSchema)
 
 CHURCHES = Church.objects.all()
 
@@ -20,7 +21,7 @@ def get_context(page_number=None):
     }
     context.update(extend_for_intentions(today))
     context.update(extend_for_articles(page_number))
-    context.update(extend_for_all_records())
+    context.update(extend_for_all_records(today))
     context.update(extend_for_messes())
     return context
 
@@ -85,12 +86,14 @@ def extend_for_articles(page_number):
         'older_number': older_number,
     }
 
-
-def extend_for_all_records():
+def extend_for_all_records(today):
     return {
         'pastors': Pastor.objects.all(),
         'galeries': Galery.objects.all(),
-        'ceremonies': Ceremony.objects.all(),
+        'ceremonies': Ceremony.objects.filter(
+            display_start__lt=today,
+            display_end__gt=today
+        ),
         'activity_groups': ActivityGroup.objects.all(),
         'officeHours': OfficeHours.objects.all(),
         'sacraments_all': Sacrament.objects.all(),
@@ -98,13 +101,13 @@ def extend_for_all_records():
     }
 
 
-def extend_for_messes():
-    return {
-        'old_messes': get_messes_for('mb', True),
-        'new_messes': get_messes_for('f', True),
-        'new_messes_other': get_messes_for('f', False),
-        'old_messes_other': get_messes_for('mb', False)
-    }
+# def extend_for_messes():
+#     return {
+#         'old_messes': get_messes_for('mb', True),
+#         'new_messes': get_messes_for('f', True),
+#         'new_messes_other': get_messes_for('f', False),
+#         'old_messes_other': get_messes_for('mb', False)
+#     }
 
 
 def get_announcements(today):
@@ -116,12 +119,38 @@ def get_announcements(today):
         return []
 
 
-def get_messes_for(church, is_sunday):
-    mass_rows = MassSchemaRows.objects.filter(church=church, is_sunday=is_sunday)
-    if len(mass_rows) > 0:
-        return mass_rows[0].hours
-    else:
-        return ''
+def extend_for_messes():
+    now = datetime.now().date()
+    mass_schemas = MassSchema.objects.filter(
+        season_start__lt=now, season_end__gt=now).prefetch_related('hour_set')
+    # return ','.join(mass_schemas[0].hour_set.all().order_by('hour'))
+    messes = {}
+    for mass_schema in mass_schemas:
+        post_fix = '_other' if mass_schema.sunday else ''
+        messes.update(get_hours_splitted(mass_schema.hour_set.all().order_by('hour'), post_fix))
+    return messes
+
+
+def get_hours_splitted(hour_set, post_fix):
+    hours = dict()
+    hours['old_messes' + post_fix] = []
+    hours['new_messes' + post_fix] = []
+    for hour in hour_set:
+        print('hour.', hour.church)
+        if hour.church == 'mb':
+            prefix = 'old'
+        else:
+            prefix = 'new'
+        hours[prefix + '_messes' + post_fix].append(hour.hour.strftime('%H:%M'))
+    for key in hours:
+        hours[key] = ','.join(hours[key])
+    return hours
+
+    # mass_rows = MassSchemaRows.objects.filter(church=church, is_sunday=is_sunday)
+    # if len(mass_rows) > 0:
+    #     return mass_rows[0].hours
+    # else:
+    #     return ''
 
 
 def index(request):

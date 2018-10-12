@@ -38,6 +38,18 @@ class ListField(models.TextField):
 
 
 DAYS_OF_WEEK = (
+    ('Brak', 'Brak'),
+    ('Poniedziałek', 'Poniedziałek'),
+    ('Wtorek', 'Wtorek'),
+    ('Środa', 'Środa'),
+    ('Czwartek', 'Czwartek'),
+    ('Piątek', 'Piątek'),
+    ('Sobota', 'Sobota'),
+    ('Niedziela', 'Niedziela'),
+)
+
+
+DAYS_OF_CEREMONY = (
     ('Poniedziałek', 'Poniedziałek'),
     ('Wtorek', 'Wtorek'),
     ('Środa', 'Środa'),
@@ -54,19 +66,10 @@ churches = (
 
 
 class MassSchema(models.Model):
-    # hours = models.ForeignKey(Hour)
-
-    # week_of_mass = ListField(choices=DAYS_OF_WEEK, verbose_name='Dni których dotyczy rozpiska')
     season_name = models.CharField(max_length=50, verbose_name='nazwa sezonu', null=True, blank=True)
     season_start = models.DateField(verbose_name='Pierwszy dzień sezonu', null=True, blank=True)
     season_end = models.DateField(verbose_name='Ostatni dzień sezonu', null=True, blank=True)
-    # monday = models.BooleanField(verbose_name='Poniedziałek', default=False)
-    # tuesday = models.BooleanField(verbose_name='Wtorek', default=False)
-    # wednesday = models.BooleanField(verbose_name='Środa', default=False)
-    # thursday = models.BooleanField(verbose_name='Czwartek', default=False)
-    # friday = models.BooleanField(verbose_name='Piątek', default=False)
     sunday = models.BooleanField(verbose_name='Niedziela', default=False)
-    # saturday = models.BooleanField(verbose_name='Niedziela', default=False)
 
     def __str__(self):
         if self.sunday:
@@ -79,17 +82,16 @@ class MassSchema(models.Model):
     def get_foreign_name():
         return 'Hour'
 
-
-
-
     class Meta:
         verbose_name = 'Lista mszy w sezonie'
         verbose_name_plural = 'Schemat mszy'
 
+
 class WeekOfMass(models.Model):
     week_day = models.CharField(choices=DAYS_OF_WEEK, max_length=12, null=True, blank=True,
                                 verbose_name='Dzień tygodnia')
-    mass_chema = models.ForeignKey(MassSchema, verbose_name='Lista mszy w sezonie', on_delete=models.CASCADE)
+    mass_schema = models.ForeignKey(MassSchema, verbose_name='Lista mszy w sezonie', on_delete=models.CASCADE)
+
 
 class Hour(models.Model):
     hour = models.TimeField(verbose_name='godzina mszy')
@@ -213,9 +215,10 @@ class Sacrament(models.Model):
 
 
 class Ceremony(models.Model):
-    name = models.CharField(max_length=50)
-    time = models.TimeField()
-    day = models.CharField(choices=DAYS_OF_WEEK, max_length=20)
+    name = models.CharField(max_length=50, null=True, blank=True)
+    description = models.CharField(max_length=250, null=True, blank=True)
+    time = models.TimeField(blank=True, null=True)
+    day = models.CharField(choices=DAYS_OF_CEREMONY, max_length=20, null=True, blank=True)
     church = models.CharField(churches, max_length=30)
     display_start = models.DateField()
     display_end = models.DateField()

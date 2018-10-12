@@ -3,6 +3,9 @@
         <div class="card-body">
         {% for ceremony in ceremonies %}
         <h4 class="card-title">{{ceremony.name}}</h4>
+            {% ifequal ceremony.day "Brak" %}
+            <p class="w3-container w3-center">{{ceremony.description}}</p>
+            {% else %}
         <table class="table">
             <tbody>
             <tr>
@@ -11,6 +14,9 @@
             </tr>
             </tbody>
         </table>
+            {% endifequal %}
+        {% empty %}
+            <p>Brak dodatkownych nabożeństw w najbliższym czasie</p>
         {% endfor %}
         </div>
     </div>

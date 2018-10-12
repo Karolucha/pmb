@@ -11,14 +11,11 @@ class MassSchemaView(BaseGenericView):
     def get_for_single(self, model_class, id_object):
         # self.get_schema()
         object_context = model_class.objects.filter(id=id_object).prefetch_related('hour_set')[0]
-        # print('zbior', object_context.hour_set)
         print('SCHEMAT DLA NIEDZIELI? ', object_context.sunday)
         hours_set = []
         for hour in object_context.hour_set.all().order_by('hour'):
             hour.is_mb = hour.church == 'mb'
             hours_set.append(hour)
-            # print(hour.church, hour.is_mb, hour.hour)
-        # print(object_context.season_end)
         return {
             'schema': object_context,
             'hours': hours_set
@@ -94,8 +91,6 @@ class MassSchemaView(BaseGenericView):
             self.messes[row_number] = {
                 prop: value
             }
-
-
 
     def delete(self, *args, **kwargs):
         mass_schema = MassSchema.objects.filter(id=kwargs['pk']).prefetch_related('hour_set')[0]

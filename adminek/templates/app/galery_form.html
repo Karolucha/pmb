@@ -7,11 +7,14 @@
 </div>
 <form method="POST" class="w3-container" enctype="multipart/form-data">
    {% csrf_token %}
-    <div class="w3-row w3-text-teal w3-section">
-        <label class="w3-text-teal"><b>Nazwa galerii</b>
-        </label>
-        <input class="w3-hover-green w3-border w3-light-grey w-30" type="text" name="title" value="{{object.galery.title}}">
-    </div>
+        <div class="w3-row w3-text-teal w3-section">
+            <label class="w3-text-teal"><b>Nazwa galerii</b>
+            </label>
+            <input class="w3-hover-green w3-border w3-light-grey w-30" type="text"
+               name="title" value="{{object.galery.title}}">
+        </div>
+
+
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Opis w galerii</b>
         </label>

@@ -5,6 +5,7 @@ app/static/js/jquery-3.2.1.min.js
 .idea/workspace.xml
 app/static/fonts
 app/static/images
+media/
 misiek/static/fonts/
 misiek/static/styles/
 misiek/static/angular.min.js

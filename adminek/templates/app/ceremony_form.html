@@ -13,12 +13,27 @@
     <div class="w3-row w3-text-teal  w3-section">
         <label class="w3-text-teal "><b>Dzień tygodnia</b>
         </label>
-        {% include 'app/days.html' %}
+        <select name="day" class="w3-select w3-border w-30">
+            <option value="Brak">BRAK</option>
+            <option value="Poniedziałek">Poniedziałek</option>
+            <option value="Wtorek">Wtorek</option>
+            <option value="Środa">Środa</option>
+            <option value="Czwartek">Czwartek</option>
+            <option value="Piątek">Piątek</option>
+            <option value="Sobota">Sobota</option>
+            <option value="Niedziela">Niedziela</option>
+        </select>
     </div>
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Godzina nabożeństwa</b>
         </label>
         <input class="w3-hover-green w3-border w3-light-grey w-30" type="time" name="time" value="{{object.time}}">
+    </div>
+
+    <div class="w3-row w3-text-teal w3-section">
+        <label class="w3-text-teal"><b>Opcjonalny opis lub zamiast terminu</b>
+        </label>
+        <textarea name="description" class="w3-hover-green w3-border w3-light-grey w-30" >{{object.description}}</textarea>
     </div>
     <div class="w3-row w3-text-teal w3-section">
         <label class="w3-text-teal"><b>Kościół</b></label>

@@ -63,7 +63,7 @@ function carousel(index, className) {
     x[index-1].style.display = "flex";
     setTimeout(function() {
         carousel(index, className);
-    }    , 2000); // Change image every 2 seconds
+    }    , 3000); // Change image every 2 seconds
 }
 //carousel2();
 

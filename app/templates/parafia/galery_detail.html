@@ -12,7 +12,7 @@
 }
 
 /* Hide the images by default    */
-.mySlides {
+.mySlidesGallery {
 display: none;
 }
 
@@ -50,34 +50,7 @@ display: none;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
 
-/* Container for image text */
-.caption-container {
-  text-align: center;
-  background-color: #222;
-  padding: 2px 16px;
-  color: white;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Six columns side by side */
-.column {
-  float: left;
-  width: 16.66%;
-}
 
 /* Add a transparency effect for thumnbail images */
 .demo {
@@ -129,33 +102,25 @@ display: none;
      right: 0;
  }
 </style>
-<div class="w3-panel w3-pale-green w3-bottombar w3-border-green w3-border">
-  <p>{{galery.description}}</p>
-
-</div>
+{% if galery.description != '' %}
+    <div class="w3-panel w3-pale-green w3-bottombar w3-border-green w3-border">
+      <p>{{galery.description}}</p>
+    </div>
+{% endif %}
 <div class="container">
      {% for image_number in images_numbers %}
     <div id="case-example-cover">
-        <div class="mySlides">
+        <div class="mySlidesGallery">
             <div id="nav-container">
-                <div id="case-left" onclick="plusSlides(-1)">  <a class="prev" >&#10094;</a></div>
-                <div id="case-right"onclick="plusSlides(1)">  <a class="next" >&#10095; </a></div>
                 <img class="big-img-gallery" src="{{ MEDIA_URL }}{{ image_number.image.image.url }}" style="">
             </div>
         </div>
     </div>
-
-  <!-- Full-width images with number text -->
-  <!--<div class="mySlides">-->
-    <!--<div class="numbertext">{{image_number.idx}} / {{size}}</div>-->
-      <!--<img class="big-img-gallery" src="{{ MEDIA_URL }}{{ image_number.image.image.url }}" style="">-->
-  <!--</div>-->
      {% endfor %}
-  <!-- Next and previous buttons -->
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095; </a>
-
-  <!-- Thumbnail images -->
+    <div class="row">
+        <div class="col-md-6 w3-btn w3-blue-grey" onclick="plusSlides(-1)" role="button">&#10094; COFNIJ</div>
+        <div class="col-md-6 w3-btn w3-blue-grey" onclick="plusSlides(1)" role="button">&#10095; DALEJ</div>
+    </div>
   <div class="row">
       {% for image_number in images_numbers %}
         <div style="float:left">
