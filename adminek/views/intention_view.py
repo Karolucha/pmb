@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta
+
+from django.http import HttpResponse
+from docx import Document
+
 from adminek.views.generic_views import BaseGenericView
 from django.shortcuts import render, redirect
-
-from adminek.views.utils import get_all_sundays
-from app.models import MassSchemaRows, Intentions, IntentionWeek, MassSchema
+from app.models import Intentions, IntentionWeek, MassSchema
 
 
 class IntentionView(BaseGenericView):
@@ -25,36 +27,45 @@ class IntentionView(BaseGenericView):
 
     def get(self, request, *args, **kwargs):
         method = kwargs.get('method', 'get')
+        print('what get kwargs')
         if method == 'edit':
-            self.context = {}
-            intentions = []
-            intention_week = self.get_for_single(self.model_class, kwargs['pk'])
-            # intention_week = self.context['object']
-            date = intention_week['intentionweek'].week
-            self.context['intention_week_start'] = intention_week['intentionweek'].week
-            i = 0
-            intentions_day = []
-            for intention in intention_week['intentions']:
-                print(intention.date, date)
-                if intention.date != date:
-                    print('is different', intentions_day)
-                    intentions.append({
-                        'day': self.days[i],
-                        'intentions': intentions_day.copy()})
-                    i += 1
-                    date = intention.date
-                    intentions_day = []
-                intentions_day.append(intention)
-
-            intentions.append({
-                'day': self.days[i],
-                'intentions': intentions_day.copy()})
-            self.template_name = 'others/intentionweek_edit.html'
-            self.context['intentions'] = intentions
+            self.prepare_ready_intentions(kwargs['pk'])
             print('context ', self.context, self.template_name)
             return render(request, self.template_name, self.context)
+        elif method == 'download':
+            self.prepare_ready_intentions(kwargs['pk'])
+            document = IntentionWord(self.context['intention_week_start'], self.context['intentions'])
+            return document.download_docx()
         else:
             return super().get(request, *args, **kwargs)
+
+    def prepare_ready_intentions(self, intention_id):
+        self.context = {}
+        intentions = []
+        print('intention id', intention_id)
+        intention_week = self.get_for_single(self.model_class, intention_id)
+        date = intention_week['intentionweek'].week
+        self.context['intention_week_start'] = intention_week['intentionweek'].week
+        self.context['intention_id'] = intention_week['intentionweek'].id
+        i = 0
+        intentions_day = []
+        for intention in intention_week['intentions']:
+            print(intention.date, date)
+            if intention.date != date:
+                print('is different', intentions_day)
+                intentions.append({
+                    'day': self.days[i],
+                    'intentions': intentions_day.copy()})
+                i += 1
+                date = intention.date
+                intentions_day = []
+            intentions_day.append(intention)
+
+        intentions.append({
+            'day': self.days[i],
+            'intentions': intentions_day.copy()})
+        self.template_name = 'others/intentionweek_edit.html'
+        self.context['intentions'] = intentions
 
     def post(self, request, *args, **kwargs):
         self.context = {}
@@ -115,3 +126,33 @@ class IntentionView(BaseGenericView):
                 intention = Intentions.objects.filter(id=params[day+'-id-'+hour][0])[0]
                 intention.title = params[day+'-content-'+hour][0]
                 intention.save()
+
+class IntentionWord:
+    def __init__(self, date, announcements):
+        self.day = str(date)
+        self.announcements = announcements
+
+    def download_docx(self):
+        document = Document()
+        document.add_heading('Intencje na tydzień ' + self.day, 0)
+        table = document.add_table(rows=1, cols=3)
+        hdr_cells = table.rows[0].cells
+        hdr_cells[0].text = 'Dzień'
+        hdr_cells[1].text = 'Godzina'
+        hdr_cells[2].text = 'Intencja'
+        print('INTENTION TO DOWNLOAD', self.announcements)
+
+        for intention_day in self.announcements:
+            for intention in intention_day['intentions']:
+                print('intetnion ', intention)
+                row_cells = table.add_row().cells
+                row_cells[0].text = str(intention_day['day'])
+                row_cells[1].text = str(intention.hour)[:-3]
+                row_cells[2].text = intention.title
+        document.add_page_break()
+
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.wordprocessingml.document')
+        response['Content-Disposition'] = 'attachment; filename=intencje.docx'
+        document.save(response)
+
+        return response

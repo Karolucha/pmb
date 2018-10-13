@@ -147,7 +147,6 @@ class IntentionWeek(models.Model):
     def __str__(self):
         return 'Intencje na tydzień od ' + str(self.week)
 
-# class IntentionDay(models.Model):
 
 class Intentions(models.Model):
     weeks = (

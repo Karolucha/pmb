@@ -53,7 +53,7 @@ def extend_for_intentions(today):
         'intentions': intentions_day.copy()})
 
     current_intentions_from_db['intentions'] = intentions
-    print('return context ', current_intentions_from_db['object'].id)
+    # print('return context ', current_intentions_from_db['object'].id)
     return {
         'intention_week': current_intentions_from_db,
     }
@@ -85,6 +85,7 @@ def extend_for_articles(page_number):
         'next_number': next_number,
         'older_number': older_number,
     }
+
 
 def extend_for_all_records(today):
     return {
@@ -120,6 +121,7 @@ def get_announcements(today):
 
 
 def extend_for_messes():
+    print('****************EXTEND')
     now = datetime.now().date()
     mass_schemas = MassSchema.objects.filter(
         season_start__lt=now, season_end__gt=now).prefetch_related('hour_set')
@@ -128,6 +130,7 @@ def extend_for_messes():
     for mass_schema in mass_schemas:
         post_fix = '_other' if mass_schema.sunday else ''
         messes.update(get_hours_splitted(mass_schema.hour_set.all().order_by('hour'), post_fix))
+    print('all messes', messes)
     return messes
 
 
@@ -154,7 +157,6 @@ def get_hours_splitted(hour_set, post_fix):
 
 
 def index(request):
-    print('index')
     return render(request, 'index.html', get_context())
 
 
@@ -166,7 +168,7 @@ def article_detail(request, page_number):
 def sacraments(request, sacrament_id):
     context = get_context()
     sacrament = Sacrament.objects.get(id=sacrament_id)
-    print(sacrament)
+    # print(sacrament)
     context['sacrament'] = sacrament
     return render(request, 'index.html', context)
 
@@ -180,5 +182,5 @@ def galery(request, galery_id):
     context['size'] = len(list(images))
     context['images_numbers'] = [{
                                'idx': i + 1, 'image': img} for i, img in enumerate(list(images))]
-    print('image numbers', context['images_numbers'])
+    # print('image numbers', context['images_numbers'])
     return render(request, 'index_to_extend.html', context)
