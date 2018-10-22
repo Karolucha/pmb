@@ -97,10 +97,19 @@ LOGOUT_REDIRECT_URL = '/panel'
 #         'ENGINE': 'django.db.backends.sqlite3',
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
+
 # }
 
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'p1065_pmbjawor',
+    #     'USER': 'p1065_pmbjawor',
+    #     'HOST': 'panel30.mydevil.net',
+    #     'PASSWORD': 'oDhvx*QGyaP2y0oKkxrn',
+    #     'PORT': 5432 # default postgres port
+    # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',

@@ -11,7 +11,6 @@ class MassSchemaView(BaseGenericView):
     def get_for_single(self, model_class, id_object):
         # self.get_schema()
         object_context = model_class.objects.filter(id=id_object).prefetch_related('hour_set')[0]
-        print('SCHEMAT DLA NIEDZIELI? ', object_context.sunday)
         hours_set = []
         for hour in object_context.hour_set.all().order_by('hour'):
             hour.is_mb = hour.church == 'mb'
@@ -22,7 +21,6 @@ class MassSchemaView(BaseGenericView):
         }
 
     def create(self, request, *args, **kwargs):
-        print('time to save')
         anothers = dict(request.POST)
         schema = MassSchema(season_start=request.POST['season_start'],
                             season_end=request.POST['season_end'],
@@ -40,7 +38,6 @@ class MassSchemaView(BaseGenericView):
         self.messes = {}
 
         for name, value in anothers.items():
-            print('items edited', name, value)
             if name.startswith('hour-'):
                 self.add_new_mass_property(name, value, 'hour')
             if name.startswith('church-'):
@@ -53,11 +50,9 @@ class MassSchemaView(BaseGenericView):
 
         for hour_row_id, mass in self.messes.items():
             hour_id = hour_row_id.split('-')[-1]
-            print(hour_id)
             hour = Hour.objects.get(id=hour_id)
             hour.church = mass['church'][0]
             hour.hour = mass['hour'][0]
-            print(hour.hour, hour.church)
             hour.save()
         schema.season_start = request.POST['season_start']
         schema.season_end = request.POST['season_end']
@@ -66,12 +61,9 @@ class MassSchemaView(BaseGenericView):
 
     def add_new_messes(self, request, schema):
         anothers = dict(request.POST)
-        print(anothers)
         self.group_messes(anothers)
-        print('meser ', self.messes)
         for number, mass in self.messes.items():
             hour = Hour(church=mass['church'][0], hour=mass['hour'][0], mass=schema)
-            print('hour', hour.church)
             hour.save()
 
     def group_messes(self, anothers):
@@ -99,33 +91,28 @@ class MassSchemaView(BaseGenericView):
 
         mass_schema.delete()
 
-class MassSchemaIssue():
+
+class MassSchemaIssue:
 
     def get_schema(self):
-        print('get schema')
         now = datetime.now().date()
-        closest_sunday = None
         MassSchemaRows.objects.all().delete()
 
         schema = MassSchema.objects.filter(
             season_start__lt=now, season_end__gt=now).prefetch_related('hour_set')
         if len(schema) > 0:
-            print('schema!')
             self.save_for_schema(schema, True)
             self.save_for_schema(schema, False)
 
     def save_for_schema(self, schema, is_sunday):
 
         others = schema.filter(sunday=is_sunday)
-        print('save for schema ', others)
         if others:
-            self.save_for_church(schema, is_sunday, others, 'mb')
-            self.save_for_church(schema, is_sunday, others, 'f')
+            self.save_for_church(is_sunday, others, 'mb')
+            self.save_for_church(is_sunday, others, 'f')
 
-    def save_for_church(self, schema, is_sunday, others, church):
-        print('now is_sunday', is_sunday)
+    def save_for_church(self, is_sunday, others, church):
         masses_mb = [mass.hour.strftime('%H:%M') for mass in others[0].hour_set.filter(church=church).order_by('hour')]
-        print(masses_mb)
         row_schema = MassSchemaRows(is_sunday=is_sunday, church=church,
                                     hours=', '.join(masses_mb))
         row_schema.save()

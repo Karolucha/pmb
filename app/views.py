@@ -8,7 +8,6 @@ CHURCHES = Church.objects.all()
 
 
 def get_context(page_number=None):
-    print('page number', page_number)
     today = datetime.now().date()
 
     context = {
@@ -65,7 +64,6 @@ def extend_for_articles(page_number):
         page_number = int(page_number)
         offset = page_number*3
         limit = page_number*3+3
-        print('numbers ', offset, limit)
         articles = Actual.objects.all().order_by('-date')[offset:limit]
         # articles = articles_more[:-1]
         articles_sum = Actual.objects.all().count()
@@ -89,7 +87,7 @@ def extend_for_articles(page_number):
 
 def extend_for_all_records(today):
     return {
-        'pastors': Pastor.objects.all(),
+        'pastors': Pastor.objects.all().order_by('-id'),
         'galeries': Galery.objects.all(),
         'ceremonies': Ceremony.objects.filter(
             display_start__lt=today,
@@ -121,7 +119,6 @@ def get_announcements(today):
 
 
 def extend_for_messes():
-    print('****************EXTEND')
     now = datetime.now().date()
     mass_schemas = MassSchema.objects.filter(
         season_start__lt=now, season_end__gt=now).prefetch_related('hour_set')
@@ -130,7 +127,6 @@ def extend_for_messes():
     for mass_schema in mass_schemas:
         post_fix = '_other' if mass_schema.sunday else ''
         messes.update(get_hours_splitted(mass_schema.hour_set.all().order_by('hour'), post_fix))
-    print('all messes', messes)
     return messes
 
 
@@ -139,7 +135,6 @@ def get_hours_splitted(hour_set, post_fix):
     hours['old_messes' + post_fix] = []
     hours['new_messes' + post_fix] = []
     for hour in hour_set:
-        print('hour.', hour.church)
         if hour.church == 'mb':
             prefix = 'old'
         else:
@@ -149,26 +144,18 @@ def get_hours_splitted(hour_set, post_fix):
         hours[key] = ','.join(hours[key])
     return hours
 
-    # mass_rows = MassSchemaRows.objects.filter(church=church, is_sunday=is_sunday)
-    # if len(mass_rows) > 0:
-    #     return mass_rows[0].hours
-    # else:
-    #     return ''
-
 
 def index(request):
     return render(request, 'index.html', get_context())
 
 
 def article_detail(request, page_number):
-    print('article_detail page number', page_number)
     return render(request, 'index.html', get_context(page_number))
 
 
 def sacraments(request, sacrament_id):
     context = get_context()
     sacrament = Sacrament.objects.get(id=sacrament_id)
-    # print(sacrament)
     context['sacrament'] = sacrament
     return render(request, 'index.html', context)
 
@@ -182,5 +169,4 @@ def galery(request, galery_id):
     context['size'] = len(list(images))
     context['images_numbers'] = [{
                                'idx': i + 1, 'image': img} for i, img in enumerate(list(images))]
-    # print('image numbers', context['images_numbers'])
     return render(request, 'index_to_extend.html', context)

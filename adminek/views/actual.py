@@ -55,9 +55,7 @@ def actual_list(request):
 
 
 def actual_detail(request, actual_id):
-    print('ACTUAL DETAIL')
     article = Actual.objects.get(id=actual_id)
-    print(article.title)
     return render(request, 'actual_detail.html', {
         'article': article})
 

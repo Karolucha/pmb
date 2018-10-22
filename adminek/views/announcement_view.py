@@ -12,7 +12,6 @@ class AnnouncementView(BaseGenericView):
 
     def get_for_single(self, model_class, id_object):
         object_context = model_class.objects.filter(id=id_object).prefetch_related('announcement_set')[0]
-        print('object_context', object_context.date)
         hours_set = []
         for msg in object_context.announcement_set.all().order_by('id'):
             hours_set.append(msg)
@@ -31,7 +30,6 @@ class AnnouncementView(BaseGenericView):
             return super().get(request, *args, **kwargs)
 
     def create(self, request, *args, **kwargs):
-        print('time to save', dict(request.POST).keys())
         schema = WeekAnnouncement(date=request.POST['date'])
         schema.save()
         self.add_new_announcements(request, schema)
@@ -61,7 +59,6 @@ class AnnouncementView(BaseGenericView):
     def add_new_announcements(self, request, schema):
         anothers = dict(request.POST)
         for name, value in anothers.items():
-            print('what a name ', name, name.startswith('n-a-'))
             if name.startswith('n-a-'):
                 announcement = Announcement(content=value[0],
                                             week_announcment=schema)

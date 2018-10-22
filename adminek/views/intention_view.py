@@ -27,10 +27,8 @@ class IntentionView(BaseGenericView):
 
     def get(self, request, *args, **kwargs):
         method = kwargs.get('method', 'get')
-        print('what get kwargs')
         if method == 'edit':
             self.prepare_ready_intentions(kwargs['pk'])
-            print('context ', self.context, self.template_name)
             return render(request, self.template_name, self.context)
         elif method == 'download':
             self.prepare_ready_intentions(kwargs['pk'])
@@ -42,7 +40,6 @@ class IntentionView(BaseGenericView):
     def prepare_ready_intentions(self, intention_id):
         self.context = {}
         intentions = []
-        print('intention id', intention_id)
         intention_week = self.get_for_single(self.model_class, intention_id)
         date = intention_week['intentionweek'].week
         self.context['intention_week_start'] = intention_week['intentionweek'].week
@@ -50,9 +47,7 @@ class IntentionView(BaseGenericView):
         i = 0
         intentions_day = []
         for intention in intention_week['intentions']:
-            print(intention.date, date)
             if intention.date != date:
-                print('is different', intentions_day)
                 intentions.append({
                     'day': self.days[i],
                     'intentions': intentions_day.copy()})
@@ -82,7 +77,7 @@ class IntentionView(BaseGenericView):
             for index, day in enumerate(self.days[1:]):
                 intentions.append(self.transform_mass_schema_to_intentions(False, day, index + 1))
             self.context['intentions'] = intentions
-            print('context ', self.context, self.template_name)
+            # print('context ', self.context, self.template_name)
             return render(request, 'others/intentions_form.html', self.context)
         else:
             return super().post(request, *args, **kwargs)
@@ -127,6 +122,7 @@ class IntentionView(BaseGenericView):
                 intention.title = params[day+'-content-'+hour][0]
                 intention.save()
 
+
 class IntentionWord:
     def __init__(self, date, announcements):
         self.day = str(date)
@@ -140,11 +136,9 @@ class IntentionWord:
         hdr_cells[0].text = 'Dzień'
         hdr_cells[1].text = 'Godzina'
         hdr_cells[2].text = 'Intencja'
-        print('INTENTION TO DOWNLOAD', self.announcements)
 
         for intention_day in self.announcements:
             for intention in intention_day['intentions']:
-                print('intetnion ', intention)
                 row_cells = table.add_row().cells
                 row_cells[0].text = str(intention_day['day'])
                 row_cells[1].text = str(intention.hour)[:-3]

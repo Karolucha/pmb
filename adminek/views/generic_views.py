@@ -23,7 +23,6 @@ class BaseGenericView(View):
         if method == 'list':
             self.context['object_list'] = self.get_for_list()
         self.get_template_name(method)
-        print('render model class', self.model_class)
         return render(request, self.template_name, self.context)
 
     def get_for_list(self):
@@ -62,7 +61,6 @@ class BaseGenericView(View):
         
     def delete(self, *args, **kwargs):
         model_object = self.model_class.objects.get(id=kwargs['pk'])
-        print('modelobject ', model_object)
         model_object.delete()
 
     def set_values(self, request):

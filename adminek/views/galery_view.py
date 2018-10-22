@@ -14,18 +14,13 @@ class GaleryView(BaseGenericView):
 
     def get_for_single(self, model_class, id_object):
         object_context = model_class.objects.filter(id=id_object).prefetch_related('imagewithcaption_set')[0]
-        print('object_context', object_context.date)
         images = object_context.imagewithcaption_set.all().order_by('id')
         return {
             'galery': object_context,
             'images': images,
-            # 'size': len(list(images)),
-            # 'images_numbers': [{
-            #                        'idx': i+1, 'image':img} for i, img in enumerate(list(images))]
         }
 
     def create(self, request, *args, **kwargs):
-        print('time to save', dict(request.POST).keys())
         schema = Galery(
             title=request.POST['title'], description=request.POST['description'])
         schema.save()
@@ -41,25 +36,19 @@ class GaleryView(BaseGenericView):
         self.add_new_images(request, schema)
 
         for name, value in anothers.items():
-            print('objects post', name, value)
             if name == 'deletions':
                 for img_attr_id in value:
                     img_id = img_attr_id.split('-')[-1]
                     hour = ImageWithCaption.objects.get(id=img_id)
-                    print('id ', img_id, hour)
-
                     hour.delete()
         schema.save()
 
     def add_new_images(self, request, schema):
         uploaded_files = dict(request.FILES)
-        print(uploaded_files.items())
         for name, value in uploaded_files.items():
-            print('what a name ', name, value)
             if name.startswith('n-a-'):
                 if isinstance(value, list):
                     for uploaded in value:
-                        # myfile = request.FILES[uploaded]
                         self.save_image(request, uploaded, schema)
                 else:
                     myfile = request.FILES[name]

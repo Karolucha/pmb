@@ -36,7 +36,6 @@ class CancelaryCreateView(CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        print('GET SUCCES  URL')
         return reverse('demos-ui-createview')
 
     def get_context_data(self, **kwargs):
